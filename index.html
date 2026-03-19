@@ -95,6 +95,96 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 .toast{position:fixed;bottom:24px;right:24px;background:var(--fa-dark);color:white;padding:10px 18px;border-radius:7px;font-size:13px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;}
 .toast.show{opacity:1;}
 
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: white; font-size: 11pt; color: #000; }
+
+  /* ---- HIDE UI CHROME ---- */
+  .top-bar, .mode-toggle, .top-bar-right, .page-order,
+  .add-btn, .status-row, .admin-note, .prefilled-note, .info-note { display: none !important; }
+
+  /* ---- SHOW BOTH PANELS ---- */
+  .brief-wrap { max-width: 100%; padding: 0; display: block !important; }
+  .preview-wrap, #previewMode {
+    display: block !important;
+    page-break-before: always;
+  }
+
+  /* ---- BRIEF STYLES ---- */
+  .section { border: none; border-radius: 0; margin-bottom: 24pt; page-break-inside: avoid; box-shadow: none; }
+  .section-header { background: #2C3142 !important; color: white !important; padding: 6pt 10pt; border-radius: 0; }
+  .section-header h2 { font-size: 11pt; font-weight: 600; }
+  .section-body { padding: 10pt; }
+  .subsection { border: 0.5pt solid #ccc; border-radius: 0; margin-bottom: 10pt; }
+  .subsection-header { background: #f5f2ec !important; padding: 5pt 8pt; font-size: 9pt; font-weight: 600; border-bottom: 0.5pt solid #ddd; }
+  .subsection-body { padding: 8pt; }
+  .field { margin-bottom: 10pt; }
+  .field-label { font-size: 8pt; color: #666; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3pt; display: flex; gap: 6pt; }
+  .field-label .limit { font-size: 7.5pt; color: #999; background: none; padding: 0; }
+  textarea, input[type="text"], input[type="url"] {
+    border: none; border-bottom: 0.5pt solid #ccc; border-radius: 0;
+    background: transparent; padding: 2pt 0; font-size: 10.5pt;
+    width: 100%; resize: none; min-height: 0;
+  }
+  .url-row { border: none; border-bottom: 0.5pt solid #ccc; border-radius: 0; background: transparent; }
+  .url-prefix { background: transparent; border: none; color: #999; font-size: 10pt; padding: 2pt 4pt 2pt 0; }
+  .url-row input { border: none; padding: 2pt 0; font-size: 10pt; }
+  .char-count { display: none; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10pt; }
+  .tab-bar { display: none; }
+  .tab-content { display: block !important; padding: 0; }
+  .tab-content + .tab-content { border-top: 0.5pt solid #eee; padding-top: 8pt; margin-top: 8pt; }
+  .tab-content::before { display: block; font-size: 8pt; font-weight: 600; color: #E8671A; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6pt; }
+  #tab0::before { content: 'Key Features & Benefits'; }
+  #tab1::before { content: 'Where to Install'; }
+  #tab2::before { content: 'Compliant & Certified'; }
+  #tab3::before { content: "What's in the Box"; }
+  .icon-grid { display: flex; flex-wrap: wrap; gap: 4pt; }
+  .icon-option { font-size: 9pt; padding: 2pt 5pt; border: 0.5pt solid #ddd; border-radius: 3pt; }
+  .icon-option input[type="checkbox"] { width: 10pt; height: 10pt; }
+  .icon-option.checked { background: #fdf0e8 !important; border-color: #E8671A; font-weight: 600; }
+  .repeater-row { border: 0.5pt solid #ddd; border-radius: 0; padding: 6pt 8pt; margin-bottom: 6pt; }
+  .repeater-row-header { font-size: 8pt; color: #E8671A; font-weight: 600; margin-bottom: 5pt; }
+  .brief-wrap::before {
+    content: 'FireAngel — Product Page Content Brief';
+    display: block; font-size: 16pt; font-weight: 700; color: #2C3142;
+    border-bottom: 2pt solid #E8671A; padding-bottom: 6pt; margin-bottom: 16pt;
+  }
+
+  /* ---- PREVIEW STYLES (preserve screen look) ---- */
+  .preview-wrap { font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .pv-nav { padding: 8pt 20pt; border-bottom: 0.5pt solid #eee; display: flex; align-items: center; }
+  .pv-seo-bar { padding: 6pt 20pt; font-size: 8pt; }
+  .pv-breadcrumb { padding: 5pt 20pt; font-size: 8pt; }
+  .pv-hero { padding: 16pt 20pt; grid-template-columns: 1fr 1fr; gap: 24pt; }
+  .pv-h1 { font-size: 18pt; }
+  .pv-boxes { padding: 16pt 20pt; }
+  .pv-boxes-inner { grid-template-columns: 1fr 1fr; }
+  .pv-box { padding: 14pt; page-break-inside: avoid; }
+  .pv-install { padding: 16pt 20pt; }
+  .pv-reviews { padding: 16pt 20pt; }
+  .pv-faqs { padding: 16pt 20pt; }
+  .pv-faq-grid { grid-template-columns: 1fr 1fr; }
+  .pv-upsell { padding: 20pt; }
+  .pv-footer { padding: 10pt 20pt; }
+  .pv-review-card { page-break-inside: avoid; }
+
+  /* hide SEO bar nav chrome in preview print */
+  .pv-nav .pv-nav-links { display: none; }
+
+  /* section divider before preview */
+  .preview-wrap::before {
+    content: 'FireAngel — Page Preview';
+    display: block; font-size: 16pt; font-weight: 700; color: #2C3142;
+    border-bottom: 2pt solid #E8671A; padding-bottom: 6pt; margin-bottom: 0;
+    font-family: system-ui, sans-serif;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  @page { margin: 12mm 12mm 12mm 12mm; }
+}
+
 /* PREVIEW */
 .preview-wrap{display:none;font-family:'Helvetica Neue',Arial,sans-serif;background:white;}
 .preview-wrap *{box-sizing:border-box;}
@@ -106,8 +196,8 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 .pv-seo-bar{background:#e8f4fd;border-bottom:1px solid #bcd8ed;padding:10px 40px;font-size:12px;color:#1d4ed8;}
 .pv-seo-bar strong{font-weight:600;}
 .pv-hero{padding:30px 40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1100px;margin:0 auto;}
-.pv-hero-imgs{display:grid;grid-template-columns:60px 1fr;gap:8px;}
-.pv-hero-thumbs{display:flex;flex-direction:column;gap:6px;}
+.pv-hero-imgs{display:flex;flex-direction:column;gap:8px;}
+.pv-hero-thumbs{display:flex;flex-direction:row;gap:6px;order:2;}
 .pv-thumb{width:54px;height:54px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#aaa;text-align:center;cursor:pointer;}
 .pv-thumb.active{border-color:var(--fa-orange);}
 .pv-main-img{background:#f5f5f5;border:1px solid #eee;border-radius:6px;display:flex;align-items:center;justify-content:center;min-height:260px;color:#bbb;font-size:12px;}
@@ -189,6 +279,7 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     <button class="tb-btn" onclick="openLoadModal()">Load</button>
     <button class="tb-btn" onclick="exportSaves()">Export</button>
     <label class="tb-btn" style="cursor:pointer;">Import<input type="file" accept=".json" style="display:none" onchange="importSaves(this)"></label>
+    <button class="tb-btn" onclick="buildPreview();window.print()">Print / PDF</button>
     <div class="mode-toggle">
       <button class="mode-btn active" id="btnBrief" onclick="setMode('brief')">Edit</button>
       <button class="mode-btn" id="btnPreview" onclick="setMode('preview')">Preview</button>
@@ -434,13 +525,13 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       <div class="pv-main-img" id="pv_main_img">Product image</div>
     </div>
     <div class="pv-hero-info">
-      <div class="pv-sku" id="pv_sku_hero">FA6829S</div>
+      <div class="pv-sku" id="pv_sku_hero">—</div>
       <div class="pv-h1" id="pv_h1">—</div>
       <div class="pv-icons" id="pv_icons"></div>
+      <div class="pv-desc" id="pv_desc" style="margin-bottom:12px;"><span class="pv-empty">Product description not entered</span></div>
       <div class="pv-short-desc" id="pv_short_desc"><span class="pv-empty">Short description not entered</span></div>
       <div class="pv-price">£XX.XX</div>
       <div class="pv-btns"><button class="pv-btn-primary">Add to basket</button><button class="pv-btn-secondary">Add to compare</button></div>
-      <div class="pv-desc" id="pv_desc"><span class="pv-empty">Product description not entered</span></div>
     </div>
   </div>
   <div class="pv-boxes">
