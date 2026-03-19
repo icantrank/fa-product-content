@@ -187,6 +187,8 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
   <div class="top-bar-right">
     <button class="tb-btn save" onclick="doSave()">Save</button>
     <button class="tb-btn" onclick="openLoadModal()">Load</button>
+    <button class="tb-btn" onclick="exportSaves()">Export</button>
+    <label class="tb-btn" style="cursor:pointer;">Import<input type="file" accept=".json" style="display:none" onchange="importSaves(this)"></label>
     <div class="mode-toggle">
       <button class="mode-btn active" id="btnBrief" onclick="setMode('brief')">Edit</button>
       <button class="mode-btn" id="btnPreview" onclick="setMode('preview')">Preview</button>
@@ -254,6 +256,11 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
   <div class="section">
     <div class="section-header"><h2>Section 1 — Header / Product Hero</h2></div>
     <div class="section-body">
+      <div class="field" style="max-width:300px;margin-bottom:18px;">
+        <div class="field-label">Product code (SKU)</div>
+        <input type="text" id="f_sku" placeholder="e.g. FA6829S">
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_sku"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
       <div class="grid-2">
         <div class="field">
           <div class="field-label">H1 — Product alternative title <span class="limit">Max 42 chars</span></div>
@@ -588,6 +595,7 @@ function collectState(){
   const gs=id=>document.getElementById(id)?.value||'🔴 Draft';
   return{
     slug:gv('f_slug'),
+    sku:gv('f_sku'),s_sku:gs('s_sku'),
     seo_title:gv('f_seo_title'),s_seo_title:gs('s_seo_title'),
     seo_desc:gv('f_seo_desc'),s_seo_desc:gs('s_seo_desc'),
     s_slug:gs('s_slug'),
@@ -618,7 +626,8 @@ function collectState(){
 function restoreState(s){
   const sv=(id,val)=>{const el=document.getElementById(id);if(el)el.value=val||'';};
   const ss=(id,val)=>{const el=document.getElementById(id);if(el){el.value=val||'🔴 Draft';setStatus(el);}};
-  sv('f_slug',s.slug);sv('f_seo_title',s.seo_title);ss('s_seo_title',s.s_seo_title);
+  sv('f_slug',s.slug);sv('f_sku',s.sku);ss('s_sku',s.s_sku);
+  sv('f_seo_title',s.seo_title);ss('s_seo_title',s.s_seo_title);
   sv('f_seo_desc',s.seo_desc);ss('s_seo_desc',s.s_seo_desc);ss('s_slug',s.s_slug);
   sv('f_h1',s.h1);ss('s_h1',s.s_h1);
   sv('f_tagline',s.tagline);ss('s_tagline',s.s_tagline);
@@ -663,6 +672,40 @@ function restoreState(s){
   ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));
   });
+}
+
+/* ---- EXPORT / IMPORT ---- */
+function exportSaves(){
+  try{
+    const all={};
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      if(k.startsWith('fa_brief_'))all[k]=JSON.parse(localStorage.getItem(k));
+    }
+    if(!Object.keys(all).length){showToast('No saves to export');return;}
+    const blob=new Blob([JSON.stringify(all,null,2)],{type:'application/json'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='fa-content-briefs-'+new Date().toISOString().slice(0,10)+'.json';
+    a.click();URL.revokeObjectURL(a.href);
+    showToast('✓ Exported '+Object.keys(all).length+' save(s)');
+  }catch(e){showToast('⚠ Export unavailable here — use on deployed site');}
+}
+function importSaves(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      let count=0;
+      Object.entries(data).forEach(([k,v])=>{
+        if(k.startsWith('fa_brief_')){localStorage.setItem(k,JSON.stringify(v));count++;}
+      });
+      showToast('✓ Imported '+count+' save(s)');
+    }catch(err){showToast('⚠ Invalid file — could not import');}
+    input.value='';
+  };
+  reader.readAsText(file);
 }
 
 /* ---- SAVE ---- */
@@ -736,12 +779,13 @@ function setTxt(id,val,fallback){const el=document.getElementById(id);if(!el)ret
 
 function buildPreview(){
   const slug=g('f_slug');
+  const sku=g('f_sku');
   const seoTitle=g('f_seo_title');
   const seoDesc=g('f_seo_desc');
   const seoBar=document.getElementById('pv_seo_bar');
   seoBar.innerHTML=`<strong>Page title:</strong> ${seoTitle||'<em>not set</em>'} &nbsp;|&nbsp; <strong>Meta description:</strong> ${seoDesc||'<em>not set</em>'} &nbsp;|&nbsp; <strong>URL:</strong> fireangel.co.uk/product/${slug||'<em>slug not set</em>'}`;
-  const slugEl=document.getElementById('pv_sku_bc');if(slugEl)slugEl.textContent=slug||'—';
-  const skuHero=document.getElementById('pv_sku_hero');if(skuHero)skuHero.textContent=slug?'/product/'+slug:'FA6829S';
+  const slugEl=document.getElementById('pv_sku_bc');if(slugEl)slugEl.textContent=sku||slug||'—';
+  const skuHero=document.getElementById('pv_sku_hero');if(skuHero)skuHero.textContent=sku||'—';
   setTxt('pv_h1',g('f_h1'),'H1 not entered');
   const sd=g('f_shortdesc');setTxt('pv_short_desc',sd.replace(/\n/g,'<br>'),'Short description not entered');
   const desc=g('f_desc'),tag=g('f_tagline');
