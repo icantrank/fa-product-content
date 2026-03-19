@@ -13,7 +13,7 @@
   const stored=sessionStorage.getItem('fa_auth');
   if(stored===k)return;
   const pw=prompt('Enter password to access this page:');
-  if(!pw||h(pw+'\n')!==k){document.documentElement.innerHTML='<h2 style="font-family:sans-serif;padding:2rem">Access denied.</h2>';throw new Error();}
+  if(!pw||h(pw+'\n')!==k){document.documentElement.innerHTML='<body style="background:#111;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;"><p style="color:#666;font-size:14px;">Access denied.</p></body>';throw new Error();}
   sessionStorage.setItem('fa_auth',k);
 })();
 </script>
