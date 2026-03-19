@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FireAngel Content Brief</title>
+<style>
+  :root {
+    --fa-orange: #E8671A;
+    --fa-dark: #2C3142;
+    --fa-orange-light: #FDF0E8;
+    --fa-orange-mid: #F5A96A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; font-size: 14px; color: #2C3142; background: #f5f5f3; }
+
+  .page-header { background: var(--fa-dark); color: white; padding: 16px 24px; display: flex; align-items: center; gap: 12px; }
+  .page-header h1 { font-size: 16px; font-weight: 500; }
+  .page-header .logo { background: var(--fa-orange); color: white; font-weight: 700; font-size: 12px; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+
+  .page-body { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+
+  .section { background: white; border-radius: 10px; border: 1px solid #e0ddd6; margin-bottom: 20px; overflow: hidden; }
+  .section-header { background: var(--fa-dark); color: white; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; }
+  .section-header h2 { font-size: 13px; font-weight: 500; letter-spacing: 0.3px; }
+  .section-body { padding: 18px; }
+
+  .subsection { border: 1px solid #e8e5de; border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+  .subsection-header { background: var(--fa-orange-light); border-bottom: 1px solid #f0c9a0; padding: 8px 14px; font-size: 12px; font-weight: 500; color: var(--fa-dark); display: flex; align-items: center; gap: 8px; }
+  .subsection-body { padding: 14px; }
+
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  .field-label { font-size: 11px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  .field-label .limit { background: #f0ede6; color: #888; font-size: 10px; padding: 1px 6px; border-radius: 10px; font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .admin-note { font-size: 11px; color: #b45309; background: #fef3c7; border: 1px solid #fcd34d; border-radius: 5px; padding: 5px 9px; margin-bottom: 8px; }
+  textarea, input[type="text"], input[type="url"] { width: 100%; border: 1px solid #ddd; border-radius: 6px; padding: 8px 10px; font-size: 13px; font-family: inherit; color: #2C3142; resize: vertical; background: #fafafa; outline: none; }
+  textarea:focus, input:focus { border-color: var(--fa-orange); background: white; }
+  .char-count { font-size: 11px; margin-top: 3px; text-align: right; }
+  .char-ok { color: #888; }
+  .char-warn { color: #d97706; font-weight: 500; }
+  .char-over { color: #dc2626; font-weight: 500; }
+
+  .status-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .status-label { font-size: 11px; color: #888; }
+  select.status { border: 1px solid #ddd; border-radius: 5px; padding: 3px 7px; font-size: 11px; font-family: inherit; background: #fafafa; cursor: pointer; outline: none; }
+  select.status:focus { border-color: var(--fa-orange); }
+  select.status.draft { color: #dc2626; }
+  select.status.review { color: #d97706; }
+  select.status.approved { color: #16a34a; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .icon-option { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; padding: 4px 6px; border-radius: 5px; }
+  .icon-option:hover { background: var(--fa-orange-light); }
+  .icon-option input[type="checkbox"] { accent-color: var(--fa-orange); width: 13px; height: 13px; cursor: pointer; }
+  .icon-option.checked { background: var(--fa-orange-light); color: var(--fa-dark); font-weight: 500; }
+
+  .tab-bar { display: flex; border-bottom: 1px solid #e0ddd6; background: #fafaf8; }
+  .tab { padding: 9px 16px; font-size: 12px; font-weight: 500; cursor: pointer; color: #888; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tab.active { color: var(--fa-orange); border-bottom-color: var(--fa-orange); }
+  .tab-content { display: none; padding: 16px; }
+  .tab-content.active { display: block; }
+
+  .repeater-row { border: 1px solid #e8e5de; border-radius: 7px; padding: 12px; margin-bottom: 10px; position: relative; }
+  .repeater-row-header { font-size: 11px; font-weight: 500; color: var(--fa-orange); margin-bottom: 10px; }
+  .add-btn { background: none; border: 1px dashed #ccc; border-radius: 6px; padding: 7px 14px; font-size: 12px; color: #888; cursor: pointer; width: 100%; margin-top: 8px; font-family: inherit; }
+  .add-btn:hover { border-color: var(--fa-orange); color: var(--fa-orange); background: var(--fa-orange-light); }
+
+  .prefilled-note { font-size: 11px; color: #16a34a; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 5px; padding: 5px 9px; margin-bottom: 8px; }
+
+  .page-order { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+  .page-order-item { background: var(--fa-dark); color: white; font-size: 11px; padding: 4px 11px; border-radius: 20px; display: flex; align-items: center; gap: 5px; }
+  .page-order-item .num { background: var(--fa-orange); border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+  .arrow { color: #aaa; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="logo">FA</div>
+  <h1>Product Page Content Brief</h1>
+  <span style="margin-left: auto; font-size: 12px; opacity: 0.6;">FireAngel — FA6829S</span>
+</div>
+
+<div class="page-body">
+
+  <div class="page-order">
+    <div class="page-order-item"><span class="num">1</span> Header / Hero</div>
+    <span class="arrow">›</span>
+    <div class="page-order-item"><span class="num">2</span> 4 Boxes</div>
+    <span class="arrow">›</span>
+    <div class="page-order-item"><span class="num">3</span> Installation &amp; Resources</div>
+    <span class="arrow">›</span>
+    <div class="page-order-item"><span class="num">4</span> Reviews</div>
+    <span class="arrow">›</span>
+    <div class="page-order-item"><span class="num">5</span> Related FAQs</div>
+    <span class="arrow">›</span>
+    <div class="page-order-item"><span class="num">6</span> Upsell</div>
+  </div>
+
+  <!-- SECTION 1: HEADER -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Section 1 — Header / Product Hero</h2>
+    </div>
+    <div class="section-body">
+
+      <div class="grid-2">
+        <div class="field">
+          <div class="field-label">H1 — Product alternative title <span class="limit">Max 42 chars</span></div>
+          <input type="text" id="h1" maxlength="80" placeholder="e.g. Carbon Monoxide Alarm with 10 Year Battery" oninput="count(this,'h1c',42)">
+          <div class="char-count char-ok" id="h1c">0 / 42</div>
+          <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+        </div>
+        <div class="field">
+          <div class="field-label">H2 — Product tagline <span class="limit">~200 chars</span></div>
+          <div class="admin-note">⚠ Entered as bolded text at the start of the Product Description field in admin</div>
+          <textarea id="h2" rows="2" placeholder="e.g. Trusted protection, wherever life takes you." oninput="count(this,'h2c',200)"></textarea>
+          <div class="char-count char-ok" id="h2c">0 / 200</div>
+          <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:14px;">
+        <div class="field-label">Product short description <span class="limit">Max 2 paragraphs</span></div>
+        <div class="admin-note">⚠ Found at the bottom of the edit page in admin — easy to miss</div>
+        <textarea rows="4" placeholder="Short description shown below feature icons..."></textarea>
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Product description <span class="limit">Use judgement</span></div>
+        <div class="admin-note">⚠ Found at the top of the edit page in admin — note the field order is reverse of how they appear on the page. H2 tagline goes here, bolded at the top.</div>
+        <textarea rows="5" placeholder="Full product description. Begins with the H2 tagline (bolded) at the top..."></textarea>
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-header">Product features — select applicable icons</div>
+        <div class="subsection-body">
+          <div class="icon-grid" id="iconGrid"></div>
+          <div class="status-row" style="margin-top:10px;"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-header">Product images — min 3, 4 default</div>
+        <div class="subsection-body" id="imagesContainer">
+          <div id="imageRows"></div>
+          <button class="add-btn" onclick="addImage()">+ Add image</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: 4 BOXES -->
+  <div class="section">
+    <div class="section-header"><h2>Section 2 — Product Template V2: 4 Boxes</h2></div>
+    <div class="tab-bar">
+      <div class="tab active" onclick="showTab(0)">Key Features &amp; Benefits</div>
+      <div class="tab" onclick="showTab(1)">Where to Install</div>
+      <div class="tab" onclick="showTab(2)">Compliant &amp; Certified</div>
+      <div class="tab" onclick="showTab(3)">What's in the Box</div>
+    </div>
+
+    <div class="tab-content active" id="tab0">
+      <div class="field">
+        <div class="field-label">Box title (H2) <span class="limit">Use judgement</span></div>
+        <input type="text" placeholder="e.g. For home safety you can trust.">
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
+      <div class="field-label" style="margin-bottom:10px;">Sub-features (3–5) — each has an icon, H3, and description</div>
+      <div id="subfeatures"></div>
+      <button class="add-btn" onclick="addSubfeature()">+ Add sub-feature</button>
+    </div>
+
+    <div class="tab-content" id="tab1">
+      <div class="field">
+        <div class="field-label">Text box <span class="limit">Use judgement</span></div>
+        <textarea rows="5" placeholder="Describe suitable installation locations..."></textarea>
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab2">
+      <div class="field">
+        <div class="field-label">Text box <span class="limit">Use judgement</span></div>
+        <div class="admin-note">Reference copy below — rewrite per Emily's feedback (shorter, customer-first, no jargon)</div>
+        <textarea rows="6" placeholder="Certification and compliance details..."></textarea>
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
+      <div style="background:#f5f5f3; border-radius:7px; padding:12px; font-size:12px; color:#666; line-height:1.6; border:1px solid #e0ddd6;">
+        <div style="font-size:11px; font-weight:500; color:#888; margin-bottom:6px;">REFERENCE COPY (old — do not use)</div>
+        The FireAngel FA6829S is certified to both BS EN 50291-1:2018 for domestic use and BS EN 50291-2:2019 for use in caravans, motorhomes, and boats. These standards ensure the alarm has been independently tested for accuracy, response time, and reliability across a range of environments, including mobile and marine settings.
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab3">
+      <div class="field">
+        <div class="field-label">Image filename / URL</div>
+        <input type="url" placeholder="https://... or filename.jpg">
+      </div>
+      <div class="field">
+        <div class="field-label">Alt text</div>
+        <input type="text" placeholder="e.g. Contents of FireAngel FA6829S box including alarm and fixings">
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: INSTALLATION & RESOURCES -->
+  <div class="section">
+    <div class="section-header"><h2>Section 3 — Installation &amp; Setup / Resources</h2></div>
+    <div class="section-body">
+      <div class="prefilled-note">✓ Fields already set up in CMS — text improvements only. Links and files should already be attached.</div>
+      <div class="grid-2">
+        <div class="subsection">
+          <div class="subsection-header">Installation &amp; Setup (left column)</div>
+          <div class="subsection-body">
+            <div class="field"><div class="field-label">Section title</div><input type="text" value="Installation &amp; Setup"></div>
+            <div class="field"><div class="field-label">Section description</div><textarea rows="2">Get the help and support you need to easily set up and install your FireAngel alarm for instant protection.</textarea></div>
+            <div class="field"><div class="field-label">Installation guide title</div><input type="text" value="Installation guide"></div>
+            <div class="field"><div class="field-label">Installation guide description</div><input type="text" value="Click the icon to find out more about installing your alarm"></div>
+            <div class="field"><div class="field-label">Maintenance guide title</div><input type="text" value="Maintenance guide"></div>
+            <div class="field"><div class="field-label">Maintenance guide description</div><input type="text" value="Click the icon to find out how to properly maintain and test your alarm"></div>
+            <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+          </div>
+        </div>
+        <div class="subsection">
+          <div class="subsection-header">Resources (right column)</div>
+          <div class="subsection-body">
+            <div class="field"><div class="field-label">Section title</div><input type="text" value="Resources"></div>
+            <div class="field"><div class="field-label">Section description</div><textarea rows="2">For more technical and specification information on this alarm, view our manual and datasheet.</textarea></div>
+            <div class="field"><div class="field-label">Product manual title</div><input type="text" value="Product manual"></div>
+            <div class="field"><div class="field-label">Product manual description</div><input type="text" value="Click the icon to download the product manual"></div>
+            <div class="field"><div class="field-label">Datasheet title</div><input type="text" value="Datasheet"></div>
+            <div class="field"><div class="field-label">Datasheet description</div><input type="text" value="Click the icon to download the product datasheet"></div>
+            <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: REVIEWS -->
+  <div class="section">
+    <div class="section-header"><h2>Section 4 — Reviews</h2></div>
+    <div class="section-body">
+      <div class="admin-note" style="margin-bottom:12px;">Minimum 1 review required.</div>
+      <div id="reviewRows"></div>
+      <button class="add-btn" onclick="addReview()">+ Add review</button>
+    </div>
+  </div>
+
+  <!-- SECTION 5: FAQS -->
+  <div class="section">
+    <div class="section-header"><h2>Section 5 — Related FAQs</h2></div>
+    <div class="section-body">
+      <div class="admin-note" style="margin-bottom:12px;">FAQs must exist in the FAQ system before they can be linked. If creating a new FAQ, complete both fields below and add to the FAQ system first.</div>
+      <div id="faqRows"></div>
+      <button class="add-btn" onclick="addFaq()">+ Add FAQ</button>
+    </div>
+  </div>
+
+  <!-- SECTION 6: UPSELL -->
+  <div class="section">
+    <div class="section-header"><h2>Section 6 — Upsell</h2></div>
+    <div class="section-body">
+      <div class="prefilled-note">✓ Pre-filled with Pro Connected upsell copy — amend if needed.</div>
+      <div class="field">
+        <div class="field-label">H2 <span class="limit">Use judgement</span></div>
+        <input type="text" value="Want whole-home protection with a smartphone alert?">
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
+      <div class="field">
+        <div class="field-label">Body text <span class="limit">Use judgement</span></div>
+        <textarea rows="4">The FireAngel Pro Connected range wirelessly interlinks all your alarms – if one sounds, every alarm in the home sounds too. Monitor them from anywhere via the FireAngel Pro Connected app, whether you are at home or away. Ideal for families, landlords, and holiday let owners managing multiple properties.</textarea>
+        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <div class="field-label">CTA button text <span class="limit">Use judgement</span></div>
+          <input type="text" placeholder="e.g. Explore Pro Connected">
+          <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+        </div>
+        <div class="field">
+          <div class="field-label">CTA button link</div>
+          <input type="url" placeholder="https://...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const icons = ["Heat alarm","Zigbee sensors","Temp & Humidity Sensors","Third Party Tested","Hardwired","Smoke Alarm","Cloud Enabled","Secure Wireless","3 Year Warranty","Android","iOS","Grade F2","Grade F1","Grade D2","Grade D1","Thermoptek","Battery included","1 Year Warranty","2 Year Warranty","Mains Powered","Sealed battery","Diagnostics","Thermistek","7 Year Warranty","Wireless Interlink","Predict AI","Smoke and CO sensing","Battery Silence","Push to fit","CO","Kitemark","5 Year Warranty","Fire Sensing","Light Indicator","10 Year Warranty"];
+
+const iconGrid = document.getElementById('iconGrid');
+icons.forEach(icon => {
+  const lbl = document.createElement('label');
+  lbl.className = 'icon-option';
+  lbl.innerHTML = `<input type="checkbox" onchange="this.closest('label').classList.toggle('checked',this.checked)"><span>${icon}</span>`;
+  iconGrid.appendChild(lbl);
+});
+
+let imgCount = 0;
+function addImage() {
+  imgCount++;
+  const d = document.createElement('div');
+  d.className = 'repeater-row';
+  d.innerHTML = `<div class="repeater-row-header">Image ${imgCount}</div>
+    <div class="grid-2">
+      <div class="field"><div class="field-label">Filename / URL</div><input type="url" placeholder="https://... or filename.jpg"></div>
+      <div class="field"><div class="field-label">Alt text</div><input type="text" placeholder="Describe the image for accessibility"></div>
+    </div>`;
+  document.getElementById('imageRows').appendChild(d);
+}
+addImage(); addImage(); addImage(); addImage();
+
+let sfCount = 0;
+function addSubfeature() {
+  if(sfCount >= 5) return;
+  sfCount++;
+  const d = document.createElement('div');
+  d.className = 'repeater-row';
+  d.innerHTML = `<div class="repeater-row-header">Sub-feature ${sfCount}</div>
+    <div class="grid-3">
+      <div class="field"><div class="field-label">Icon</div><select style="width:100%;border:1px solid #ddd;border-radius:6px;padding:7px 8px;font-size:12px;font-family:inherit;background:#fafafa;"><option value="">— select icon —</option>${icons.map(i=>`<option>${i}</option>`).join('')}</select></div>
+      <div class="field"><div class="field-label">H3 title</div><input type="text" placeholder="e.g. Dual certification"></div>
+      <div class="field"><div class="field-label">Description</div><input type="text" placeholder="Short supporting text"></div>
+    </div>`;
+  document.getElementById('subfeatures').appendChild(d);
+}
+addSubfeature(); addSubfeature(); addSubfeature();
+
+let revCount = 0;
+function addReview() {
+  revCount++;
+  const d = document.createElement('div');
+  d.className = 'repeater-row';
+  d.innerHTML = `<div class="repeater-row-header">Review ${revCount}</div>
+    <div class="grid-2">
+      <div class="field"><div class="field-label">Review title (H3)</div><input type="text" placeholder="e.g. Great alarm, easy to install"></div>
+      <div class="field"><div class="field-label">Reviewer name</div><input type="text" placeholder="e.g. John S."></div>
+    </div>
+    <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>`;
+  document.getElementById('reviewRows').appendChild(d);
+}
+addReview();
+
+let faqCount = 0;
+function addFaq() {
+  faqCount++;
+  const d = document.createElement('div');
+  d.className = 'repeater-row';
+  d.innerHTML = `<div class="repeater-row-header">FAQ ${faqCount}</div>
+    <div class="field"><div class="field-label">Question</div><input type="text" placeholder="e.g. Where should I install a CO alarm?"></div>
+    <div class="field"><div class="field-label">Answer <span class="limit">New FAQs only</span></div><textarea rows="2" placeholder="Leave blank if this FAQ already exists in the system"></textarea></div>
+    <div class="grid-2" style="margin-top:8px;">
+      <div class="field"><div class="field-label">New or existing?</div><select style="width:100%;border:1px solid #ddd;border-radius:6px;padding:7px 8px;font-size:12px;font-family:inherit;background:#fafafa;"><option>Existing</option><option>New — needs adding to FAQ system</option></select></div>
+      <div class="status-row" style="align-self:flex-end;"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
+    </div>`;
+  document.getElementById('faqRows').appendChild(d);
+}
+
+function count(el, outId, max) {
+  const n = el.value.length;
+  const out = document.getElementById(outId);
+  out.textContent = n + ' / ' + max;
+  out.className = 'char-count ' + (n > max ? 'char-over' : n > max * 0.85 ? 'char-warn' : 'char-ok');
+}
+
+function setStatus(sel) {
+  sel.className = 'status';
+  if(sel.value.includes('Draft')) sel.classList.add('draft');
+  else if(sel.value.includes('Review')) sel.classList.add('review');
+  else sel.classList.add('approved');
+}
+
+function showTab(i) {
+  document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active', i===j));
+  document.querySelectorAll('.tab-content').forEach((t,j) => t.classList.toggle('active', i===j));
+}
+</script>
+</body>
+</html>
