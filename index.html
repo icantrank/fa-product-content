@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FireAngel Content Brief</title>
+<script>
+(function(){
+  const inIframe=()=>{try{return window.self!==window.top;}catch(e){return true;}};
+  if(inIframe())return;
+  const h=s=>[...s].reduce((a,c)=>a+c.charCodeAt(0).toString(16).padStart(2,'0'),'');
+  const k='6661323032360a';
+  const stored=sessionStorage.getItem('fa_auth');
+  if(stored===k)return;
+  const pw=prompt('Enter password to access this page:');
+  if(!pw||h(pw+'\n')!==k){document.documentElement.innerHTML='<h2 style="font-family:sans-serif;padding:2rem">Access denied.</h2>';throw new Error();}
+  sessionStorage.setItem('fa_auth',k);
+})();
+</script>
 <style>
   :root {
     --fa-orange: #E8671A;
