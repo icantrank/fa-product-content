@@ -9,8 +9,6 @@
 :root{--fa-orange:#E8671A;--fa-dark:#2C3142;--fa-orange-light:#FDF0E8;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,sans-serif;font-size:14px;color:#2C3142;background:#f5f5f3;}
-
-/* TOP BAR */
 .top-bar{background:var(--fa-dark);color:white;padding:12px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
 .top-bar .logo{background:var(--fa-orange);color:white;font-weight:700;font-size:12px;padding:4px 10px;border-radius:4px;}
 .top-bar h1{font-size:15px;font-weight:500;}
@@ -22,8 +20,6 @@ body{font-family:system-ui,sans-serif;font-size:14px;color:#2C3142;background:#f
 .tb-btn:hover{background:rgba(255,255,255,0.1);}
 .tb-btn.save{border-color:var(--fa-orange);color:var(--fa-orange);}
 .tb-btn.save:hover{background:var(--fa-orange);color:white;}
-
-/* BRIEF */
 .brief-wrap{max-width:900px;margin:0 auto;padding:24px 16px;}
 .section{background:white;border-radius:10px;border:1px solid #e0ddd6;margin-bottom:20px;overflow:hidden;}
 .section-header{background:var(--fa-dark);color:white;padding:12px 18px;}
@@ -74,8 +70,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 .page-order-item{background:var(--fa-dark);color:white;font-size:11px;padding:4px 11px;border-radius:20px;display:flex;align-items:center;gap:5px;}
 .page-order-item .num{background:var(--fa-orange);border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
 .arrow{color:#aaa;font-size:12px;}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
 .modal{background:white;border-radius:10px;width:560px;max-width:95vw;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -99,8 +93,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 .no-saves{text-align:center;padding:30px;color:#aaa;font-size:13px;}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--fa-dark);color:white;padding:10px 18px;border-radius:7px;font-size:13px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;}
 .toast.show{opacity:1;}
-
-/* PREVIEW */
 .preview-wrap{display:none;font-family:'Helvetica Neue',Arial,sans-serif;background:white;}
 .preview-wrap *{box-sizing:border-box;}
 .pv-editable{outline:none;border-bottom:1.5px dashed rgba(232,103,26,0.4);cursor:text;transition:border-color .2s;display:inline-block;min-width:20px;min-height:1em;}
@@ -173,77 +165,29 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 .pv-footer span{font-size:11px;color:#666;}
 .pv-empty{color:#ccc;font-style:italic;font-size:12px;}
 
-@media print {
-  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  body{background:white;font-size:11pt;color:#000;}
-  .top-bar,.mode-toggle,.top-bar-right,.page-order,.add-btn,.status-row,.admin-note,.prefilled-note,.info-note{display:none!important;}
-  .brief-wrap{max-width:100%;padding:0;display:block!important;}
-  .section{border:none;border-radius:0;margin-bottom:24pt;page-break-inside:avoid;box-shadow:none;}
-  .section-header{background:#2C3142!important;color:white!important;padding:6pt 10pt;border-radius:0;}
-  .section-header h2{font-size:11pt;font-weight:600;}
-  .section-body{padding:10pt;}
-  .subsection{border:0.5pt solid #ccc;border-radius:0;margin-bottom:10pt;}
-  .subsection-header{background:#f5f2ec!important;padding:5pt 8pt;font-size:9pt;font-weight:600;border-bottom:0.5pt solid #ddd;}
-  .subsection-body{padding:8pt;}
-  .field{margin-bottom:10pt;}
-  .field-label{font-size:8pt;color:#666;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:3pt;display:flex;gap:6pt;}
-  .field-label .limit{font-size:7.5pt;color:#999;background:none;padding:0;}
-  textarea,input[type="text"],input[type="url"]{border:none;border-bottom:0.5pt solid #ccc;border-radius:0;background:transparent;padding:2pt 0;font-size:10.5pt;width:100%;resize:none;min-height:0;}
-  .url-row{border:none;border-bottom:0.5pt solid #ccc;border-radius:0;background:transparent;}
-  .url-prefix{background:transparent;border:none;color:#999;font-size:10pt;padding:2pt 4pt 2pt 0;}
-  .url-row input{border:none;padding:2pt 0;font-size:10pt;}
-  .char-count{display:none;}
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12pt;}
-  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10pt;}
-  .tab-bar{display:none;}
-  .tab-content{display:block!important;padding:0;}
-  .tab-content+.tab-content{border-top:0.5pt solid #eee;padding-top:8pt;margin-top:8pt;}
-  .tab-content::before{display:block;font-size:8pt;font-weight:600;color:#E8671A;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6pt;}
-  #tab0::before{content:'Key Features & Benefits';}
-  #tab1::before{content:'Where to Install';}
-  #tab2::before{content:'Compliant & Certified';}
-  #tab3::before{content:"What's in the Box";}
-  .icon-grid{display:flex;flex-wrap:wrap;gap:4pt;}
-  .icon-option{font-size:9pt;padding:2pt 5pt;border:0.5pt solid #ddd;border-radius:3pt;}
-  .icon-option input[type="checkbox"]{width:10pt;height:10pt;}
-  .icon-option.checked{background:#fdf0e8!important;border-color:#E8671A;font-weight:600;}
-  .repeater-row{border:0.5pt solid #ddd;border-radius:0;padding:6pt 8pt;margin-bottom:6pt;}
-  .repeater-row-header{font-size:8pt;color:#E8671A;font-weight:600;margin-bottom:5pt;}
-  .remove-btn{display:none;}
-  .brief-wrap::before{content:'FireAngel — Product Page Content Brief';display:block;font-size:16pt;font-weight:700;color:#2C3142;border-bottom:2pt solid #E8671A;padding-bottom:6pt;margin-bottom:16pt;}
-  .preview-wrap,#previewMode{display:block!important;page-break-before:always;}
-  .pv-nav .pv-nav-links{display:none;}
-  .pv-hero{padding:16pt 20pt;grid-template-columns:1fr 1fr;gap:24pt;}
-  .pv-h1{font-size:18pt;}
-  .pv-boxes{padding:16pt 20pt;}
-  .pv-install{padding:16pt 20pt;}
-  .pv-reviews{padding:16pt 20pt;}
-  .pv-faqs{padding:16pt 20pt;}
-  .pv-upsell{padding:20pt;}
-  .pv-footer{padding:10pt 20pt;}
-  .pv-review-card{page-break-inside:avoid;}
-  .pv-editable,.pv-editable-block{border:none!important;background:none!important;padding:0!important;}
-  .pv-sf-remove{display:none;}
-  .preview-wrap::before{content:'FireAngel — Page Preview';display:block;font-size:16pt;font-weight:700;color:#2C3142;border-bottom:2pt solid #E8671A;padding-bottom:6pt;margin-bottom:0;font-family:system-ui,sans-serif;}
-  a{color:inherit;text-decoration:none;}
-  @page{margin:12mm;}
+/* PRINT FRAME */
+#printFrame{display:none;position:fixed;inset:0;z-index:9999;background:#555;overflow-y:auto;}
+#printFrame .pf-toolbar{position:sticky;top:0;z-index:10;background:#374151;padding:10px 24px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.4);}
+#printFrame .pf-toolbar-title{color:rgba(255,255,255,.7);font-size:13px;font-family:system-ui,sans-serif;}
+#printFrame .pf-toolbar-spacer{flex:1;}
+#printFrame .pf-close-btn{padding:7px 16px;border-radius:6px;font-size:13px;font-family:system-ui,sans-serif;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:none;color:white;}
+#printFrame .pf-close-btn:hover{background:rgba(255,255,255,.1);}
+#printFrame .pf-print-btn{padding:7px 18px;border-radius:6px;font-size:13px;font-family:system-ui,sans-serif;cursor:pointer;border:none;background:#E8671A;color:white;font-weight:600;}
+#printFrame .pf-pages{max-width:820px;margin:24px auto 60px;}
+#printFrame .pf-page{background:white;box-shadow:0 2px 16px rgba(0,0,0,.25);padding:52px 60px;margin-bottom:20px;font-family:Georgia,serif;font-size:13pt;color:#1a1a1a;line-height:1.7;position:relative;}
+
+@media print{
+  body>*:not(#printFrame){display:none!important;}
+  #printFrame{display:block!important;position:static;overflow:visible;background:white;}
+  #printFrame .pf-toolbar{display:none!important;}
+  #printFrame .pf-pages{max-width:100%;margin:0;}
+  #printFrame .pf-page{box-shadow:none;margin:0;padding:18mm 20mm;page-break-after:always;}
+  #printFrame .pf-page:last-child{page-break-after:avoid;}
+  @page{margin:0;size:A4;}
 }
 </style>
 </head>
 <body>
-<script>
-(function(){
-  const inIframe=()=>{try{return window.self!==window.top;}catch(e){return true;}};
-  if(inIframe())return;
-  const h=s=>[...s].reduce((a,c)=>a+c.charCodeAt(0).toString(16).padStart(2,'0'),'');
-  const k='6661323032360a';
-  const stored=sessionStorage.getItem('fa_auth');
-  if(stored===k)return;
-  const pw=prompt('Enter password to access this page:');
-  if(!pw||h(pw+'\n')!==k){document.documentElement.innerHTML='<body style="background:#111;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;"><p style="color:#666;font-size:14px;">Access denied.</p></body>';throw new Error();}
-  sessionStorage.setItem('fa_auth',k);
-})();
-</script>
 
 <div class="top-bar">
   <div class="logo">FA</div>
@@ -285,7 +229,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     <div class="page-order-item"><span class="num">5</span> FAQs</div><span class="arrow">›</span>
     <div class="page-order-item"><span class="num">6</span> Upsell</div>
   </div>
-
   <div class="section">
     <div class="section-header"><h2>Section 0 — SEO Metadata</h2></div>
     <div class="section-body">
@@ -309,7 +252,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       </div>
     </div>
   </div>
-
   <div class="section">
     <div class="section-header"><h2>Section 1 — Header / Product Hero</h2></div>
     <div class="section-body">
@@ -358,7 +300,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       </div>
     </div>
   </div>
-
   <div class="section">
     <div class="section-header"><h2>Section 2 — Product Template V2: 4 Boxes</h2></div>
     <div class="tab-bar">
@@ -368,42 +309,23 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       <div class="tab" onclick="showTab(3)">What's in the Box</div>
     </div>
     <div class="tab-content active" id="tab0">
-      <div class="field">
-        <div class="field-label">Box title (H2)</div>
-        <input type="text" id="f_kfb_title" placeholder="e.g. For home safety you can trust.">
-        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_kfb_title"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
-      </div>
+      <div class="field"><div class="field-label">Box title (H2)</div><input type="text" id="f_kfb_title" placeholder="e.g. For home safety you can trust."><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_kfb_title"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
       <div class="field-label" style="margin-bottom:10px;">Sub-features (3–5)</div>
       <div id="subfeatures"></div>
       <button class="add-btn" onclick="addSubfeature()">+ Add sub-feature</button>
     </div>
     <div class="tab-content" id="tab1">
-      <div class="field">
-        <div class="field-label">Text box</div>
-        <textarea id="f_install_text" rows="5" placeholder="Describe suitable installation locations..."></textarea>
-        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_install_text"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
-      </div>
+      <div class="field"><div class="field-label">Text box</div><textarea id="f_install_text" rows="5" placeholder="Describe suitable installation locations..."></textarea><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_install_text"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
     </div>
     <div class="tab-content" id="tab2">
-      <div class="field">
-        <div class="field-label">Text box</div>
-        <div class="admin-note">Rewrite per Emily's feedback — shorter, customer-first</div>
-        <textarea id="f_cert_text" rows="6" placeholder="Certification and compliance details..."></textarea>
-        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_cert_text"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
-      </div>
-      <div style="background:#f5f5f3;border-radius:7px;padding:12px;font-size:12px;color:#666;line-height:1.6;border:1px solid #e0ddd6;">
-        <div style="font-size:11px;font-weight:500;color:#888;margin-bottom:6px;">REFERENCE COPY (old — do not use)</div>
-        The FireAngel FA6829S is certified to both BS EN 50291-1:2018 for domestic use and BS EN 50291-2:2019 for use in caravans, motorhomes, and boats.
-      </div>
+      <div class="field"><div class="field-label">Text box</div><div class="admin-note">Rewrite per Emily's feedback — shorter, customer-first</div><textarea id="f_cert_text" rows="6" placeholder="Certification and compliance details..."></textarea><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_cert_text"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
+      <div style="background:#f5f5f3;border-radius:7px;padding:12px;font-size:12px;color:#666;line-height:1.6;border:1px solid #e0ddd6;"><div style="font-size:11px;font-weight:500;color:#888;margin-bottom:6px;">REFERENCE COPY (old — do not use)</div>The FireAngel FA6829S is certified to both BS EN 50291-1:2018 for domestic use and BS EN 50291-2:2019 for use in caravans, motorhomes, and boats.</div>
     </div>
     <div class="tab-content" id="tab3">
       <div class="field"><div class="field-label">Image filename / URL</div><input type="url" id="f_witb_url" placeholder="https://... or filename.jpg"></div>
-      <div class="field"><div class="field-label">Alt text</div><input type="text" id="f_witb_alt" placeholder="e.g. Contents of FireAngel FA6829S box">
-        <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_witb"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
-      </div>
+      <div class="field"><div class="field-label">Alt text</div><input type="text" id="f_witb_alt" placeholder="e.g. Contents of FireAngel FA6829S box"><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_witb"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
     </div>
   </div>
-
   <div class="section">
     <div class="section-header"><h2>Section 3 — Installation &amp; Setup / Resources</h2></div>
     <div class="section-body">
@@ -436,7 +358,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       </div>
     </div>
   </div>
-
   <div class="section">
     <div class="section-header"><h2>Section 4 — Reviews</h2></div>
     <div class="section-body">
@@ -445,16 +366,14 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       <button class="add-btn" onclick="addReview()">+ Add review</button>
     </div>
   </div>
-
   <div class="section">
     <div class="section-header"><h2>Section 5 — Related FAQs</h2></div>
     <div class="section-body">
-      <div class="admin-note" style="margin-bottom:12px;">FAQs must exist in the FAQ system before linking. Complete both fields for new FAQs and add to system first.</div>
+      <div class="admin-note" style="margin-bottom:12px;">FAQs must exist in the FAQ system before linking.</div>
       <div id="faqRows"></div>
       <button class="add-btn" onclick="addFaq()">+ Add FAQ</button>
     </div>
   </div>
-
   <div class="section">
     <div class="section-header"><h2>Section 6 — Upsell</h2></div>
     <div class="section-body">
@@ -490,23 +409,12 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       <div class="pv-btns"><button class="pv-btn-primary">Add to basket</button><button class="pv-btn-secondary">Add to compare</button></div>
     </div>
   </div>
-  <div class="pv-boxes">
-    <div class="pv-boxes-inner">
-      <div class="pv-box">
-        <h2 class="pv-editable" id="pv_kfb_title" contenteditable="true" data-field="f_kfb_title"></h2>
-        <div id="pv_subfeatures"></div>
-      </div>
-      <div class="pv-box">
-        <h2>Where to install your alarm</h2>
-        <div class="pv-editable-block" id="pv_install_text" contenteditable="true" data-field="f_install_text"></div>
-      </div>
-      <div class="pv-box">
-        <h2>Compliant and Certified for Safety</h2>
-        <div class="pv-editable-block" id="pv_cert_text" contenteditable="true" data-field="f_cert_text"></div>
-      </div>
-      <div class="pv-box"><h2>What's in the box?</h2><div class="pv-box-img" id="pv_witb">What's in the box image</div></div>
-    </div>
-  </div>
+  <div class="pv-boxes"><div class="pv-boxes-inner">
+    <div class="pv-box"><h2 class="pv-editable" id="pv_kfb_title" contenteditable="true" data-field="f_kfb_title"></h2><div id="pv_subfeatures"></div></div>
+    <div class="pv-box"><h2>Where to install your alarm</h2><div class="pv-editable-block" id="pv_install_text" contenteditable="true" data-field="f_install_text"></div></div>
+    <div class="pv-box"><h2>Compliant and Certified for Safety</h2><div class="pv-editable-block" id="pv_cert_text" contenteditable="true" data-field="f_cert_text"></div></div>
+    <div class="pv-box"><h2>What's in the box?</h2><div class="pv-box-img" id="pv_witb">What's in the box image</div></div>
+  </div></div>
   <div class="pv-install">
     <div class="pv-install-col">
       <h2 class="pv-editable" id="pv_is_title" contenteditable="true" data-field="f_is_title"></h2>
@@ -535,7 +443,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 </div>
 
 <script>
-/* ---- AUTOSAVE ---- */
 function autosave(){
   const slug=document.getElementById('f_slug')?.value?.trim();
   if(!slug)return;
@@ -548,7 +455,6 @@ function attachAutosave(root){
 }
 
 const icons=['Heat alarm','Zigbee sensors','Temp & Humidity Sensors','Third Party Tested','Hardwired','Smoke Alarm','Cloud Enabled','Secure Wireless','3 Year Warranty','Android','iOS','Grade F2','Grade F1','Grade D2','Grade D1','Thermoptek','Battery included','1 Year Warranty','2 Year Warranty','Mains Powered','Sealed battery','Diagnostics','Thermistek','7 Year Warranty','Wireless Interlink','Predict AI','Smoke and CO sensing','Battery Silence','Push to fit','CO','Kitemark','5 Year Warranty','Fire Sensing','Light Indicator','10 Year Warranty'];
-
 const iconGrid=document.getElementById('iconGrid');
 icons.forEach(ic=>{
   const l=document.createElement('label');l.className='icon-option';
@@ -616,7 +522,6 @@ function addFaq(q='',a='',type='Existing',status='🔴 Draft'){
 }
 
 function removeRow(btn){btn.closest('.repeater-row').remove();autosave();buildPreview();}
-
 function count(el,outId,max,min){
   const n=el.value.length,out=document.getElementById(outId);
   out.textContent=n+' / '+max+(min?' (min '+min+')':'');
@@ -636,147 +541,49 @@ function showTab(i){
 function sanitizeSlug(el){el.value=el.value.toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 
-/* ---- COLLECT STATE ---- */
 function collectState(){
   const gv=id=>document.getElementById(id)?.value||'';
   const gs=id=>document.getElementById(id)?.value||'🔴 Draft';
-  const sfs=[...document.querySelectorAll('#subfeatures .repeater-row')].map(r=>{
-    const inps=r.querySelectorAll('input[type="text"]');
-    return{icon:r.querySelector('select').value,h3:inps[0]?.value||'',desc:inps[1]?.value||''};
-  });
-  const imgs=[...document.querySelectorAll('#imageRows .repeater-row')].map(r=>{
-    const inps=r.querySelectorAll('input');return{url:inps[0]?.value||'',alt:inps[1]?.value||''};
-  });
-  const revs=[...document.querySelectorAll('#reviewRows .repeater-row')].map(r=>{
-    const inps=r.querySelectorAll('input[type="text"]');
-    return{title:inps[0]?.value||'',name:inps[1]?.value||'',status:r.querySelector('select.status')?.value||'🔴 Draft'};
-  });
-  const faqs=[...document.querySelectorAll('#faqRows .repeater-row')].map(r=>{
-    const sels=r.querySelectorAll('select');
-    return{q:r.querySelector('input[type="text"]')?.value||'',a:r.querySelector('textarea')?.value||'',type:sels[0]?.value||'Existing',status:sels[1]?.value||'🔴 Draft'};
-  });
+  const sfs=[...document.querySelectorAll('#subfeatures .repeater-row')].map(r=>{const inps=r.querySelectorAll('input[type="text"]');return{icon:r.querySelector('select').value,h3:inps[0]?.value||'',desc:inps[1]?.value||''};});
+  const imgs=[...document.querySelectorAll('#imageRows .repeater-row')].map(r=>{const inps=r.querySelectorAll('input');return{url:inps[0]?.value||'',alt:inps[1]?.value||''};});
+  const revs=[...document.querySelectorAll('#reviewRows .repeater-row')].map(r=>{const inps=r.querySelectorAll('input[type="text"]');return{title:inps[0]?.value||'',name:inps[1]?.value||'',status:r.querySelector('select.status')?.value||'🔴 Draft'};});
+  const faqs=[...document.querySelectorAll('#faqRows .repeater-row')].map(r=>{const sels=r.querySelectorAll('select');return{q:r.querySelector('input[type="text"]')?.value||'',a:r.querySelector('textarea')?.value||'',type:sels[0]?.value||'Existing',status:sels[1]?.value||'🔴 Draft'};});
   const checkedIcons=[...document.querySelectorAll('#iconGrid .icon-option.checked span')].map(s=>s.textContent);
-  return{
-    slug:gv('f_slug'),sku:gv('f_sku'),s_sku:gs('s_sku'),
-    seo_title:gv('f_seo_title'),s_seo_title:gs('s_seo_title'),
-    seo_desc:gv('f_seo_desc'),s_seo_desc:gs('s_seo_desc'),s_slug:gs('s_slug'),
-    h1:gv('f_h1'),s_h1:gs('s_h1'),tagline:gv('f_tagline'),s_tagline:gs('s_tagline'),
-    shortdesc:gv('f_shortdesc'),s_shortdesc:gs('s_shortdesc'),desc:gv('f_desc'),s_desc:gs('s_desc'),
-    checkedIcons,s_icons:gs('s_icons'),
-    kfb_title:gv('f_kfb_title'),s_kfb_title:gs('s_kfb_title'),
-    install_text:gv('f_install_text'),s_install_text:gs('s_install_text'),
-    cert_text:gv('f_cert_text'),s_cert_text:gs('s_cert_text'),
-    witb_url:gv('f_witb_url'),witb_alt:gv('f_witb_alt'),s_witb:gs('s_witb'),
-    is_title:gv('f_is_title'),is_desc:gv('f_is_desc'),ig_title:gv('f_ig_title'),ig_desc:gv('f_ig_desc'),
-    mg_title:gv('f_mg_title'),mg_desc:gv('f_mg_desc'),s_install_sec:gs('s_install_sec'),
-    res_title:gv('f_res_title'),res_desc:gv('f_res_desc'),pm_title:gv('f_pm_title'),pm_desc:gv('f_pm_desc'),
-    ds_title:gv('f_ds_title'),ds_desc:gv('f_ds_desc'),s_resources_sec:gs('s_resources_sec'),
-    up_h2:gv('f_up_h2'),s_up_h2:gs('s_up_h2'),up_body:gv('f_up_body'),s_up_body:gs('s_up_body'),
-    up_cta:gv('f_up_cta'),s_up_cta:gs('s_up_cta'),up_url:gv('f_up_url'),
-    subfeatures:sfs,images:imgs,reviews:revs,faqs,savedAt:new Date().toISOString()
-  };
+  return{slug:gv('f_slug'),sku:gv('f_sku'),s_sku:gs('s_sku'),seo_title:gv('f_seo_title'),s_seo_title:gs('s_seo_title'),seo_desc:gv('f_seo_desc'),s_seo_desc:gs('s_seo_desc'),s_slug:gs('s_slug'),h1:gv('f_h1'),s_h1:gs('s_h1'),tagline:gv('f_tagline'),s_tagline:gs('s_tagline'),shortdesc:gv('f_shortdesc'),s_shortdesc:gs('s_shortdesc'),desc:gv('f_desc'),s_desc:gs('s_desc'),checkedIcons,s_icons:gs('s_icons'),kfb_title:gv('f_kfb_title'),s_kfb_title:gs('s_kfb_title'),install_text:gv('f_install_text'),s_install_text:gs('s_install_text'),cert_text:gv('f_cert_text'),s_cert_text:gs('s_cert_text'),witb_url:gv('f_witb_url'),witb_alt:gv('f_witb_alt'),s_witb:gs('s_witb'),is_title:gv('f_is_title'),is_desc:gv('f_is_desc'),ig_title:gv('f_ig_title'),ig_desc:gv('f_ig_desc'),mg_title:gv('f_mg_title'),mg_desc:gv('f_mg_desc'),s_install_sec:gs('s_install_sec'),res_title:gv('f_res_title'),res_desc:gv('f_res_desc'),pm_title:gv('f_pm_title'),pm_desc:gv('f_pm_desc'),ds_title:gv('f_ds_title'),ds_desc:gv('f_ds_desc'),s_resources_sec:gs('s_resources_sec'),up_h2:gv('f_up_h2'),s_up_h2:gs('s_up_h2'),up_body:gv('f_up_body'),s_up_body:gs('s_up_body'),up_cta:gv('f_up_cta'),s_up_cta:gs('s_up_cta'),up_url:gv('f_up_url'),subfeatures:sfs,images:imgs,reviews:revs,faqs,savedAt:new Date().toISOString()};
 }
 
-/* ---- RESTORE STATE ---- */
 function restoreState(s){
   const sv=(id,val)=>{const el=document.getElementById(id);if(el)el.value=val||'';};
   const ss=(id,val)=>{const el=document.getElementById(id);if(el){el.value=val||'🔴 Draft';setStatus(el);}};
-  sv('f_slug',s.slug);sv('f_sku',s.sku);ss('s_sku',s.s_sku);
-  sv('f_seo_title',s.seo_title);ss('s_seo_title',s.s_seo_title);
-  sv('f_seo_desc',s.seo_desc);ss('s_seo_desc',s.s_seo_desc);ss('s_slug',s.s_slug);
-  sv('f_h1',s.h1);ss('s_h1',s.s_h1);sv('f_tagline',s.tagline);ss('s_tagline',s.s_tagline);
-  sv('f_shortdesc',s.shortdesc);ss('s_shortdesc',s.s_shortdesc);sv('f_desc',s.desc);ss('s_desc',s.s_desc);
-  sv('f_kfb_title',s.kfb_title);ss('s_kfb_title',s.s_kfb_title);
-  sv('f_install_text',s.install_text);ss('s_install_text',s.s_install_text);
-  sv('f_cert_text',s.cert_text);ss('s_cert_text',s.s_cert_text);
-  sv('f_witb_url',s.witb_url);sv('f_witb_alt',s.witb_alt);ss('s_witb',s.s_witb);
-  sv('f_is_title',s.is_title);sv('f_is_desc',s.is_desc);sv('f_ig_title',s.ig_title);sv('f_ig_desc',s.ig_desc);
-  sv('f_mg_title',s.mg_title);sv('f_mg_desc',s.mg_desc);ss('s_install_sec',s.s_install_sec);
-  sv('f_res_title',s.res_title);sv('f_res_desc',s.res_desc);sv('f_pm_title',s.pm_title);sv('f_pm_desc',s.pm_desc);
-  sv('f_ds_title',s.ds_title);sv('f_ds_desc',s.ds_desc);ss('s_resources_sec',s.s_resources_sec);
-  sv('f_up_h2',s.up_h2);ss('s_up_h2',s.s_up_h2);sv('f_up_body',s.up_body);ss('s_up_body',s.s_up_body);
-  sv('f_up_cta',s.up_cta);ss('s_up_cta',s.s_up_cta);sv('f_up_url',s.up_url);
-  document.querySelectorAll('#iconGrid .icon-option').forEach(l=>{
-    const name=l.querySelector('span').textContent,chk=l.querySelector('input');
-    chk.checked=(s.checkedIcons||[]).includes(name);l.classList.toggle('checked',chk.checked);
-  });
+  sv('f_slug',s.slug);sv('f_sku',s.sku);ss('s_sku',s.s_sku);sv('f_seo_title',s.seo_title);ss('s_seo_title',s.s_seo_title);sv('f_seo_desc',s.seo_desc);ss('s_seo_desc',s.s_seo_desc);ss('s_slug',s.s_slug);sv('f_h1',s.h1);ss('s_h1',s.s_h1);sv('f_tagline',s.tagline);ss('s_tagline',s.s_tagline);sv('f_shortdesc',s.shortdesc);ss('s_shortdesc',s.s_shortdesc);sv('f_desc',s.desc);ss('s_desc',s.s_desc);sv('f_kfb_title',s.kfb_title);ss('s_kfb_title',s.s_kfb_title);sv('f_install_text',s.install_text);ss('s_install_text',s.s_install_text);sv('f_cert_text',s.cert_text);ss('s_cert_text',s.s_cert_text);sv('f_witb_url',s.witb_url);sv('f_witb_alt',s.witb_alt);ss('s_witb',s.s_witb);sv('f_is_title',s.is_title);sv('f_is_desc',s.is_desc);sv('f_ig_title',s.ig_title);sv('f_ig_desc',s.ig_desc);sv('f_mg_title',s.mg_title);sv('f_mg_desc',s.mg_desc);ss('s_install_sec',s.s_install_sec);sv('f_res_title',s.res_title);sv('f_res_desc',s.res_desc);sv('f_pm_title',s.pm_title);sv('f_pm_desc',s.pm_desc);sv('f_ds_title',s.ds_title);sv('f_ds_desc',s.ds_desc);ss('s_resources_sec',s.s_resources_sec);sv('f_up_h2',s.up_h2);ss('s_up_h2',s.s_up_h2);sv('f_up_body',s.up_body);ss('s_up_body',s.s_up_body);sv('f_up_cta',s.up_cta);ss('s_up_cta',s.s_up_cta);sv('f_up_url',s.up_url);
+  document.querySelectorAll('#iconGrid .icon-option').forEach(l=>{const name=l.querySelector('span').textContent,chk=l.querySelector('input');chk.checked=(s.checkedIcons||[]).includes(name);l.classList.toggle('checked',chk.checked);});
   ss('s_icons',s.s_icons);
-  document.getElementById('subfeatures').innerHTML='';sfCount=0;
-  (s.subfeatures||[]).forEach(sf=>addSubfeature(sf.icon,sf.h3,sf.desc));
-  document.getElementById('imageRows').innerHTML='';imgCount=0;
-  (s.images||[]).forEach(img=>addImage(img.url,img.alt));
-  if(imgCount<4)for(let i=imgCount;i<4;i++)addImage();
-  document.getElementById('reviewRows').innerHTML='';revCount=0;
-  (s.reviews||[]).forEach(r=>addReview(r.title,r.name,r.status));
-  if(revCount<1)addReview();
-  document.getElementById('faqRows').innerHTML='';faqCount=0;
-  (s.faqs||[]).forEach(f=>addFaq(f.q,f.a,f.type,f.status));
-  ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));
-  });
+  document.getElementById('subfeatures').innerHTML='';sfCount=0;(s.subfeatures||[]).forEach(sf=>addSubfeature(sf.icon,sf.h3,sf.desc));
+  document.getElementById('imageRows').innerHTML='';imgCount=0;(s.images||[]).forEach(img=>addImage(img.url,img.alt));if(imgCount<4)for(let i=imgCount;i<4;i++)addImage();
+  document.getElementById('reviewRows').innerHTML='';revCount=0;(s.reviews||[]).forEach(r=>addReview(r.title,r.name,r.status));if(revCount<1)addReview();
+  document.getElementById('faqRows').innerHTML='';faqCount=0;(s.faqs||[]).forEach(f=>addFaq(f.q,f.a,f.type,f.status));
+  ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));});
 }
 
-/* ---- SAVE / LOAD ---- */
 function doSave(){
   const slug=document.getElementById('f_slug')?.value?.trim();
   if(!slug){showToast('⚠ Set a URL slug before saving');return;}
   try{localStorage.setItem('fa_brief_'+slug,JSON.stringify(collectState()));showToast('✓ Saved: /product/'+slug);}
-  catch(e){showToast('⚠ Save unavailable here — use on deployed site');}
+  catch(e){showToast('⚠ Save unavailable here');}
 }
 function openLoadModal(){
-  const body=document.getElementById('modalBody');
-  let saves=[];
-  try{
-    for(let i=0;i<localStorage.length;i++){
-      const k=localStorage.key(i);
-      if(k.startsWith('fa_brief_')){const d=JSON.parse(localStorage.getItem(k));saves.push({key:k,slug:d.slug,savedAt:d.savedAt,title:d.seo_title||d.h1||'Untitled'});}
-    }
-  }catch(e){body.innerHTML='<div class="no-saves">localStorage not available here.<br>Save/load works on the deployed GitHub Pages site.</div>';document.getElementById('loadModal').classList.add('open');return;}
+  const body=document.getElementById('modalBody');let saves=[];
+  try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('fa_brief_')){const d=JSON.parse(localStorage.getItem(k));saves.push({key:k,slug:d.slug,savedAt:d.savedAt,title:d.seo_title||d.h1||'Untitled'});}}}
+  catch(e){body.innerHTML='<div class="no-saves">localStorage not available.</div>';document.getElementById('loadModal').classList.add('open');return;}
   if(!saves.length){body.innerHTML='<div class="no-saves">No saved briefs found.</div>';}
-  else{
-    saves.sort((a,b)=>new Date(b.savedAt)-new Date(a.savedAt));
-    body.innerHTML=saves.map(s=>`<div class="save-item"><div class="save-item-info"><div class="save-item-slug">/product/${s.slug}</div><div class="save-item-meta">${s.title} · ${new Date(s.savedAt).toLocaleString('en-GB')}</div></div><div class="save-item-actions"><button class="si-btn load" onclick="loadSave('${s.key}')">Load</button><button class="si-btn del" onclick="deleteSave('${s.key}',this)">Remove</button></div></div>`).join('');
-  }
+  else{saves.sort((a,b)=>new Date(b.savedAt)-new Date(a.savedAt));body.innerHTML=saves.map(s=>`<div class="save-item"><div class="save-item-info"><div class="save-item-slug">/product/${s.slug}</div><div class="save-item-meta">${s.title} · ${new Date(s.savedAt).toLocaleString('en-GB')}</div></div><div class="save-item-actions"><button class="si-btn load" onclick="loadSave('${s.key}')">Load</button><button class="si-btn del" onclick="deleteSave('${s.key}',this)">Remove</button></div></div>`).join('');}
   document.getElementById('loadModal').classList.add('open');
 }
 function closeModal(){document.getElementById('loadModal').classList.remove('open');}
-function loadSave(key){
-  try{
-    const data=JSON.parse(localStorage.getItem(key));
-    restoreState(data);buildPreview();closeModal();showToast('✓ Loaded: /product/'+data.slug);
-  }catch(e){showToast('⚠ Could not load save');}
-}
-function deleteSave(key,btn){
-  try{localStorage.removeItem(key);btn.closest('.save-item').remove();showToast('Removed');
-    const body=document.getElementById('modalBody');
-    if(!body.querySelector('.save-item'))body.innerHTML='<div class="no-saves">No saved briefs found.</div>';
-  }catch(e){showToast('⚠ Could not remove');}
-}
-function exportSaves(){
-  try{
-    const all={};
-    for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('fa_brief_'))all[k]=JSON.parse(localStorage.getItem(k));}
-    if(!Object.keys(all).length){showToast('No saves to export');return;}
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(new Blob([JSON.stringify(all,null,2)],{type:'application/json'}));
-    a.download='fa-content-briefs-'+new Date().toISOString().slice(0,10)+'.json';
-    a.click();URL.revokeObjectURL(a.href);
-    showToast('✓ Exported '+Object.keys(all).length+' save(s)');
-  }catch(e){showToast('⚠ Export unavailable here');}
-}
-function importSaves(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    try{
-      const data=JSON.parse(e.target.result);let count=0;
-      Object.entries(data).forEach(([k,v])=>{if(k.startsWith('fa_brief_')){localStorage.setItem(k,JSON.stringify(v));count++;}});
-      showToast('✓ Imported '+count+' save(s)');
-    }catch(err){showToast('⚠ Invalid file');}
-    input.value='';
-  };
-  reader.readAsText(file);
-}
+function loadSave(key){try{const data=JSON.parse(localStorage.getItem(key));restoreState(data);buildPreview();closeModal();showToast('✓ Loaded: /product/'+data.slug);}catch(e){showToast('⚠ Could not load save');}}
+function deleteSave(key,btn){try{localStorage.removeItem(key);btn.closest('.save-item').remove();showToast('Removed');const body=document.getElementById('modalBody');if(!body.querySelector('.save-item'))body.innerHTML='<div class="no-saves">No saved briefs found.</div>';}catch(e){showToast('⚠ Could not remove');}}
+function exportSaves(){try{const all={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('fa_brief_'))all[k]=JSON.parse(localStorage.getItem(k));}if(!Object.keys(all).length){showToast('No saves to export');return;}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(all,null,2)],{type:'application/json'}));a.download='fa-content-briefs-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href);showToast('✓ Exported '+Object.keys(all).length+' save(s)');}catch(e){showToast('⚠ Export unavailable');}}
+function importSaves(input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{try{const data=JSON.parse(e.target.result);let count=0;Object.entries(data).forEach(([k,v])=>{if(k.startsWith('fa_brief_')){localStorage.setItem(k,JSON.stringify(v));count++;}});showToast('✓ Imported '+count+' save(s)');}catch(err){showToast('⚠ Invalid file');}input.value='';};reader.readAsText(file);}
 
 /* ---- BUILD PREVIEW ---- */
 function g(id){const el=document.getElementById(id);return el?el.value.trim():'';}
@@ -787,318 +594,302 @@ function buildPreview(){
   const slug=g('f_slug'),sku=g('f_sku');
   const seoBar=document.getElementById('pv_seo_bar');
   seoBar.innerHTML=`<strong>Page title:</strong> ${g('f_seo_title')||'<em>not set</em>'} &nbsp;|&nbsp; <strong>Meta:</strong> ${g('f_seo_desc')||'<em>not set</em>'} &nbsp;|&nbsp; <strong>URL:</strong> fireangel.co.uk/product/${slug||'<em>not set</em>'}`;
-  setEl('pv_sku_bc',sku||slug||'—');
-  setEl('pv_sku_hero',sku||'—');
-
-  // Hero text
+  setEl('pv_sku_bc',sku||slug||'—');setEl('pv_sku_hero',sku||'—');
   setTxt('pv_h1',g('f_h1'),'H1 not entered');
-  const tag=g('f_tagline');setTxt('pv_tagline',tag.replace(/\n/g,'<br>'),'Tagline not entered');
-  const sd=g('f_shortdesc');setTxt('pv_short_desc',sd.replace(/\n/g,'<br>'),'Short description not entered');
-  const desc=g('f_desc');setTxt('pv_desc',desc.replace(/\n/g,'<br>'),'Product description not entered');
-
-  // Icons
+  setTxt('pv_tagline',g('f_tagline').replace(/\n/g,'<br>'),'Tagline not entered');
+  setTxt('pv_short_desc',g('f_shortdesc').replace(/\n/g,'<br>'),'Short description not entered');
+  setTxt('pv_desc',g('f_desc').replace(/\n/g,'<br>'),'Product description not entered');
   const checked=[...document.querySelectorAll('#iconGrid .icon-option.checked span')].map(s=>s.textContent);
-  const iconsEl=document.getElementById('pv_icons');
-  iconsEl.innerHTML=checked.length?checked.map(i=>`<div class="pv-icon-badge"><div class="pv-icon-dot"></div>${i}</div>`).join(''):'<span class="pv-empty">No features selected</span>';
-
-  // Images
+  document.getElementById('pv_icons').innerHTML=checked.length?checked.map(i=>`<div class="pv-icon-badge"><div class="pv-icon-dot"></div>${i}</div>`).join(''):'<span class="pv-empty">No features selected</span>';
   const thumbsEl=document.getElementById('pv_thumbs');thumbsEl.innerHTML='';
   const mainImg=document.getElementById('pv_main_img');mainImg.innerHTML='';
   const imgRows=[...document.querySelectorAll('#imageRows .repeater-row')];
   imgRows.forEach((row,i)=>{
-    const val=row.querySelectorAll('input')[0]?.value?.trim()||'';
-    const filename=val?val.split('/').pop():'Image '+(i+1);
-    const badge=document.createElement('div');
-    badge.style.cssText='background:#f0f0f0;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:10px;color:#555;display:inline-flex;align-items:center;gap:4px;';
-    badge.innerHTML=`<span style="width:8px;height:8px;background:var(--fa-orange);border-radius:50%;flex-shrink:0;display:inline-block;"></span>${filename}`;
-    thumbsEl.appendChild(badge);
-    if(i===0){
-      mainImg.style.cssText='min-height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;';
-      mainImg.innerHTML=`<svg viewBox="0 0 24 24" width="40" height="40" fill="#ccc"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5z"/></svg><span style="font-size:12px;color:#aaa;">${filename}</span>`;
-    }
+    const val=row.querySelectorAll('input')[0]?.value?.trim()||'';const filename=val?val.split('/').pop():'Image '+(i+1);
+    const badge=document.createElement('div');badge.style.cssText='background:#f0f0f0;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:10px;color:#555;display:inline-flex;align-items:center;gap:4px;';
+    badge.innerHTML=`<span style="width:8px;height:8px;background:var(--fa-orange);border-radius:50%;flex-shrink:0;display:inline-block;"></span>${filename}`;thumbsEl.appendChild(badge);
+    if(i===0){mainImg.style.cssText='min-height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;';mainImg.innerHTML=`<svg viewBox="0 0 24 24" width="40" height="40" fill="#ccc"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5z"/></svg><span style="font-size:12px;color:#aaa;">${filename}</span>`;}
   });
-
-  // KFB
   setTxt('pv_kfb_title',g('f_kfb_title'),'Key Features and Benefits');
   const sfEl=document.getElementById('pv_subfeatures');sfEl.innerHTML='';
   document.querySelectorAll('#subfeatures .repeater-row').forEach((row,ri)=>{
-    const inps=row.querySelectorAll('input[type="text"]');
-    const h3=inps[0]?.value||'',desc=inps[1]?.value||'';
-    if(h3||desc){
-      const d=document.createElement('div');d.className='pv-subfeature';
-      d.innerHTML=`<div class="pv-sf-icon"></div><div class="pv-sf-text">
-        <h3 class="pv-editable-block" contenteditable="true" data-sf-row="${ri}" data-sf-field="h3">${h3}</h3>
-        <p class="pv-editable-block" contenteditable="true" data-sf-row="${ri}" data-sf-field="desc">${desc}</p>
-      </div><button class="pv-sf-remove" onclick="removePvSf(this,${ri})">×</button>`;
-      sfEl.appendChild(d);
-    }
+    const inps=row.querySelectorAll('input[type="text"]');const h3=inps[0]?.value||'',desc=inps[1]?.value||'';
+    if(h3||desc){const d=document.createElement('div');d.className='pv-subfeature';d.innerHTML=`<div class="pv-sf-icon"></div><div class="pv-sf-text"><h3 class="pv-editable-block" contenteditable="true" data-sf-row="${ri}" data-sf-field="h3">${h3}</h3><p class="pv-editable-block" contenteditable="true" data-sf-row="${ri}" data-sf-field="desc">${desc}</p></div><button class="pv-sf-remove" onclick="removePvSf(this,${ri})">×</button>`;sfEl.appendChild(d);}
   });
   if(!sfEl.innerHTML)sfEl.innerHTML='<span class="pv-empty">No sub-features entered</span>';
-
-  // Boxes
   setTxt('pv_install_text',g('f_install_text').replace(/\n/g,'<br>'),'Installation text not entered');
   setTxt('pv_cert_text',g('f_cert_text').replace(/\n/g,'<br>'),'Certification text not entered');
-
-  // Install & Resources
-  ['is_title','is_desc','ig_title','ig_desc','mg_title','mg_desc','res_title','res_desc','pm_title','pm_desc','ds_title','ds_desc'].forEach(k=>{
-    setTxt('pv_'+k,g('f_'+k),'');
-  });
-
-  // Reviews
+  ['is_title','is_desc','ig_title','ig_desc','mg_title','mg_desc','res_title','res_desc','pm_title','pm_desc','ds_title','ds_desc'].forEach(k=>setTxt('pv_'+k,g('f_'+k),''));
   const revEl=document.getElementById('pv_reviews');revEl.innerHTML='';
   document.querySelectorAll('#reviewRows .repeater-row').forEach((row,ri)=>{
-    const inps=row.querySelectorAll('input[type="text"]');
-    const title=inps[0]?.value||'',name=inps[1]?.value||'';
-    if(title||name){
-      const d=document.createElement('div');d.className='pv-review-card';
-      d.innerHTML=`<div class="pv-stars">★★★★★</div>
-        <div class="pv-editable-block" contenteditable="true" data-rev-row="${ri}" data-rev-field="title" style="font-size:14px;font-weight:500;font-style:italic;margin-bottom:4px;">"${title}"</div>
-        <div class="pv-editable" contenteditable="true" data-rev-row="${ri}" data-rev-field="name" style="font-size:12px;color:#999;">${name}</div>`;
-      revEl.appendChild(d);
-    }
+    const inps=row.querySelectorAll('input[type="text"]');const title=inps[0]?.value||'',name=inps[1]?.value||'';
+    if(title||name){const d=document.createElement('div');d.className='pv-review-card';d.innerHTML=`<div class="pv-stars">★★★★★</div><div class="pv-editable-block" contenteditable="true" data-rev-row="${ri}" data-rev-field="title" style="font-size:14px;font-weight:500;font-style:italic;margin-bottom:4px;">"${title}"</div><div class="pv-editable" contenteditable="true" data-rev-row="${ri}" data-rev-field="name" style="font-size:12px;color:#999;">${name}</div>`;revEl.appendChild(d);}
   });
   if(!revEl.innerHTML)revEl.innerHTML='<span class="pv-empty">No reviews entered</span>';
-
-  // FAQs
   const faqEl=document.getElementById('pv_faqs');faqEl.innerHTML='';
   document.querySelectorAll('#faqRows .repeater-row').forEach((row,ri)=>{
-    const qInp=row.querySelector('input[type="text"]');
-    const aTA=row.querySelector('textarea');
-    const q=qInp?.value||'',a=aTA?.value||'';
-    if(q){
-      const d=document.createElement('div');d.className='pv-faq-item';
-      d.innerHTML=`<div class="pv-faq-q pv-editable-block" contenteditable="true" data-faq-row="${ri}" data-faq-field="q">${q}</div>
-        <div class="pv-faq-answer pv-editable-block" contenteditable="true" data-faq-row="${ri}" data-faq-field="a">${a.replace(/\n/g,'<br>')}</div>`;
-      faqEl.appendChild(d);
-    }
+    const q=row.querySelector('input[type="text"]')?.value||'',a=row.querySelector('textarea')?.value||'';
+    if(q){const d=document.createElement('div');d.className='pv-faq-item';d.innerHTML=`<div class="pv-faq-q pv-editable-block" contenteditable="true" data-faq-row="${ri}" data-faq-field="q">${q}</div><div class="pv-faq-answer pv-editable-block" contenteditable="true" data-faq-row="${ri}" data-faq-field="a">${a.replace(/\n/g,'<br>')}</div>`;faqEl.appendChild(d);}
   });
   if(!faqEl.innerHTML)faqEl.innerHTML='<span class="pv-empty">No FAQs entered</span>';
-
-  // Upsell
   setTxt('pv_up_h2',g('f_up_h2'),'Upsell headline not entered');
   setTxt('pv_up_body',g('f_up_body').replace(/\n/g,'<br>'),'');
   setEl('pv_up_cta',g('f_up_cta')||'Find out more');
 }
 
-/* ---- REMOVE FROM PREVIEW ---- */
-function removePvSf(btn,ri){
-  btn.closest('.pv-subfeature').remove();
-  document.querySelectorAll('#subfeatures .repeater-row')[ri]?.remove();
-  autosave();
-}
+function removePvSf(btn,ri){btn.closest('.pv-subfeature').remove();document.querySelectorAll('#subfeatures .repeater-row')[ri]?.remove();autosave();}
 
-/* ---- TWO-WAY SYNC ---- */
 function initEditableSync(){
-  let hintTimer;
-  const hint=document.getElementById('editHint');
-  document.getElementById('previewMode').addEventListener('focus',e=>{
-    if(!e.target.contentEditable==='true')return;
-    hint.classList.add('show');clearTimeout(hintTimer);
-  },true);
+  let hintTimer;const hint=document.getElementById('editHint');
+  document.getElementById('previewMode').addEventListener('focus',e=>{if(!e.target.contentEditable==='true')return;hint.classList.add('show');clearTimeout(hintTimer);},true);
   document.getElementById('previewMode').addEventListener('blur',e=>{
-    const el=e.target;
-    if(el.contentEditable!=='true')return;
+    const el=e.target;if(el.contentEditable!=='true')return;
     hintTimer=setTimeout(()=>hint.classList.remove('show'),1500);
     const val=el.innerText.trim();
-    // Simple field sync
-    if(el.dataset.field){
-      const t=document.getElementById(el.dataset.field);
-      if(t){t.tagName==='TEXTAREA'?t.value=val:t.value=val;t.dispatchEvent(new Event('input'));}
-    }
-    // Sub-feature sync
-    if(el.dataset.sfRow!==undefined){
-      const row=document.querySelectorAll('#subfeatures .repeater-row')[+el.dataset.sfRow];
-      if(row){
-        const inps=row.querySelectorAll('input[type="text"]');
-        if(el.dataset.sfField==='h3'&&inps[0])inps[0].value=val;
-        if(el.dataset.sfField==='desc'&&inps[1])inps[1].value=val;
-      }
-    }
-    // Review sync
-    if(el.dataset.revRow!==undefined){
-      const row=document.querySelectorAll('#reviewRows .repeater-row')[+el.dataset.revRow];
-      if(row){
-        const inps=row.querySelectorAll('input[type="text"]');
-        if(el.dataset.revField==='title'&&inps[0])inps[0].value=val.replace(/^"|"$/g,'');
-        if(el.dataset.revField==='name'&&inps[1])inps[1].value=val;
-      }
-    }
-    // FAQ sync
-    if(el.dataset.faqRow!==undefined){
-      const row=document.querySelectorAll('#faqRows .repeater-row')[+el.dataset.faqRow];
-      if(row){
-        const qInp=row.querySelector('input[type="text"]');
-        const aTA=row.querySelector('textarea');
-        if(el.dataset.faqField==='q'&&qInp)qInp.value=val;
-        if(el.dataset.faqField==='a'&&aTA)aTA.value=el.innerText.trim();
-      }
-    }
+    if(el.dataset.field){const t=document.getElementById(el.dataset.field);if(t){t.tagName==='TEXTAREA'?t.value=val:t.value=val;t.dispatchEvent(new Event('input'));}}
+    if(el.dataset.sfRow!==undefined){const row=document.querySelectorAll('#subfeatures .repeater-row')[+el.dataset.sfRow];if(row){const inps=row.querySelectorAll('input[type="text"]');if(el.dataset.sfField==='h3'&&inps[0])inps[0].value=val;if(el.dataset.sfField==='desc'&&inps[1])inps[1].value=val;}}
+    if(el.dataset.revRow!==undefined){const row=document.querySelectorAll('#reviewRows .repeater-row')[+el.dataset.revRow];if(row){const inps=row.querySelectorAll('input[type="text"]');if(el.dataset.revField==='title'&&inps[0])inps[0].value=val.replace(/^"|"$/g,'');if(el.dataset.revField==='name'&&inps[1])inps[1].value=val;}}
+    if(el.dataset.faqRow!==undefined){const row=document.querySelectorAll('#faqRows .repeater-row')[+el.dataset.faqRow];if(row){const qInp=row.querySelector('input[type="text"]');const aTA=row.querySelector('textarea');if(el.dataset.faqField==='q'&&qInp)qInp.value=val;if(el.dataset.faqField==='a'&&aTA)aTA.value=el.innerText.trim();}}
     autosave();
   },true);
 }
 
-/* ---- PRINT ---- */
-function field(label,value){
-  if(!value)return '';
-  return `<div class="pf-label">${label}</div><div class="pf-value">${value.replace(/\n/g,'<br>')}</div>`;
+/* ================================================================
+   PRINT DOC — all styling is inline in the HTML string
+   ================================================================ */
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function nl(s){return esc(s||'').replace(/\n/g,'<br>');}
+
+// Shared inline styles as constants
+const S = {
+  page:     'font-family:Arial,Helvetica,sans-serif;font-size:13pt;color:#1a1a1a;line-height:1.7;background:white;padding:52px 60px;margin-bottom:20px;box-shadow:0 2px 16px rgba(0,0,0,.2);position:relative;',
+  cover:    'border-top:6px solid #E8671A;min-height:260px;display:flex;flex-direction:column;',
+  secHead:  'font-family:Arial,sans-serif;font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#E8671A;border-bottom:2px solid #E8671A;padding-bottom:6px;margin:0 0 20px;',
+  fieldLbl: 'font-family:Arial,sans-serif;font-size:9pt;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 4px;',
+  fieldVal: 'font-size:13pt;color:#1a1a1a;line-height:1.7;margin:0 0 20px;padding-left:12px;border-left:3px solid #f0c9a0;',
+  badge:    (cls)=>{
+    const map={draft:'background:#fee2e2;color:#dc2626;',review:'background:#fef3c7;color:#b45309;',approved:'background:#dcfce7;color:#166534;'};
+    return `display:inline-block;font-size:8pt;font-weight:700;padding:2px 10px;border-radius:20px;${map[cls]||map.draft}`;
+  },
+  h2:       'font-size:18pt;font-weight:700;color:#2C3142;margin:0 0 8px;',
+  h3:       'font-size:14pt;font-weight:700;color:#1a1a1a;margin:0 0 4px;',
+  subtext:  'font-size:11pt;color:#555;margin:0 0 4px;',
+  footer:   'position:absolute;bottom:20px;font-family:Arial,sans-serif;font-size:9pt;color:#bbb;',
+  divider:  'border:none;border-top:1px solid #e8e5de;margin:24px 0;',
+  chip:     'display:inline-block;font-size:11pt;background:#FDF0E8;border:1px solid #f0c9a0;color:#2C3142;padding:4px 14px;border-radius:20px;margin:4px 6px 4px 0;',
+  sfDot:    'display:inline-block;width:10px;height:10px;border-radius:50%;background:#E8671A;flex-shrink:0;margin-top:6px;',
+  card:     'border:1px solid #e0ddd6;border-radius:6px;padding:20px 24px;margin-bottom:16px;page-break-inside:avoid;',
+  cardTtl:  'font-size:14pt;font-weight:700;color:#2C3142;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid #f0ede6;',
+  imgRow:   'display:flex;gap:16px;font-size:11pt;padding:8px 12px;background:#fafaf8;border:1px solid #e8e5de;border-radius:4px;margin-bottom:6px;',
+  revBlock: 'border-left:3px solid #E8671A;padding:12px 16px;margin-bottom:16px;background:#fafaf8;page-break-inside:avoid;',
+  faqBlock: 'border:1px solid #e0ddd6;border-radius:5px;padding:14px 18px;margin-bottom:14px;page-break-inside:avoid;',
+  grid2:    'display:grid;grid-template-columns:1fr 1fr;gap:24px;',
+};
+
+function statusBadge(val){
+  if(!val)return'';
+  const cls=val.includes('Draft')?'draft':val.includes('Review')?'review':'approved';
+  const label=val.includes('Draft')?'Draft':val.includes('Review')?'In Review':'Approved';
+  return `<span style="${S.badge(cls)}">${label}</span>`;
 }
+
+function pfield(label,val,statusVal){
+  if(!val)return'';
+  return `<p style="${S.fieldLbl}">${label}${statusVal?' '+statusBadge(statusVal):''}</p>
+          <p style="${S.fieldVal}">${val}</p>`;
+}
+
 function printDoc(){
-  buildPreview();
-  const gv=id=>document.getElementById(id)?.value?.trim()||'';
-  const sku=gv('f_sku'),slug=gv('f_slug');
-  const date=new Date().toLocaleDateString('en-GB');
-  let html=`<div class="pf-doc-title">FireAngel — Product Page Content Brief</div>`;
-  html+=`<p style="font-size:10pt;color:#888;margin-bottom:16pt;">Product: ${sku||'—'} &nbsp;|&nbsp; URL: /product/${slug||'—'} &nbsp;|&nbsp; Printed: ${date}</p>`;
-
-  // SEO
-  html+=`<div class="pf-section"><h2>SEO Metadata</h2>`;
-  html+=field('Page title',gv('f_seo_title'));
-  html+=field('Meta description',gv('f_seo_desc'));
-  html+=field('URL slug','fireangel.co.uk/product/'+slug);
-  html+=`</div>`;
-
-  // Header
-  html+=`<div class="pf-section"><h2>Header / Product Hero</h2>`;
-  html+=field('Product code (SKU)',sku);
-  html+=field('H1 — Product title',gv('f_h1'));
-  html+=field('H2 — Product tagline',gv('f_tagline'));
-  html+=field('Product short description',gv('f_shortdesc'));
-  html+=field('Product description',gv('f_desc'));
+  const gv=id=>(document.getElementById(id)||{}).value||'';
+  const gs=id=>(document.getElementById(id)||{}).value||'🔴 Draft';
+  const sku=gv('f_sku'), slug=gv('f_slug');
+  const date=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
   const checked=[...document.querySelectorAll('#iconGrid .icon-option.checked span')].map(s=>s.textContent);
-  if(checked.length){html+=`<div class="pf-label">Product features</div><div class="pf-chips">${checked.map(c=>`<span class="pf-chip">${c}</span>`).join('')}</div>`;}
-  const imgs=[...document.querySelectorAll('#imageRows .repeater-row')].filter(r=>r.querySelectorAll('input')[0]?.value);
-  if(imgs.length){
-    html+=`<div class="pf-label">Product images</div>`;
-    imgs.forEach((row,i)=>{
-      const inps=row.querySelectorAll('input');
-      html+=`<div class="pf-value"><strong>Image ${i+1}:</strong> ${inps[0]?.value||''} &nbsp;|&nbsp; Alt: ${inps[1]?.value||''}</div>`;
-    });
+  const imgs=[...document.querySelectorAll('#imageRows .repeater-row')].map((r,i)=>{const inps=r.querySelectorAll('input');return{n:i+1,url:inps[0]?.value||'',alt:inps[1]?.value||''};}).filter(x=>x.url||x.alt);
+  const sfs=[...document.querySelectorAll('#subfeatures .repeater-row')].map(r=>{const inps=r.querySelectorAll('input[type="text"]');return{icon:r.querySelector('select')?.value||'',h3:inps[0]?.value||'',desc:inps[1]?.value||''};}).filter(x=>x.h3||x.desc);
+  const revs=[...document.querySelectorAll('#reviewRows .repeater-row')].map(r=>{const inps=r.querySelectorAll('input[type="text"]');return{title:inps[0]?.value||'',name:inps[1]?.value||'',status:r.querySelector('select.status')?.value||''};}).filter(x=>x.title);
+  const faqs=[...document.querySelectorAll('#faqRows .repeater-row')].map(r=>{const sels=r.querySelectorAll('select');return{q:r.querySelector('input[type="text"]')?.value||'',a:r.querySelector('textarea')?.value||'',type:sels[0]?.value||'',status:sels[1]?.value||''};}).filter(x=>x.q);
+
+  let pageNum=0;
+  function page(inner,extraStyle=''){
+    pageNum++;
+    return `<div style="${S.page}${extraStyle}">
+      ${inner}
+      <span style="${S.footer}left:60px;">FireAngel — ${sku||'Product'} Content Brief</span>
+      <span style="${S.footer}right:60px;">${pageNum}</span>
+    </div>`;
   }
-  html+=`</div>`;
 
-  // 4 Boxes
-  html+=`<div class="pf-section"><h2>Product Template V2 — 4 Boxes</h2>`;
-  html+=`<div class="pf-box"><h2>Key Features and Benefits — ${gv('f_kfb_title')}</h2>`;
-  document.querySelectorAll('#subfeatures .repeater-row').forEach(row=>{
-    const inps=row.querySelectorAll('input[type="text"]');
-    const h3=inps[0]?.value||'',desc=inps[1]?.value||'';
-    if(h3||desc)html+=`<div class="pf-sf"><h3>${h3}</h3><p>${desc}</p></div>`;
-  });
-  html+=`</div>`;
-  html+=`<div class="pf-box"><h2>Where to Install</h2><p>${gv('f_install_text').replace(/\n/g,'<br>')}</p></div>`;
-  html+=`<div class="pf-box"><h2>Compliant and Certified for Safety</h2><p>${gv('f_cert_text').replace(/\n/g,'<br>')}</p></div>`;
-  html+=`<div class="pf-box"><h2>What's in the Box</h2>${field('Image',gv('f_witb_url'))}${field('Alt text',gv('f_witb_alt'))}</div>`;
-  html+=`</div>`;
+  let pages='';
 
-  // Install & Resources
-  html+=`<div class="pf-section"><h2>Installation &amp; Setup / Resources</h2><div class="pf-grid">`;
-  html+=`<div>${field('Section title',gv('f_is_title'))}${field('Section description',gv('f_is_desc'))}${field('Installation guide title',gv('f_ig_title'))}${field('Installation guide description',gv('f_ig_desc'))}${field('Maintenance guide title',gv('f_mg_title'))}${field('Maintenance guide description',gv('f_mg_desc'))}</div>`;
-  html+=`<div>${field('Section title',gv('f_res_title'))}${field('Section description',gv('f_res_desc'))}${field('Manual title',gv('f_pm_title'))}${field('Manual description',gv('f_pm_desc'))}${field('Datasheet title',gv('f_ds_title'))}${field('Datasheet description',gv('f_ds_desc'))}</div>`;
-  html+=`</div></div>`;
+  // ---- COVER ----
+  pages+=page(`
+    <div style="${S.cover}">
+      <div style="font-size:26pt;font-weight:900;color:#E8671A;margin-bottom:8px;letter-spacing:-1px;">FireAngel</div>
+      <div style="font-size:22pt;font-weight:700;color:#2C3142;margin-bottom:6px;">Product Page Content Brief</div>
+      <div style="font-size:13pt;color:#888;margin-bottom:32px;">${sku?sku+' — ':''}${esc(gv('f_h1'))||'Draft product'}</div>
+      <div style="margin-top:auto;padding-top:24px;border-top:1px solid #e0ddd6;display:flex;gap:48px;">
+        <div><div style="font-size:9pt;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#aaa;margin-bottom:4px;">SKU</div><div style="font-size:13pt;font-weight:600;">${esc(sku)||'—'}</div></div>
+        <div><div style="font-size:9pt;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#aaa;margin-bottom:4px;">URL</div><div style="font-size:13pt;font-weight:600;">fireangel.co.uk/product/${esc(slug)||'—'}</div></div>
+        <div><div style="font-size:9pt;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#aaa;margin-bottom:4px;">Date</div><div style="font-size:13pt;font-weight:600;">${date}</div></div>
+      </div>
+    </div>
+  `);
 
-  // Reviews
-  html+=`<div class="pf-section"><h2>Reviews</h2>`;
-  document.querySelectorAll('#reviewRows .repeater-row').forEach(row=>{
-    const inps=row.querySelectorAll('input[type="text"]');
-    if(inps[0]?.value)html+=`<div class="pf-review"><p>"${inps[0]?.value}"</p><p style="font-size:10pt;color:#888;">— ${inps[1]?.value||''}</p></div>`;
-  });
-  html+=`</div>`;
+  // ---- PAGE 2: SEO + Hero text ----
+  pages+=page(`
+    <h2 style="${S.secHead}">Section 0 — SEO Metadata</h2>
+    ${pfield('Page title',esc(gv('f_seo_title')),gs('s_seo_title'))}
+    ${pfield('Meta description',esc(gv('f_seo_desc')),gs('s_seo_desc'))}
+    ${pfield('URL slug','fireangel.co.uk/product/'+esc(slug),gs('s_slug'))}
 
-  // FAQs
-  html+=`<div class="pf-section"><h2>Related FAQs</h2>`;
-  document.querySelectorAll('#faqRows .repeater-row').forEach(row=>{
-    const q=row.querySelector('input[type="text"]')?.value||'';
-    const a=row.querySelector('textarea')?.value||'';
-    if(q)html+=`<div class="pf-faq"><div class="pf-faq-q">${q}</div><div class="pf-faq-a">${a.replace(/\n/g,'<br>')}</div></div>`;
-  });
-  html+=`</div>`;
+    <hr style="${S.divider}">
+    <h2 style="${S.secHead}">Section 1 — Header / Product Hero</h2>
+    ${pfield('Product code (SKU)',esc(sku),gs('s_sku'))}
+    ${pfield('H1 — Product title',esc(gv('f_h1')),gs('s_h1'))}
+    ${pfield('H2 — Product tagline',nl(gv('f_tagline')),gs('s_tagline'))}
+    ${pfield('Product short description',nl(gv('f_shortdesc')),gs('s_shortdesc'))}
+  `);
 
-  // Upsell
-  html+=`<div class="pf-section"><h2>Upsell</h2>`;
-  html+=field('H2',gv('f_up_h2'));html+=field('Body text',gv('f_up_body'));
-  html+=field('CTA text',gv('f_up_cta'));html+=field('CTA link',gv('f_up_url'));
-  html+=`</div>`;
+  // ---- PAGE 3: Description + Icons + Images ----
+  const chipsHtml=checked.length
+    ?`<div style="margin-bottom:20px;">${checked.map(c=>`<span style="${S.chip}">${esc(c)}</span>`).join('')}</div>`
+    :`<p style="${S.fieldVal}font-style:italic;color:#bbb;">None selected</p>`;
+  const imgsHtml=imgs.length
+    ?imgs.map(img=>`<div style="${S.imgRow}"><span style="font-weight:700;color:#E8671A;min-width:20px;">${img.n}</span><span style="flex:1;font-weight:500;">${esc(img.url)||'—'}</span><span style="color:#888;">Alt: ${esc(img.alt)||'—'}</span></div>`).join('')
+    :`<p style="${S.fieldVal}font-style:italic;color:#bbb;">No images entered</p>`;
 
-  // Preview section
-  html+=`<div class="pf-preview-title">FireAngel — Page Preview</div>`;
-  html+=`<div class="pf-preview-sku">${sku}</div>`;
-  html+=`<div class="pf-preview-h1">${gv('f_h1')}</div>`;
-  if(checked.length)html+=`<div class="pf-preview-icons">${checked.map(c=>`<span class="pf-preview-icon">${c}</span>`).join('')}</div>`;
-  html+=`<div class="pf-preview-tagline">${gv('f_tagline').replace(/\n/g,'<br>')}</div>`;
-  html+=`<div class="pf-preview-shortdesc">${gv('f_shortdesc').replace(/\n/g,'<br>')}</div>`;
-  html+=`<div class="pf-preview-desc">${gv('f_desc').replace(/\n/g,'<br>')}</div>`;
+  pages+=page(`
+    <h2 style="${S.secHead}">Section 1 (cont.) — Product Description &amp; Features</h2>
+    ${pfield('Product description',nl(gv('f_desc')),gs('s_desc'))}
+    <p style="${S.fieldLbl}">Product feature icons ${statusBadge(gs('s_icons'))}</p>
+    ${chipsHtml}
+    <p style="${S.fieldLbl}">Product images</p>
+    ${imgsHtml}
+  `);
 
-  html+=`<div class="pf-grid" style="margin-bottom:14pt;">`;
-  // KFB box
-  html+=`<div class="pf-box"><h2>${gv('f_kfb_title')||'Key Features and Benefits'}</h2>`;
-  document.querySelectorAll('#subfeatures .repeater-row').forEach(row=>{
-    const inps=row.querySelectorAll('input[type="text"]');
-    const h3=inps[0]?.value||'',d=inps[1]?.value||'';
-    if(h3||d)html+=`<div class="pf-sf"><h3>${h3}</h3><p>${d}</p></div>`;
-  });
-  html+=`</div>`;
-  html+=`<div class="pf-box"><h2>Where to Install</h2><p>${gv('f_install_text').replace(/\n/g,'<br>')}</p></div>`;
-  html+=`</div><div class="pf-grid" style="margin-bottom:14pt;">`;
-  html+=`<div class="pf-box"><h2>Compliant and Certified</h2><p>${gv('f_cert_text').replace(/\n/g,'<br>')}</p></div>`;
-  html+=`<div class="pf-box"><h2>What's in the Box</h2><p>${gv('f_witb_url')||'—'}</p></div>`;
-  html+=`</div>`;
+  // ---- PAGE 4: 4 Boxes ----
+  const sfsHtml=sfs.length
+    ?sfs.map(sf=>`<div style="display:flex;gap:12px;margin-bottom:14px;page-break-inside:avoid;"><div style="${S.sfDot}"></div><div><p style="${S.h3}">${esc(sf.h3)}</p><p style="${S.subtext}">${esc(sf.desc)}</p></div></div>`).join('')
+    :`<p style="color:#bbb;font-style:italic;">No sub-features entered</p>`;
 
-  html+=`<div class="pf-grid" style="margin-bottom:14pt;">`;
-  html+=`<div><h2>${gv('f_is_title')}</h2><p>${gv('f_is_desc')}</p><p><strong>${gv('f_ig_title')}</strong> — ${gv('f_ig_desc')}</p><p><strong>${gv('f_mg_title')}</strong> — ${gv('f_mg_desc')}</p></div>`;
-  html+=`<div><h2>${gv('f_res_title')}</h2><p>${gv('f_res_desc')}</p><p><strong>${gv('f_pm_title')}</strong> — ${gv('f_pm_desc')}</p><p><strong>${gv('f_ds_title')}</strong> — ${gv('f_ds_desc')}</p></div>`;
-  html+=`</div>`;
+  pages+=page(`
+    <h2 style="${S.secHead}">Section 2 — Product Template V2: 4 Boxes</h2>
+    <div style="${S.card}">
+      <p style="${S.cardTtl}">Box 1: Key Features &amp; Benefits ${statusBadge(gs('s_kfb_title'))}</p>
+      ${pfield('Box title',esc(gv('f_kfb_title')))}
+      ${sfsHtml}
+    </div>
+    <div style="${S.card}">
+      <p style="${S.cardTtl}">Box 2: Where to Install ${statusBadge(gs('s_install_text'))}</p>
+      <p style="font-size:13pt;line-height:1.7;color:#1a1a1a;">${nl(gv('f_install_text'))||'<span style="color:#bbb;font-style:italic;">Not entered</span>'}</p>
+    </div>
+    <div style="${S.card}">
+      <p style="${S.cardTtl}">Box 3: Compliant &amp; Certified ${statusBadge(gs('s_cert_text'))}</p>
+      <p style="font-size:13pt;line-height:1.7;color:#1a1a1a;">${nl(gv('f_cert_text'))||'<span style="color:#bbb;font-style:italic;">Not entered</span>'}</p>
+    </div>
+    <div style="${S.card}">
+      <p style="${S.cardTtl}">Box 4: What's in the Box ${statusBadge(gs('s_witb'))}</p>
+      ${pfield('Image filename',esc(gv('f_witb_url')))}
+      ${pfield('Alt text',esc(gv('f_witb_alt')))}
+    </div>
+  `);
 
-  document.querySelectorAll('#reviewRows .repeater-row').forEach(row=>{
-    const inps=row.querySelectorAll('input[type="text"]');
-    if(inps[0]?.value)html+=`<div class="pf-review"><p style="font-style:italic;">"${inps[0]?.value}"</p><p style="font-size:10pt;color:#888;">— ${inps[1]?.value||''}</p></div>`;
-  });
+  // ---- PAGE 5: Installation & Resources ----
+  pages+=page(`
+    <h2 style="${S.secHead}">Section 3 — Installation &amp; Setup / Resources</h2>
+    <div style="${S.grid2}">
+      <div>
+        <div style="${S.card}">
+          <p style="${S.cardTtl}">Installation &amp; Setup ${statusBadge(gs('s_install_sec'))}</p>
+          ${pfield('Section title',esc(gv('f_is_title')))}
+          ${pfield('Section description',nl(gv('f_is_desc')))}
+          ${pfield('Installation guide title',esc(gv('f_ig_title')))}
+          ${pfield('Installation guide description',esc(gv('f_ig_desc')))}
+          ${pfield('Maintenance guide title',esc(gv('f_mg_title')))}
+          ${pfield('Maintenance guide description',esc(gv('f_mg_desc')))}
+        </div>
+      </div>
+      <div>
+        <div style="${S.card}">
+          <p style="${S.cardTtl}">Resources ${statusBadge(gs('s_resources_sec'))}</p>
+          ${pfield('Section title',esc(gv('f_res_title')))}
+          ${pfield('Section description',nl(gv('f_res_desc')))}
+          ${pfield('Product manual title',esc(gv('f_pm_title')))}
+          ${pfield('Product manual description',esc(gv('f_pm_desc')))}
+          ${pfield('Datasheet title',esc(gv('f_ds_title')))}
+          ${pfield('Datasheet description',esc(gv('f_ds_desc')))}
+        </div>
+      </div>
+    </div>
+  `);
 
-  document.querySelectorAll('#faqRows .repeater-row').forEach(row=>{
-    const q=row.querySelector('input[type="text"]')?.value||'';
-    const a=row.querySelector('textarea')?.value||'';
-    if(q)html+=`<div class="pf-faq"><div class="pf-faq-q">${q}</div><div class="pf-faq-a">${a.replace(/\n/g,'<br>')}</div></div>`;
-  });
+  // ---- PAGE 6: Reviews + FAQs ----
+  const revsHtml=revs.length
+    ?revs.map(r=>`<div style="${S.revBlock}">
+        ${statusBadge(r.status)}
+        <p style="font-size:14pt;font-weight:600;font-style:italic;color:#1a1a1a;margin:6px 0 4px;">"${esc(r.title)}"</p>
+        <p style="font-size:12pt;color:#888;margin:0;">— ${esc(r.name)}</p>
+      </div>`).join('')
+    :`<p style="color:#bbb;font-style:italic;">No reviews entered</p>`;
 
-  html+=`<div class="pf-upsell"><h2>${gv('f_up_h2')}</h2><p>${gv('f_up_body').replace(/\n/g,'<br>')}</p><p style="margin-top:8pt;"><strong style="color:white;">${gv('f_up_cta')}</strong></p></div>`;
+  const faqsHtml=faqs.length
+    ?faqs.map(f=>`<div style="${S.faqBlock}">
+        <p style="${S.h3}margin-bottom:8px;">${esc(f.q)}${f.type&&f.type.includes('New')?'&nbsp;<span style="'+S.badge('draft')+'">New FAQ</span>':''}</p>
+        ${f.a?`<p style="font-size:12pt;color:#444;line-height:1.7;margin:0;">${nl(f.a)}</p>`:''}
+      </div>`).join('')
+    :`<p style="color:#bbb;font-style:italic;">No FAQs entered</p>`;
 
-  // Inject and show
-  let frame=document.getElementById('printFrame');
-  if(!frame){frame=document.createElement('div');frame.id='printFrame';document.body.appendChild(frame);}
-  frame.innerHTML=`<button class="pf-close" onclick="closePrintFrame()">✕ Close</button>
-    <div class="pf-actions"><button class="pf-print-btn" onclick="triggerPrint()">Print / Save PDF</button></div>
-    <div class="pf-inner">${html}</div>`;
+  pages+=page(`
+    <h2 style="${S.secHead}">Section 4 — Reviews</h2>
+    ${revsHtml}
+    <hr style="${S.divider}">
+    <h2 style="${S.secHead}">Section 5 — Related FAQs</h2>
+    ${faqsHtml}
+  `);
+
+  // ---- PAGE 7: Upsell ----
+  pages+=page(`
+    <h2 style="${S.secHead}">Section 6 — Upsell</h2>
+    <div style="background:#2C3142;border-radius:8px;padding:32px 36px;color:white;">
+      <p style="font-size:18pt;font-weight:700;color:white;margin:0 0 12px;line-height:1.3;">${esc(gv('f_up_h2'))||'<span style="color:rgba(255,255,255,.3);font-style:italic;">Headline not entered</span>'}</p>
+      <p style="font-size:13pt;color:rgba(255,255,255,.75);line-height:1.7;margin:0 0 20px;">${nl(gv('f_up_body'))||'<span style="color:rgba(255,255,255,.3);font-style:italic;">Body text not entered</span>'}</p>
+      ${gv('f_up_cta')?`<span style="display:inline-block;background:#E8671A;color:white;font-size:13pt;font-weight:700;padding:10px 22px;border-radius:4px;">${esc(gv('f_up_cta'))}</span>`:''}
+    </div>
+    ${gv('f_up_url')?`<hr style="${S.divider}">${pfield('CTA link',esc(gv('f_up_url')))}`:'' }
+  `);
+
+  const frame=document.getElementById('printFrame');
+  frame.innerHTML=`
+    <div style="position:sticky;top:0;z-index:10;background:#374151;padding:10px 24px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.4);">
+      <span style="color:rgba(255,255,255,.7);font-size:13px;font-family:system-ui,sans-serif;">Print Preview — ${esc(sku)||'Draft'} · ${slug?'/product/'+esc(slug):''}</span>
+      <span style="flex:1;"></span>
+      <button onclick="closePrintFrame()" style="padding:7px 16px;border-radius:6px;font-size:13px;font-family:system-ui,sans-serif;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:none;color:white;">✕ Close</button>
+      <button onclick="triggerPrint()" style="padding:7px 18px;border-radius:6px;font-size:13px;font-family:system-ui,sans-serif;cursor:pointer;border:none;background:#E8671A;color:white;font-weight:600;">⎙ Print / Save PDF</button>
+    </div>
+    <div style="max-width:840px;margin:24px auto 60px;padding:0 16px;">${pages}</div>
+  `;
   frame.style.display='block';
   document.body.style.overflow='hidden';
 }
+
 function closePrintFrame(){
-  const frame=document.getElementById('printFrame');
-  if(frame){frame.style.display='none';frame.innerHTML='';}
+  const f=document.getElementById('printFrame');f.style.display='none';f.innerHTML='';
   document.body.style.overflow='';
 }
 function triggerPrint(){
-  const sku=document.getElementById('f_sku')?.value?.trim()||'FA';
+  const sku=(document.getElementById('f_sku')||{}).value||'FA';
   const prev=document.title;
   document.title=`${sku}-content-brief-${new Date().toISOString().slice(0,10)}`;
-  window.print();
-  setTimeout(()=>document.title=prev,1000);
+  window.print();setTimeout(()=>document.title=prev,1000);
 }
 
-/* ---- SET MODE ---- */
 function setMode(mode){
   const brief=document.getElementById('briefMode'),preview=document.getElementById('previewMode');
-  if(mode==='preview'){
-    buildPreview();
-    brief.style.display='none';preview.style.display='block';
-    document.getElementById('btnBrief').classList.remove('active');
-    document.getElementById('btnPreview').classList.add('active');
-  }else{
-    brief.style.display='block';preview.style.display='none';
-    document.getElementById('btnBrief').classList.add('active');
-    document.getElementById('btnPreview').classList.remove('active');
-  }
+  if(mode==='preview'){buildPreview();brief.style.display='none';preview.style.display='block';document.getElementById('btnBrief').classList.remove('active');document.getElementById('btnPreview').classList.add('active');}
+  else{brief.style.display='block';preview.style.display='none';document.getElementById('btnBrief').classList.add('active');document.getElementById('btnPreview').classList.remove('active');}
 }
 
-/* ---- PLACEHOLDERS ---- */
 function loadPlaceholders(){
   const set=(id,val)=>{const el=document.getElementById(id);if(el)el.value=val;};
   set('f_sku','FA6829S-1');
@@ -1110,20 +901,18 @@ function loadPlaceholders(){
   set('f_shortdesc','Carbon monoxide is invisible, odourless, and can be deadly. The FireAngel FA6829S provides continuous, reliable protection for your home – in our slimmest design yet.\n\nAt just 25mm deep, it sits discreetly on any wall, while a sealed 10-year lithium battery removes the need for maintenance or replacement throughout the life of the alarm.');
   set('f_desc','Designed for use across a wide range of environments, dual EN certification makes the FA6829S legally suitable for homes, caravans, motorhomes, and boats, while IP44 splash resistance allows installation in areas such as kitchens or compact living spaces.\n\nWhen carbon monoxide is detected, the digital display shows real-time CO levels alongside a clear "ALARM" alert, while an 85dB alarm ensures every warning is heard throughout the home.\n\nAdditional features include Night-time Sensing, which dims the LED after dark, and Sleep Easy mode, which silences low battery alerts overnight.\n\nAt the end of its 10-year life, the alarm will indicate when replacement is required.');
   set('f_kfb_title','For home safety you can trust.');
-  set('f_install_text','The FA6829S is suitable for installation in homes, caravans, motorhomes, and boats.\n\nCO alarms should be installed on a wall at head height, between 1 and 3 metres from any combustion appliance. As carbon monoxide mixes evenly with air, the alarm should not be placed on the ceiling.\n\nIn the home, install the alarm in the same room as boilers, gas fires, or wood burners. If you have appliances in multiple rooms, a separate alarm is recommended for each. As CO can travel through walls from adjoining properties, installing an alarm in living rooms or bedrooms provides additional protection.\n\nIn caravans, motorhomes, and boats, fit the alarm in the main living or sleeping area, positioned away from appliances to avoid nuisance alarms.\n\nAlways follow the installation guidance in the user manual for correct positioning.');
-  set('f_cert_text','The FireAngel FA6829S is certified to both BS EN 50291-1:2018 for domestic use and BS EN 50291-2:2019 for use in caravans, motorhomes, and boats.\n\nThese standards ensure the alarm has been independently tested for accuracy, response time, and reliability across a range of environments, including mobile and marine settings.\n\nThis dual certification means the FA6829S is suitable for use throughout the home as well as in caravans and boats, providing trusted protection wherever it is installed. Unlike domestic-only alarms, it is specifically tested to perform reliably in these more demanding environments.');
+  set('f_install_text','The FA6829S is suitable for installation in homes, caravans, motorhomes, and boats.\n\nCO alarms should be installed on a wall at head height, between 1 and 3 metres from any combustion appliance. As carbon monoxide mixes evenly with air, the alarm should not be placed on the ceiling.\n\nIn the home, install the alarm in the same room as boilers, gas fires, or wood burners. If you have appliances in multiple rooms, a separate alarm is recommended for each.');
+  set('f_cert_text','The FireAngel FA6829S is certified to both BS EN 50291-1:2018 for domestic use and BS EN 50291-2:2019 for use in caravans, motorhomes, and boats.\n\nThis dual certification means the FA6829S is suitable for use throughout the home as well as in caravans and boats, providing trusted protection wherever it is installed.');
   set('f_witb_url','FA6829S-EU-PRODUCT-PACKAGE-WB.jpg');
   set('f_witb_alt','Contents of the FireAngel FA6829S box including alarm unit and fixings');
-  set('f_is_title','Installation & Setup');
-  set('f_is_desc','Get the help and support you need to easily set up and install your FireAngel alarm for instant protection.');
+  set('f_is_title','Installation & Setup');set('f_is_desc','Get the help and support you need to easily set up and install your FireAngel alarm for instant protection.');
   set('f_ig_title','Installation guide');set('f_ig_desc','Click the icon to find out more about installing your alarm');
   set('f_mg_title','Maintenance guide');set('f_mg_desc','Click the icon to find out how to properly maintain and test your alarm');
-  set('f_res_title','Resources');
-  set('f_res_desc','For more technical and specification information on this alarm, view our manual and datasheet.');
+  set('f_res_title','Resources');set('f_res_desc','For more technical and specification information on this alarm, view our manual and datasheet.');
   set('f_pm_title','Product manual');set('f_pm_desc','Click the icon to download the product manual');
   set('f_ds_title','Datasheet');set('f_ds_desc','Click the icon to download the product datasheet');
   set('f_up_h2','Want whole-home protection with a smartphone alert?');
-  set('f_up_body','The FireAngel Pro Connected range wirelessly interlinks all your alarms – if one sounds, every alarm in the home sounds too. Monitor them from anywhere via the FireAngel Pro Connected app, whether you are at home or away. Ideal for families, landlords, and holiday let owners managing multiple properties.');
+  set('f_up_body','The FireAngel Pro Connected range wirelessly interlinks all your alarms – if one sounds, every alarm in the home sounds too. Monitor them from anywhere via the FireAngel Pro Connected app, whether you are at home or away.');
   set('f_up_cta','Explore Pro Connected');
   document.getElementById('subfeatures').innerHTML='';sfCount=0;
   addSubfeature('CO','The slimmest CO alarm in the FireAngel range','Just 25mm deep for discreet wall mounting.');
@@ -1136,28 +925,18 @@ function loadPlaceholders(){
   addImage('FA6829S-side-650x650.jpg','FA6829S side profile showing ultra-slim 25mm depth');
   addImage('','');
   const toCheck=['CO','Sealed battery','Kitemark','5 Year Warranty','Third Party Tested'];
-  document.querySelectorAll('#iconGrid .icon-option').forEach(l=>{
-    const name=l.querySelector('span').textContent,chk=l.querySelector('input');
-    chk.checked=toCheck.includes(name);l.classList.toggle('checked',chk.checked);
-  });
+  document.querySelectorAll('#iconGrid .icon-option').forEach(l=>{const name=l.querySelector('span').textContent,chk=l.querySelector('input');chk.checked=toCheck.includes(name);l.classList.toggle('checked',chk.checked);});
   document.getElementById('reviewRows').innerHTML='';revCount=0;
   addReview('A must have in every home with gas appliances. You can\'t see it or smell it, but it will save your life if things go wrong.','Amazon Customer');
   addReview('This alarm is neat, unobtrusive and does the job.','Robert Dyas customer');
-  addReview('Very easy to set up and so far so good. It nice to have a digital display so you exactly what going on.','B&Q customer');
+  addReview('Very easy to set up and so far so good. Nice to have a digital display so you know exactly what\'s going on.','B&Q customer');
   document.getElementById('faqRows').innerHTML='';faqCount=0;
-  addFaq('What will the FA6829S alarm sound like when it detects carbon monoxide?','The alarm emits 4 loud beeps followed by a pause, repeated continuously. This pattern is distinct from smoke alarm sounds (which pulse rapidly) and from low-battery warnings (a single chirp every 40–60 seconds).\n\nAt the same time, the digital display shows a clear "ALARM" message alongside the current CO level in parts per million (ppm).\n\nIf carbon monoxide is still present, the alarm will continue until the air clears. After an event, the red memory indicator flashes to show that the alarm was triggered, even if you were not present at the time.','New — needs adding to FAQ system');
-  addFaq('Do I legally need a carbon monoxide alarm in my home?','It depends on your situation and where you live in the UK:\n\nEngland: CO alarms are required in any room with a fixed combustion appliance (such as gas boilers, gas fires, oil boilers, wood burners, or open fires, but not gas cookers).\n\nScotland: CO alarms are required in all homes, regardless of tenure, in every room containing a carbon-fuelled appliance or flue. Regulations introduced in 2022 require sealed, tamper-proof batteries for the full lifespan of the alarm; the FA6829S meets this requirement.\n\nWales: CO alarms are required in rented properties in every room with a gas, oil or solid fuel appliance, including gas cookers.\n\nEven where not legally required, carbon monoxide detectors are strongly recommended by the UK Health Security Agency, Gas Safe Register and fire services for any home with fuel-burning appliances.','New — needs adding to FAQ system');
-  ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));
-  });
+  addFaq('What will the FA6829S alarm sound like when it detects carbon monoxide?','The alarm emits 4 loud beeps followed by a pause, repeated continuously. This pattern is distinct from smoke alarm sounds and from low-battery warnings.\n\nThe digital display shows a clear "ALARM" message alongside the current CO level in ppm.','New — needs adding to FAQ system');
+  addFaq('Do I legally need a carbon monoxide alarm in my home?','It depends on your situation and where you live in the UK. England requires CO alarms in any room with a fixed combustion appliance. Scotland requires them in all homes in every room with a carbon-fuelled appliance.\n\nEven where not legally required, CO detectors are strongly recommended for any home with fuel-burning appliances.','New — needs adding to FAQ system');
+  ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));});
 }
 
-/* ---- INIT ---- */
-loadPlaceholders();
-buildPreview();
-setMode('preview');
-initEditableSync();
-attachAutosave();
+loadPlaceholders();buildPreview();setMode('preview');initEditableSync();attachAutosave();
 </script>
 </body>
 </html>
