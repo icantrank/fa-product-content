@@ -272,6 +272,8 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
   </div>
 </div>
 
+<div id="printFrame"></div>
+
 <!-- BRIEF -->
 <div class="brief-wrap" id="briefMode" style="display:none;">
   <div class="page-order">
@@ -936,27 +938,149 @@ function initEditableSync(){
 }
 
 /* ---- PRINT ---- */
+function field(label,value){
+  if(!value)return '';
+  return `<div class="pf-label">${label}</div><div class="pf-value">${value.replace(/\n/g,'<br>')}</div>`;
+}
 function printDoc(){
   buildPreview();
-  const slug=g('f_slug')||'product',sku=g('f_sku')||'FA';
-  const date=new Date().toISOString().slice(0,10);
-  const clone=document.documentElement.cloneNode(true);
-  clone.querySelectorAll('input[type="text"],input[type="url"],textarea').forEach(el=>{
-    const div=document.createElement('div');
-    div.textContent=el.value||'';
-    div.style.cssText='border-bottom:0.5pt solid #ccc;padding:2pt 0;font-size:10.5pt;min-height:14pt;font-family:inherit;';
-    el.replaceWith(div);
+  const gv=id=>document.getElementById(id)?.value?.trim()||'';
+  const sku=gv('f_sku'),slug=gv('f_slug');
+  const date=new Date().toLocaleDateString('en-GB');
+  let html=`<div class="pf-doc-title">FireAngel — Product Page Content Brief</div>`;
+  html+=`<p style="font-size:10pt;color:#888;margin-bottom:16pt;">Product: ${sku||'—'} &nbsp;|&nbsp; URL: /product/${slug||'—'} &nbsp;|&nbsp; Printed: ${date}</p>`;
+
+  // SEO
+  html+=`<div class="pf-section"><h2>SEO Metadata</h2>`;
+  html+=field('Page title',gv('f_seo_title'));
+  html+=field('Meta description',gv('f_seo_desc'));
+  html+=field('URL slug','fireangel.co.uk/product/'+slug);
+  html+=`</div>`;
+
+  // Header
+  html+=`<div class="pf-section"><h2>Header / Product Hero</h2>`;
+  html+=field('Product code (SKU)',sku);
+  html+=field('H1 — Product title',gv('f_h1'));
+  html+=field('H2 — Product tagline',gv('f_tagline'));
+  html+=field('Product short description',gv('f_shortdesc'));
+  html+=field('Product description',gv('f_desc'));
+  const checked=[...document.querySelectorAll('#iconGrid .icon-option.checked span')].map(s=>s.textContent);
+  if(checked.length){html+=`<div class="pf-label">Product features</div><div class="pf-chips">${checked.map(c=>`<span class="pf-chip">${c}</span>`).join('')}</div>`;}
+  const imgs=[...document.querySelectorAll('#imageRows .repeater-row')].filter(r=>r.querySelectorAll('input')[0]?.value);
+  if(imgs.length){
+    html+=`<div class="pf-label">Product images</div>`;
+    imgs.forEach((row,i)=>{
+      const inps=row.querySelectorAll('input');
+      html+=`<div class="pf-value"><strong>Image ${i+1}:</strong> ${inps[0]?.value||''} &nbsp;|&nbsp; Alt: ${inps[1]?.value||''}</div>`;
+    });
+  }
+  html+=`</div>`;
+
+  // 4 Boxes
+  html+=`<div class="pf-section"><h2>Product Template V2 — 4 Boxes</h2>`;
+  html+=`<div class="pf-box"><h2>Key Features and Benefits — ${gv('f_kfb_title')}</h2>`;
+  document.querySelectorAll('#subfeatures .repeater-row').forEach(row=>{
+    const inps=row.querySelectorAll('input[type="text"]');
+    const h3=inps[0]?.value||'',desc=inps[1]?.value||'';
+    if(h3||desc)html+=`<div class="pf-sf"><h3>${h3}</h3><p>${desc}</p></div>`;
   });
-  clone.querySelectorAll('[contenteditable]').forEach(el=>{el.removeAttribute('contenteditable');el.classList.remove('pv-editable','pv-editable-block');});
-  ['top-bar','modal-overlay','toast','pv-edit-hint'].forEach(cls=>clone.querySelectorAll('.'+cls).forEach(el=>el.remove()));
-  const b=clone.querySelector('#briefMode'),p=clone.querySelector('#previewMode');
-  if(b)b.style.display='block';if(p)p.style.display='block';
-  const win=window.open('','_print');
-  win.document.write('<!DOCTYPE html><html><head><title>'+sku+'-content-brief-'+date+'</title>');
-  [...document.querySelectorAll('style')].forEach(s=>win.document.write(s.outerHTML));
-  win.document.write('</head><body>'+clone.querySelector('body').innerHTML+'</body></html>');
-  win.document.close();win.focus();
-  setTimeout(()=>{win.print();win.close();},600);
+  html+=`</div>`;
+  html+=`<div class="pf-box"><h2>Where to Install</h2><p>${gv('f_install_text').replace(/\n/g,'<br>')}</p></div>`;
+  html+=`<div class="pf-box"><h2>Compliant and Certified for Safety</h2><p>${gv('f_cert_text').replace(/\n/g,'<br>')}</p></div>`;
+  html+=`<div class="pf-box"><h2>What's in the Box</h2>${field('Image',gv('f_witb_url'))}${field('Alt text',gv('f_witb_alt'))}</div>`;
+  html+=`</div>`;
+
+  // Install & Resources
+  html+=`<div class="pf-section"><h2>Installation &amp; Setup / Resources</h2><div class="pf-grid">`;
+  html+=`<div>${field('Section title',gv('f_is_title'))}${field('Section description',gv('f_is_desc'))}${field('Installation guide title',gv('f_ig_title'))}${field('Installation guide description',gv('f_ig_desc'))}${field('Maintenance guide title',gv('f_mg_title'))}${field('Maintenance guide description',gv('f_mg_desc'))}</div>`;
+  html+=`<div>${field('Section title',gv('f_res_title'))}${field('Section description',gv('f_res_desc'))}${field('Manual title',gv('f_pm_title'))}${field('Manual description',gv('f_pm_desc'))}${field('Datasheet title',gv('f_ds_title'))}${field('Datasheet description',gv('f_ds_desc'))}</div>`;
+  html+=`</div></div>`;
+
+  // Reviews
+  html+=`<div class="pf-section"><h2>Reviews</h2>`;
+  document.querySelectorAll('#reviewRows .repeater-row').forEach(row=>{
+    const inps=row.querySelectorAll('input[type="text"]');
+    if(inps[0]?.value)html+=`<div class="pf-review"><p>"${inps[0]?.value}"</p><p style="font-size:10pt;color:#888;">— ${inps[1]?.value||''}</p></div>`;
+  });
+  html+=`</div>`;
+
+  // FAQs
+  html+=`<div class="pf-section"><h2>Related FAQs</h2>`;
+  document.querySelectorAll('#faqRows .repeater-row').forEach(row=>{
+    const q=row.querySelector('input[type="text"]')?.value||'';
+    const a=row.querySelector('textarea')?.value||'';
+    if(q)html+=`<div class="pf-faq"><div class="pf-faq-q">${q}</div><div class="pf-faq-a">${a.replace(/\n/g,'<br>')}</div></div>`;
+  });
+  html+=`</div>`;
+
+  // Upsell
+  html+=`<div class="pf-section"><h2>Upsell</h2>`;
+  html+=field('H2',gv('f_up_h2'));html+=field('Body text',gv('f_up_body'));
+  html+=field('CTA text',gv('f_up_cta'));html+=field('CTA link',gv('f_up_url'));
+  html+=`</div>`;
+
+  // Preview section
+  html+=`<div class="pf-preview-title">FireAngel — Page Preview</div>`;
+  html+=`<div class="pf-preview-sku">${sku}</div>`;
+  html+=`<div class="pf-preview-h1">${gv('f_h1')}</div>`;
+  if(checked.length)html+=`<div class="pf-preview-icons">${checked.map(c=>`<span class="pf-preview-icon">${c}</span>`).join('')}</div>`;
+  html+=`<div class="pf-preview-tagline">${gv('f_tagline').replace(/\n/g,'<br>')}</div>`;
+  html+=`<div class="pf-preview-shortdesc">${gv('f_shortdesc').replace(/\n/g,'<br>')}</div>`;
+  html+=`<div class="pf-preview-desc">${gv('f_desc').replace(/\n/g,'<br>')}</div>`;
+
+  html+=`<div class="pf-grid" style="margin-bottom:14pt;">`;
+  // KFB box
+  html+=`<div class="pf-box"><h2>${gv('f_kfb_title')||'Key Features and Benefits'}</h2>`;
+  document.querySelectorAll('#subfeatures .repeater-row').forEach(row=>{
+    const inps=row.querySelectorAll('input[type="text"]');
+    const h3=inps[0]?.value||'',d=inps[1]?.value||'';
+    if(h3||d)html+=`<div class="pf-sf"><h3>${h3}</h3><p>${d}</p></div>`;
+  });
+  html+=`</div>`;
+  html+=`<div class="pf-box"><h2>Where to Install</h2><p>${gv('f_install_text').replace(/\n/g,'<br>')}</p></div>`;
+  html+=`</div><div class="pf-grid" style="margin-bottom:14pt;">`;
+  html+=`<div class="pf-box"><h2>Compliant and Certified</h2><p>${gv('f_cert_text').replace(/\n/g,'<br>')}</p></div>`;
+  html+=`<div class="pf-box"><h2>What's in the Box</h2><p>${gv('f_witb_url')||'—'}</p></div>`;
+  html+=`</div>`;
+
+  html+=`<div class="pf-grid" style="margin-bottom:14pt;">`;
+  html+=`<div><h2>${gv('f_is_title')}</h2><p>${gv('f_is_desc')}</p><p><strong>${gv('f_ig_title')}</strong> — ${gv('f_ig_desc')}</p><p><strong>${gv('f_mg_title')}</strong> — ${gv('f_mg_desc')}</p></div>`;
+  html+=`<div><h2>${gv('f_res_title')}</h2><p>${gv('f_res_desc')}</p><p><strong>${gv('f_pm_title')}</strong> — ${gv('f_pm_desc')}</p><p><strong>${gv('f_ds_title')}</strong> — ${gv('f_ds_desc')}</p></div>`;
+  html+=`</div>`;
+
+  document.querySelectorAll('#reviewRows .repeater-row').forEach(row=>{
+    const inps=row.querySelectorAll('input[type="text"]');
+    if(inps[0]?.value)html+=`<div class="pf-review"><p style="font-style:italic;">"${inps[0]?.value}"</p><p style="font-size:10pt;color:#888;">— ${inps[1]?.value||''}</p></div>`;
+  });
+
+  document.querySelectorAll('#faqRows .repeater-row').forEach(row=>{
+    const q=row.querySelector('input[type="text"]')?.value||'';
+    const a=row.querySelector('textarea')?.value||'';
+    if(q)html+=`<div class="pf-faq"><div class="pf-faq-q">${q}</div><div class="pf-faq-a">${a.replace(/\n/g,'<br>')}</div></div>`;
+  });
+
+  html+=`<div class="pf-upsell"><h2>${gv('f_up_h2')}</h2><p>${gv('f_up_body').replace(/\n/g,'<br>')}</p><p style="margin-top:8pt;"><strong style="color:white;">${gv('f_up_cta')}</strong></p></div>`;
+
+  // Inject and show
+  let frame=document.getElementById('printFrame');
+  if(!frame){frame=document.createElement('div');frame.id='printFrame';document.body.appendChild(frame);}
+  frame.innerHTML=`<button class="pf-close" onclick="closePrintFrame()">✕ Close</button>
+    <div class="pf-actions"><button class="pf-print-btn" onclick="triggerPrint()">Print / Save PDF</button></div>
+    <div class="pf-inner">${html}</div>`;
+  frame.style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closePrintFrame(){
+  const frame=document.getElementById('printFrame');
+  if(frame){frame.style.display='none';frame.innerHTML='';}
+  document.body.style.overflow='';
+}
+function triggerPrint(){
+  const sku=document.getElementById('f_sku')?.value?.trim()||'FA';
+  const prev=document.title;
+  document.title=`${sku}-content-brief-${new Date().toISOString().slice(0,10)}`;
+  window.print();
+  setTimeout(()=>document.title=prev,1000);
 }
 
 /* ---- SET MODE ---- */
