@@ -6,9 +6,11 @@
 <meta name="robots" content="noindex, nofollow">
 <title>FireAngel Content Brief</title>
 <style>
-:root{--fa-orange:#E8671A;--fa-dark:#2C3142;--fa-orange-light:#FDF0E8;--fa-mid:#f5f5f3;}
+:root{--fa-orange:#E8671A;--fa-dark:#2C3142;--fa-orange-light:#FDF0E8;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,sans-serif;font-size:14px;color:#2C3142;background:#f5f5f3;}
+
+/* TOP BAR */
 .top-bar{background:var(--fa-dark);color:white;padding:12px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
 .top-bar .logo{background:var(--fa-orange);color:white;font-weight:700;font-size:12px;padding:4px 10px;border-radius:4px;}
 .top-bar h1{font-size:15px;font-weight:500;}
@@ -39,7 +41,7 @@ body{font-family:system-ui,sans-serif;font-size:14px;color:#2C3142;background:#f
 .info-note{font-size:11px;color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe;border-radius:5px;padding:5px 9px;margin-bottom:8px;}
 textarea,input[type="text"],input[type="url"]{width:100%;border:1px solid #ddd;border-radius:6px;padding:8px 10px;font-size:13px;font-family:inherit;color:#2C3142;resize:vertical;background:#fafafa;outline:none;}
 textarea:focus,input:focus{border-color:var(--fa-orange);background:white;}
-.url-row{display:flex;align-items:center;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;background:#fafafa;}
+.url-row{display:flex;align-items:center;border:1px solid #ddd;border-radius:6px;overflow:hidden;background:#fafafa;}
 .url-row:focus-within{border-color:var(--fa-orange);background:white;}
 .url-prefix{padding:8px 10px;font-size:13px;color:#999;background:#f0ede6;white-space:nowrap;border-right:1px solid #ddd;}
 .url-row input{border:none;border-radius:0;background:transparent;padding:8px 10px;}
@@ -63,7 +65,9 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 .tab-content{display:none;padding:16px;}
 .tab-content.active{display:block;}
 .repeater-row{border:1px solid #e8e5de;border-radius:7px;padding:12px;margin-bottom:10px;}
-.repeater-row-header{font-size:11px;font-weight:500;color:var(--fa-orange);margin-bottom:10px;}
+.repeater-row-header{font-size:11px;font-weight:500;color:var(--fa-orange);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.remove-btn{background:none;border:none;color:#ccc;font-size:18px;cursor:pointer;padding:0;line-height:1;}
+.remove-btn:hover{color:#dc2626;}
 .add-btn{background:none;border:1px dashed #ccc;border-radius:6px;padding:7px 14px;font-size:12px;color:#888;cursor:pointer;width:100%;margin-top:8px;font-family:inherit;}
 .add-btn:hover{border-color:var(--fa-orange);color:var(--fa-orange);background:var(--fa-orange-light);}
 .page-order{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;align-items:center;}
@@ -96,133 +100,50 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 .toast{position:fixed;bottom:24px;right:24px;background:var(--fa-dark);color:white;padding:10px 18px;border-radius:7px;font-size:13px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;}
 .toast.show{opacity:1;}
 
-@media print {
-  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { background: white; font-size: 11pt; color: #000; }
-
-  /* ---- HIDE UI CHROME ---- */
-  .top-bar, .mode-toggle, .top-bar-right, .page-order,
-  .add-btn, .status-row, .admin-note, .prefilled-note, .info-note { display: none !important; }
-
-  /* ---- SHOW BOTH PANELS ---- */
-  .brief-wrap { max-width: 100%; padding: 0; display: block !important; }
-  .preview-wrap, #previewMode {
-    display: block !important;
-    page-break-before: always;
-  }
-
-  /* ---- BRIEF STYLES ---- */
-  .section { border: none; border-radius: 0; margin-bottom: 24pt; page-break-inside: avoid; box-shadow: none; }
-  .section-header { background: #2C3142 !important; color: white !important; padding: 6pt 10pt; border-radius: 0; }
-  .section-header h2 { font-size: 11pt; font-weight: 600; }
-  .section-body { padding: 10pt; }
-  .subsection { border: 0.5pt solid #ccc; border-radius: 0; margin-bottom: 10pt; }
-  .subsection-header { background: #f5f2ec !important; padding: 5pt 8pt; font-size: 9pt; font-weight: 600; border-bottom: 0.5pt solid #ddd; }
-  .subsection-body { padding: 8pt; }
-  .field { margin-bottom: 10pt; }
-  .field-label { font-size: 8pt; color: #666; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3pt; display: flex; gap: 6pt; }
-  .field-label .limit { font-size: 7.5pt; color: #999; background: none; padding: 0; }
-  textarea, input[type="text"], input[type="url"] {
-    border: none; border-bottom: 0.5pt solid #ccc; border-radius: 0;
-    background: transparent; padding: 2pt 0; font-size: 10.5pt;
-    width: 100%; resize: none; min-height: 0;
-  }
-  .url-row { border: none; border-bottom: 0.5pt solid #ccc; border-radius: 0; background: transparent; }
-  .url-prefix { background: transparent; border: none; color: #999; font-size: 10pt; padding: 2pt 4pt 2pt 0; }
-  .url-row input { border: none; padding: 2pt 0; font-size: 10pt; }
-  .char-count { display: none; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10pt; }
-  .tab-bar { display: none; }
-  .tab-content { display: block !important; padding: 0; }
-  .tab-content + .tab-content { border-top: 0.5pt solid #eee; padding-top: 8pt; margin-top: 8pt; }
-  .tab-content::before { display: block; font-size: 8pt; font-weight: 600; color: #E8671A; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6pt; }
-  #tab0::before { content: 'Key Features & Benefits'; }
-  #tab1::before { content: 'Where to Install'; }
-  #tab2::before { content: 'Compliant & Certified'; }
-  #tab3::before { content: "What's in the Box"; }
-  .icon-grid { display: flex; flex-wrap: wrap; gap: 4pt; }
-  .icon-option { font-size: 9pt; padding: 2pt 5pt; border: 0.5pt solid #ddd; border-radius: 3pt; }
-  .icon-option input[type="checkbox"] { width: 10pt; height: 10pt; }
-  .icon-option.checked { background: #fdf0e8 !important; border-color: #E8671A; font-weight: 600; }
-  .repeater-row { border: 0.5pt solid #ddd; border-radius: 0; padding: 6pt 8pt; margin-bottom: 6pt; }
-  .repeater-row-header { font-size: 8pt; color: #E8671A; font-weight: 600; margin-bottom: 5pt; }
-  .brief-wrap::before {
-    content: 'FireAngel — Product Page Content Brief';
-    display: block; font-size: 16pt; font-weight: 700; color: #2C3142;
-    border-bottom: 2pt solid #E8671A; padding-bottom: 6pt; margin-bottom: 16pt;
-  }
-
-  /* ---- PREVIEW STYLES (preserve screen look) ---- */
-  .preview-wrap { font-family: 'Helvetica Neue', Arial, sans-serif; }
-  .pv-nav { padding: 8pt 20pt; border-bottom: 0.5pt solid #eee; display: flex; align-items: center; }
-  .pv-seo-bar { padding: 6pt 20pt; font-size: 8pt; }
-  .pv-breadcrumb { padding: 5pt 20pt; font-size: 8pt; }
-  .pv-hero { padding: 16pt 20pt; grid-template-columns: 1fr 1fr; gap: 24pt; }
-  .pv-h1 { font-size: 18pt; }
-  .pv-boxes { padding: 16pt 20pt; }
-  .pv-boxes-inner { grid-template-columns: 1fr 1fr; }
-  .pv-box { padding: 14pt; page-break-inside: avoid; }
-  .pv-install { padding: 16pt 20pt; }
-  .pv-reviews { padding: 16pt 20pt; }
-  .pv-faqs { padding: 16pt 20pt; }
-  .pv-faq-grid { grid-template-columns: 1fr 1fr; }
-  .pv-upsell { padding: 20pt; }
-  .pv-footer { padding: 10pt 20pt; }
-  .pv-review-card { page-break-inside: avoid; }
-
-  /* hide SEO bar nav chrome in preview print */
-  .pv-nav .pv-nav-links { display: none; }
-
-  /* section divider before preview */
-  .preview-wrap::before {
-    content: 'FireAngel — Page Preview';
-    display: block; font-size: 16pt; font-weight: 700; color: #2C3142;
-    border-bottom: 2pt solid #E8671A; padding-bottom: 6pt; margin-bottom: 0;
-    font-family: system-ui, sans-serif;
-  }
-
-  a { color: inherit; text-decoration: none; }
-  @page { margin: 12mm 12mm 12mm 12mm; }
-}
-
 /* PREVIEW */
 .preview-wrap{display:none;font-family:'Helvetica Neue',Arial,sans-serif;background:white;}
 .preview-wrap *{box-sizing:border-box;}
+.pv-editable{outline:none;border-bottom:1.5px dashed rgba(232,103,26,0.4);cursor:text;transition:border-color .2s;display:inline-block;min-width:20px;min-height:1em;}
+.pv-editable:hover{border-bottom-color:rgba(232,103,26,0.8);}
+.pv-editable:focus{border-bottom-color:#E8671A;background:rgba(232,103,26,0.04);}
+.pv-editable-block{outline:none;border:1.5px dashed rgba(232,103,26,0.3);border-radius:4px;cursor:text;padding:4px 6px;transition:border-color .2s;display:block;min-height:1.5em;width:100%;}
+.pv-editable-block:hover{border-color:rgba(232,103,26,0.7);}
+.pv-editable-block:focus{border-color:#E8671A;background:rgba(232,103,26,0.04);}
+.pv-edit-hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--fa-dark);color:white;font-size:11px;padding:6px 14px;border-radius:20px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:50;}
+.pv-edit-hint.show{opacity:1;}
 .pv-nav{background:white;border-bottom:1px solid #eee;padding:10px 40px;display:flex;align-items:center;}
-.pv-nav .pv-logo{color:var(--fa-orange);font-weight:800;font-size:18px;}
-.pv-nav .pv-nav-links{margin-left:auto;display:flex;gap:20px;font-size:12px;color:#666;}
+.pv-logo{color:var(--fa-orange);font-weight:800;font-size:18px;}
+.pv-nav-links{margin-left:auto;display:flex;gap:20px;font-size:12px;color:#666;}
+.pv-seo-bar{background:#e8f4fd;border-bottom:1px solid #bcd8ed;padding:10px 40px;font-size:12px;color:#1d4ed8;}
 .pv-breadcrumb{background:#f8f8f8;padding:8px 40px;font-size:11px;color:#999;}
 .pv-breadcrumb span{color:var(--fa-orange);}
-.pv-seo-bar{background:#e8f4fd;border-bottom:1px solid #bcd8ed;padding:10px 40px;font-size:12px;color:#1d4ed8;}
-.pv-seo-bar strong{font-weight:600;}
 .pv-hero{padding:30px 40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1100px;margin:0 auto;}
 .pv-hero-imgs{display:flex;flex-direction:column;gap:8px;}
 .pv-hero-thumbs{display:flex;flex-direction:row;gap:6px;order:2;}
-.pv-thumb{width:54px;height:54px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#aaa;text-align:center;cursor:pointer;}
-.pv-thumb.active{border-color:var(--fa-orange);}
-.pv-main-img{background:#f5f5f5;border:1px solid #eee;border-radius:6px;display:flex;align-items:center;justify-content:center;min-height:260px;color:#bbb;font-size:12px;}
+.pv-main-img{background:#f5f5f5;border:1px solid #eee;border-radius:6px;display:flex;align-items:center;justify-content:center;min-height:260px;padding:20px;}
 .pv-sku{font-size:11px;color:#999;margin-bottom:4px;}
 .pv-h1{font-size:26px;font-weight:700;color:#1a1a1a;line-height:1.2;margin-bottom:10px;}
 .pv-icons{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.pv-icon-badge{background:#f0f0f0;border-radius:4px;padding:4px 8px;font-size:10px;color:#555;display:flex;align-items:center;gap:4px;}
-.pv-icon-dot{width:8px;height:8px;background:var(--fa-orange);border-radius:50%;}
-.pv-short-desc{font-size:13px;color:#444;line-height:1.6;margin-bottom:14px;}
+.pv-icon-badge{background:#f0f0f0;border-radius:4px;padding:4px 8px;font-size:10px;color:#555;display:inline-flex;align-items:center;gap:4px;}
+.pv-icon-dot{width:8px;height:8px;background:var(--fa-orange);border-radius:50%;flex-shrink:0;display:inline-block;}
+.pv-tagline{font-size:13px;font-weight:700;color:#1a1a1a;line-height:1.6;margin-bottom:10px;}
+.pv-short-desc{font-size:13px;color:#444;line-height:1.6;margin-bottom:10px;}
+.pv-desc{font-size:13px;color:#444;line-height:1.7;margin-bottom:12px;}
 .pv-price{font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:14px;}
 .pv-btns{display:flex;gap:10px;margin-bottom:16px;}
 .pv-btn-primary{background:var(--fa-orange);color:white;border:none;padding:10px 20px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;}
 .pv-btn-secondary{background:white;color:var(--fa-dark);border:2px solid var(--fa-dark);padding:10px 20px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;}
-.pv-desc{font-size:13px;color:#444;line-height:1.7;}
-.pv-desc strong{font-weight:700;display:block;margin-bottom:6px;font-size:14px;}
 .pv-boxes{background:#f8f8f8;padding:40px;}
 .pv-boxes-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2px;}
 .pv-box{background:white;padding:28px;border:1px solid #eee;}
 .pv-box h2{font-size:17px;font-weight:700;color:#1a1a1a;margin-bottom:14px;}
-.pv-box p{font-size:13px;color:#555;line-height:1.6;}
-.pv-subfeature{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start;}
+.pv-subfeature{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start;position:relative;}
 .pv-sf-icon{width:32px;height:32px;background:var(--fa-orange);border-radius:50%;flex-shrink:0;}
+.pv-sf-text{flex:1;}
 .pv-sf-text h3{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:2px;}
 .pv-sf-text p{font-size:12px;color:#666;line-height:1.5;}
+.pv-sf-remove{position:absolute;top:0;right:0;background:none;border:none;color:#ccc;font-size:16px;cursor:pointer;line-height:1;}
+.pv-sf-remove:hover{color:#dc2626;}
 .pv-box-img{background:#f0f0f0;border:1px solid #eee;border-radius:4px;height:160px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#aaa;}
 .pv-install{padding:40px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;}
 .pv-install-col h2{font-size:18px;font-weight:700;margin-bottom:8px;}
@@ -237,31 +158,79 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 .pv-reviews h2{font-size:22px;font-weight:700;margin-bottom:24px;}
 .pv-review-card{background:white;border:1px solid #eee;border-radius:6px;padding:20px;margin-bottom:12px;}
 .pv-stars{color:var(--fa-orange);font-size:16px;margin-bottom:8px;}
-.pv-review-title{font-size:15px;font-weight:700;color:#1a1a1a;font-style:italic;margin-bottom:6px;}
-.pv-reviewer{font-size:12px;color:#999;}
 .pv-faqs{padding:40px;max-width:1100px;margin:0 auto;}
 .pv-faqs h2{font-size:22px;font-weight:700;margin-bottom:20px;}
-.pv-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.pv-faq-item{border:1px solid #eee;border-radius:4px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
-.pv-faq-q{font-size:13px;color:#1a1a1a;}
-.pv-faq-arrow{color:var(--fa-orange);font-size:16px;}
+.pv-faq-item{border:1px solid #eee;border-radius:4px;padding:14px 16px;margin-bottom:8px;}
+.pv-faq-item:hover{border-color:var(--fa-orange);}
+.pv-faq-q{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;display:block;}
+.pv-faq-answer{font-size:12px;color:#555;line-height:1.7;display:block;}
 .pv-upsell{background:var(--fa-dark);padding:50px 40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
 .pv-upsell-img{background:rgba(255,255,255,0.05);border-radius:6px;height:180px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);font-size:12px;}
 .pv-upsell-text h2{font-size:22px;font-weight:700;color:white;margin-bottom:12px;line-height:1.3;}
 .pv-upsell-text p{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:20px;}
-.pv-upsell-btn{background:var(--fa-orange);color:white;border:none;padding:11px 22px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;}
+.pv-upsell-btn{background:var(--fa-orange);color:white;border:none;padding:11px 22px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;display:inline-block;}
 .pv-footer{background:#1a1d2e;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;}
-.pv-footer .pv-logo{color:var(--fa-orange);font-weight:800;font-size:16px;}
 .pv-footer span{font-size:11px;color:#666;}
-.pv-editable { outline: none; border-bottom: 1.5px dashed rgba(232,103,26,0.4); cursor: text; transition: border-color .2s; }
-.pv-editable:hover { border-bottom-color: rgba(232,103,26,0.8); }
-.pv-editable:focus { border-bottom-color: #E8671A; background: rgba(232,103,26,0.04); }
-.pv-edit-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--fa-dark); color: white; font-size: 11px; padding: 6px 14px; border-radius: 20px; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 50; }
-.pv-edit-hint.show { opacity: 1; }
+.pv-empty{color:#ccc;font-style:italic;font-size:12px;}
+
+@media print {
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{background:white;font-size:11pt;color:#000;}
+  .top-bar,.mode-toggle,.top-bar-right,.page-order,.add-btn,.status-row,.admin-note,.prefilled-note,.info-note{display:none!important;}
+  .brief-wrap{max-width:100%;padding:0;display:block!important;}
+  .section{border:none;border-radius:0;margin-bottom:24pt;page-break-inside:avoid;box-shadow:none;}
+  .section-header{background:#2C3142!important;color:white!important;padding:6pt 10pt;border-radius:0;}
+  .section-header h2{font-size:11pt;font-weight:600;}
+  .section-body{padding:10pt;}
+  .subsection{border:0.5pt solid #ccc;border-radius:0;margin-bottom:10pt;}
+  .subsection-header{background:#f5f2ec!important;padding:5pt 8pt;font-size:9pt;font-weight:600;border-bottom:0.5pt solid #ddd;}
+  .subsection-body{padding:8pt;}
+  .field{margin-bottom:10pt;}
+  .field-label{font-size:8pt;color:#666;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:3pt;display:flex;gap:6pt;}
+  .field-label .limit{font-size:7.5pt;color:#999;background:none;padding:0;}
+  textarea,input[type="text"],input[type="url"]{border:none;border-bottom:0.5pt solid #ccc;border-radius:0;background:transparent;padding:2pt 0;font-size:10.5pt;width:100%;resize:none;min-height:0;}
+  .url-row{border:none;border-bottom:0.5pt solid #ccc;border-radius:0;background:transparent;}
+  .url-prefix{background:transparent;border:none;color:#999;font-size:10pt;padding:2pt 4pt 2pt 0;}
+  .url-row input{border:none;padding:2pt 0;font-size:10pt;}
+  .char-count{display:none;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12pt;}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10pt;}
+  .tab-bar{display:none;}
+  .tab-content{display:block!important;padding:0;}
+  .tab-content+.tab-content{border-top:0.5pt solid #eee;padding-top:8pt;margin-top:8pt;}
+  .tab-content::before{display:block;font-size:8pt;font-weight:600;color:#E8671A;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6pt;}
+  #tab0::before{content:'Key Features & Benefits';}
+  #tab1::before{content:'Where to Install';}
+  #tab2::before{content:'Compliant & Certified';}
+  #tab3::before{content:"What's in the Box";}
+  .icon-grid{display:flex;flex-wrap:wrap;gap:4pt;}
+  .icon-option{font-size:9pt;padding:2pt 5pt;border:0.5pt solid #ddd;border-radius:3pt;}
+  .icon-option input[type="checkbox"]{width:10pt;height:10pt;}
+  .icon-option.checked{background:#fdf0e8!important;border-color:#E8671A;font-weight:600;}
+  .repeater-row{border:0.5pt solid #ddd;border-radius:0;padding:6pt 8pt;margin-bottom:6pt;}
+  .repeater-row-header{font-size:8pt;color:#E8671A;font-weight:600;margin-bottom:5pt;}
+  .remove-btn{display:none;}
+  .brief-wrap::before{content:'FireAngel — Product Page Content Brief';display:block;font-size:16pt;font-weight:700;color:#2C3142;border-bottom:2pt solid #E8671A;padding-bottom:6pt;margin-bottom:16pt;}
+  .preview-wrap,#previewMode{display:block!important;page-break-before:always;}
+  .pv-nav .pv-nav-links{display:none;}
+  .pv-hero{padding:16pt 20pt;grid-template-columns:1fr 1fr;gap:24pt;}
+  .pv-h1{font-size:18pt;}
+  .pv-boxes{padding:16pt 20pt;}
+  .pv-install{padding:16pt 20pt;}
+  .pv-reviews{padding:16pt 20pt;}
+  .pv-faqs{padding:16pt 20pt;}
+  .pv-upsell{padding:20pt;}
+  .pv-footer{padding:10pt 20pt;}
+  .pv-review-card{page-break-inside:avoid;}
+  .pv-editable,.pv-editable-block{border:none!important;background:none!important;padding:0!important;}
+  .pv-sf-remove{display:none;}
+  .preview-wrap::before{content:'FireAngel — Page Preview';display:block;font-size:16pt;font-weight:700;color:#2C3142;border-bottom:2pt solid #E8671A;padding-bottom:6pt;margin-bottom:0;font-family:system-ui,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  @page{margin:12mm;}
+}
 </style>
 </head>
 <body>
-
 <script>
 (function(){
   const inIframe=()=>{try{return window.self!==window.top;}catch(e){return true;}};
@@ -286,41 +255,35 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     <label class="tb-btn" style="cursor:pointer;">Import<input type="file" accept=".json" style="display:none" onchange="importSaves(this)"></label>
     <button class="tb-btn" onclick="printDoc()">Print / PDF</button>
     <div class="mode-toggle">
-      <button class="mode-btn active" id="btnBrief" onclick="setMode('brief')">Edit</button>
-      <button class="mode-btn" id="btnPreview" onclick="setMode('preview')">Preview</button>
+      <button class="mode-btn" id="btnBrief" onclick="setMode('brief')">Edit</button>
+      <button class="mode-btn active" id="btnPreview" onclick="setMode('preview')">Preview</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
+<div class="pv-edit-hint" id="editHint">Editing preview — changes sync to brief</div>
 
-<!-- LOAD MODAL -->
 <div class="modal-overlay" id="loadModal">
   <div class="modal">
-    <div class="modal-header">
-      <h3>Load saved brief</h3>
-      <button class="modal-close" onclick="closeModal()">×</button>
-    </div>
+    <div class="modal-header"><h3>Load saved brief</h3><button class="modal-close" onclick="closeModal()">×</button></div>
     <div class="modal-body" id="modalBody"></div>
-    <div class="modal-footer">
-      <button class="modal-btn" onclick="closeModal()">Cancel</button>
-    </div>
+    <div class="modal-footer"><button class="modal-btn" onclick="closeModal()">Cancel</button></div>
   </div>
 </div>
 
-<!-- ===== BRIEF MODE ===== -->
-<div class="brief-wrap" id="briefMode">
+<!-- BRIEF -->
+<div class="brief-wrap" id="briefMode" style="display:none;">
   <div class="page-order">
     <div class="page-order-item"><span class="num">0</span> SEO</div><span class="arrow">›</span>
-    <div class="page-order-item"><span class="num">1</span> Header / Hero</div><span class="arrow">›</span>
+    <div class="page-order-item"><span class="num">1</span> Header</div><span class="arrow">›</span>
     <div class="page-order-item"><span class="num">2</span> 4 Boxes</div><span class="arrow">›</span>
     <div class="page-order-item"><span class="num">3</span> Installation &amp; Resources</div><span class="arrow">›</span>
     <div class="page-order-item"><span class="num">4</span> Reviews</div><span class="arrow">›</span>
-    <div class="page-order-item"><span class="num">5</span> Related FAQs</div><span class="arrow">›</span>
+    <div class="page-order-item"><span class="num">5</span> FAQs</div><span class="arrow">›</span>
     <div class="page-order-item"><span class="num">6</span> Upsell</div>
   </div>
 
-  <!-- SEO SECTION -->
   <div class="section">
     <div class="section-header"><h2>Section 0 — SEO Metadata</h2></div>
     <div class="section-body">
@@ -332,23 +295,19 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
         <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_seo_title"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
       </div>
       <div class="field">
-        <div class="field-label">Meta description <span class="limit">Use judgement (~155 chars)</span></div>
-        <input type="text" id="f_seo_desc" placeholder="Concise description of the page for search engines..." oninput="count(this,'c_seo_desc',150,70)">
-        <div class="char-count char-ok" id="c_seo_desc">0 / 155</div>
+        <div class="field-label">Meta description <span class="limit">70–150 chars</span></div>
+        <input type="text" id="f_seo_desc" placeholder="Concise page description for search engines..." oninput="count(this,'c_seo_desc',150,70)">
+        <div class="char-count char-ok" id="c_seo_desc">0 / 150</div>
         <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_seo_desc"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
       </div>
       <div class="field">
         <div class="field-label">URL slug</div>
-        <div class="url-row">
-          <span class="url-prefix">fireangel.co.uk/product/</span>
-          <input type="text" id="f_slug" placeholder="fa6829s-carbon-monoxide-alarm" oninput="sanitizeSlug(this)">
-        </div>
+        <div class="url-row"><span class="url-prefix">fireangel.co.uk/product/</span><input type="text" id="f_slug" placeholder="fa6829s-ultra-slim-co-alarm" oninput="sanitizeSlug(this)"></div>
         <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_slug"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
       </div>
     </div>
   </div>
 
-  <!-- HEADER SECTION -->
   <div class="section">
     <div class="section-header"><h2>Section 1 — Header / Product Hero</h2></div>
     <div class="section-body">
@@ -359,14 +318,14 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       </div>
       <div class="grid-2">
         <div class="field">
-          <div class="field-label">H1 — Product alternative title <span class="limit">Max 42 chars</span></div>
-          <input type="text" id="f_h1" maxlength="80" placeholder="e.g. Carbon Monoxide Alarm with 10 Year Battery" oninput="count(this,'c_h1',42)">
+          <div class="field-label">H1 — Product title <span class="limit">Max 42 chars</span></div>
+          <input type="text" id="f_h1" placeholder="e.g. Carbon Monoxide Alarm with 10 Year Battery" oninput="count(this,'c_h1',42)">
           <div class="char-count char-ok" id="c_h1">0 / 42</div>
           <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_h1"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
         </div>
         <div class="field">
           <div class="field-label">H2 — Product tagline <span class="limit">~200 chars</span></div>
-          <div class="admin-note">⚠ Entered as bolded text at the start of the Product Description field in admin</div>
+          <div class="admin-note">⚠ Entered as bolded text at start of Product Description field in admin</div>
           <textarea id="f_tagline" rows="2" placeholder="e.g. Trusted protection, wherever life takes you." oninput="count(this,'c_tagline',200)"></textarea>
           <div class="char-count char-ok" id="c_tagline">0 / 200</div>
           <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_tagline"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
@@ -374,14 +333,14 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       </div>
       <div class="field" style="margin-top:14px;">
         <div class="field-label">Product short description <span class="limit">Max 2 paragraphs</span></div>
-        <div class="admin-note">⚠ Found at the bottom of the edit page in admin — easy to miss</div>
+        <div class="admin-note">⚠ Found at the bottom of the edit page in admin</div>
         <textarea id="f_shortdesc" rows="4" placeholder="Short description shown below feature icons..."></textarea>
         <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_shortdesc"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
       </div>
       <div class="field">
         <div class="field-label">Product description <span class="limit">Use judgement</span></div>
-        <div class="admin-note">⚠ Found at the top of the edit page in admin — field order is reverse of how they appear on the page. H2 tagline goes here, bolded at the top.</div>
-        <textarea id="f_desc" rows="5" placeholder="Full product description. Begins with the H2 tagline (bolded) at the top..."></textarea>
+        <div class="admin-note">⚠ Found at top of admin — field order is reverse of page. H2 tagline goes here bolded at top.</div>
+        <textarea id="f_desc" rows="5" placeholder="Full product description..."></textarea>
         <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_desc"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
       </div>
       <div class="subsection">
@@ -393,15 +352,11 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       </div>
       <div class="subsection">
         <div class="subsection-header">Product images — min 3, 4 default</div>
-        <div class="subsection-body">
-          <div id="imageRows"></div>
-          <button class="add-btn" onclick="addImage()">+ Add image</button>
-        </div>
+        <div class="subsection-body"><div id="imageRows"></div><button class="add-btn" onclick="addImage()">+ Add image</button></div>
       </div>
     </div>
   </div>
 
-  <!-- 4 BOXES -->
   <div class="section">
     <div class="section-header"><h2>Section 2 — Product Template V2: 4 Boxes</h2></div>
     <div class="tab-bar">
@@ -412,25 +367,25 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     </div>
     <div class="tab-content active" id="tab0">
       <div class="field">
-        <div class="field-label">Box title (H2) <span class="limit">Use judgement</span></div>
+        <div class="field-label">Box title (H2)</div>
         <input type="text" id="f_kfb_title" placeholder="e.g. For home safety you can trust.">
         <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_kfb_title"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
       </div>
-      <div class="field-label" style="margin-bottom:10px;">Sub-features (3–5) — icon, H3, description</div>
+      <div class="field-label" style="margin-bottom:10px;">Sub-features (3–5)</div>
       <div id="subfeatures"></div>
       <button class="add-btn" onclick="addSubfeature()">+ Add sub-feature</button>
     </div>
     <div class="tab-content" id="tab1">
       <div class="field">
-        <div class="field-label">Text box <span class="limit">Use judgement</span></div>
+        <div class="field-label">Text box</div>
         <textarea id="f_install_text" rows="5" placeholder="Describe suitable installation locations..."></textarea>
         <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_install_text"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
       </div>
     </div>
     <div class="tab-content" id="tab2">
       <div class="field">
-        <div class="field-label">Text box <span class="limit">Use judgement</span></div>
-        <div class="admin-note">Rewrite per Emily's feedback — shorter, customer-first, no jargon</div>
+        <div class="field-label">Text box</div>
+        <div class="admin-note">Rewrite per Emily's feedback — shorter, customer-first</div>
         <textarea id="f_cert_text" rows="6" placeholder="Certification and compliance details..."></textarea>
         <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_cert_text"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
       </div>
@@ -447,7 +402,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     </div>
   </div>
 
-  <!-- INSTALL & RESOURCES -->
   <div class="section">
     <div class="section-header"><h2>Section 3 — Installation &amp; Setup / Resources</h2></div>
     <div class="section-body">
@@ -456,24 +410,24 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
         <div class="subsection">
           <div class="subsection-header">Installation &amp; Setup (left)</div>
           <div class="subsection-body">
-            <div class="field"><div class="field-label">Section title</div><input type="text" id="f_is_title" value="Installation &amp; Setup"></div>
-            <div class="field"><div class="field-label">Section description</div><textarea id="f_is_desc" rows="2">Get the help and support you need to easily set up and install your FireAngel alarm for instant protection.</textarea></div>
-            <div class="field"><div class="field-label">Installation guide title</div><input type="text" id="f_ig_title" value="Installation guide"></div>
-            <div class="field"><div class="field-label">Installation guide description</div><input type="text" id="f_ig_desc" value="Click the icon to find out more about installing your alarm"></div>
-            <div class="field"><div class="field-label">Maintenance guide title</div><input type="text" id="f_mg_title" value="Maintenance guide"></div>
-            <div class="field"><div class="field-label">Maintenance guide description</div><input type="text" id="f_mg_desc" value="Click the icon to find out how to properly maintain and test your alarm"></div>
+            <div class="field"><div class="field-label">Section title</div><input type="text" id="f_is_title"></div>
+            <div class="field"><div class="field-label">Section description</div><textarea id="f_is_desc" rows="2"></textarea></div>
+            <div class="field"><div class="field-label">Installation guide title</div><input type="text" id="f_ig_title"></div>
+            <div class="field"><div class="field-label">Installation guide description</div><input type="text" id="f_ig_desc"></div>
+            <div class="field"><div class="field-label">Maintenance guide title</div><input type="text" id="f_mg_title"></div>
+            <div class="field"><div class="field-label">Maintenance guide description</div><input type="text" id="f_mg_desc"></div>
             <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_install_sec"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
           </div>
         </div>
         <div class="subsection">
           <div class="subsection-header">Resources (right)</div>
           <div class="subsection-body">
-            <div class="field"><div class="field-label">Section title</div><input type="text" id="f_res_title" value="Resources"></div>
-            <div class="field"><div class="field-label">Section description</div><textarea id="f_res_desc" rows="2">For more technical and specification information on this alarm, view our manual and datasheet.</textarea></div>
-            <div class="field"><div class="field-label">Product manual title</div><input type="text" id="f_pm_title" value="Product manual"></div>
-            <div class="field"><div class="field-label">Product manual description</div><input type="text" id="f_pm_desc" value="Click the icon to download the product manual"></div>
-            <div class="field"><div class="field-label">Datasheet title</div><input type="text" id="f_ds_title" value="Datasheet"></div>
-            <div class="field"><div class="field-label">Datasheet description</div><input type="text" id="f_ds_desc" value="Click the icon to download the product datasheet"></div>
+            <div class="field"><div class="field-label">Section title</div><input type="text" id="f_res_title"></div>
+            <div class="field"><div class="field-label">Section description</div><textarea id="f_res_desc" rows="2"></textarea></div>
+            <div class="field"><div class="field-label">Product manual title</div><input type="text" id="f_pm_title"></div>
+            <div class="field"><div class="field-label">Product manual description</div><input type="text" id="f_pm_desc"></div>
+            <div class="field"><div class="field-label">Datasheet title</div><input type="text" id="f_ds_title"></div>
+            <div class="field"><div class="field-label">Datasheet description</div><input type="text" id="f_ds_desc"></div>
             <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_resources_sec"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
           </div>
         </div>
@@ -481,7 +435,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     </div>
   </div>
 
-  <!-- REVIEWS -->
   <div class="section">
     <div class="section-header"><h2>Section 4 — Reviews</h2></div>
     <div class="section-body">
@@ -491,7 +444,6 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     </div>
   </div>
 
-  <!-- FAQS -->
   <div class="section">
     <div class="section-header"><h2>Section 5 — Related FAQs</h2></div>
     <div class="section-body">
@@ -501,13 +453,12 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     </div>
   </div>
 
-  <!-- UPSELL -->
   <div class="section">
     <div class="section-header"><h2>Section 6 — Upsell</h2></div>
     <div class="section-body">
-      <div class="prefilled-note">✓ Pre-filled with Pro Connected upsell copy — amend if needed.</div>
-      <div class="field"><div class="field-label">H2</div><input type="text" id="f_up_h2" value="Want whole-home protection with a smartphone alert?"><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_up_h2"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
-      <div class="field"><div class="field-label">Body text</div><textarea id="f_up_body" rows="4">The FireAngel Pro Connected range wirelessly interlinks all your alarms – if one sounds, every alarm in the home sounds too. Monitor them from anywhere via the FireAngel Pro Connected app, whether you are at home or away. Ideal for families, landlords, and holiday let owners managing multiple properties.</textarea><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_up_body"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
+      <div class="prefilled-note">✓ Pre-filled with Pro Connected upsell copy.</div>
+      <div class="field"><div class="field-label">H2</div><input type="text" id="f_up_h2"><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_up_h2"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
+      <div class="field"><div class="field-label">Body text</div><textarea id="f_up_body" rows="4"></textarea><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_up_body"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
       <div class="grid-2">
         <div class="field"><div class="field-label">CTA button text</div><input type="text" id="f_up_cta" placeholder="e.g. Explore Pro Connected"><div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)" id="s_up_cta"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div></div>
         <div class="field"><div class="field-label">CTA button link</div><input type="url" id="f_up_url" placeholder="https://..."></div>
@@ -516,26 +467,23 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
   </div>
 </div>
 
-<!-- ===== PREVIEW MODE ===== -->
+<!-- PREVIEW -->
 <div class="preview-wrap" id="previewMode">
-  <div class="pv-nav">
-    <div class="pv-logo">FireAngel</div>
-    <div class="pv-nav-links"><span>Products</span><span>Support</span><span>About</span></div>
-  </div>
+  <div class="pv-nav"><div class="pv-logo">FireAngel</div><div class="pv-nav-links"><span>Products</span><span>Support</span><span>About</span></div></div>
   <div class="pv-seo-bar" id="pv_seo_bar"></div>
   <div class="pv-breadcrumb">Home › Products › <span id="pv_sku_bc">—</span></div>
   <div class="pv-hero">
     <div class="pv-hero-imgs">
-      <div class="pv-main-img" id="pv_main_img">Product image</div>
+      <div class="pv-main-img" id="pv_main_img"></div>
       <div class="pv-hero-thumbs" id="pv_thumbs"></div>
     </div>
     <div class="pv-hero-info">
       <div class="pv-sku" id="pv_sku_hero">—</div>
-      <div class="pv-h1 pv-editable" id="pv_h1" contenteditable="true" data-field="f_h1">—</div>
+      <div class="pv-h1 pv-editable" id="pv_h1" contenteditable="true" data-field="f_h1"></div>
       <div class="pv-icons" id="pv_icons"></div>
-      <div class="pv-desc pv-editable" id="pv_desc" contenteditable="true" data-field="f_tagline" style="margin-bottom:12px;"><span class="pv-empty">Tagline not entered</span></div>
-      <div class="pv-short-desc pv-editable" id="pv_short_desc" contenteditable="true" data-field="f_shortdesc"><span class="pv-empty">Short description not entered</span></div>
-      <div class="pv-desc pv-editable" id="pv_desc2" contenteditable="true" data-field="f_desc" style="margin-bottom:12px;"><span class="pv-empty">Product description not entered</span></div>
+      <div class="pv-tagline pv-editable-block" id="pv_tagline" contenteditable="true" data-field="f_tagline"></div>
+      <div class="pv-short-desc pv-editable-block" id="pv_short_desc" contenteditable="true" data-field="f_shortdesc"></div>
+      <div class="pv-desc pv-editable-block" id="pv_desc" contenteditable="true" data-field="f_desc"></div>
       <div class="pv-price">£XX.XX</div>
       <div class="pv-btns"><button class="pv-btn-primary">Add to basket</button><button class="pv-btn-secondary">Add to compare</button></div>
     </div>
@@ -543,72 +491,65 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
   <div class="pv-boxes">
     <div class="pv-boxes-inner">
       <div class="pv-box">
-        <h2 class="pv-editable" id="pv_kfb_title" contenteditable="true" data-field="f_kfb_title">Key Features and Benefits</h2>
+        <h2 class="pv-editable" id="pv_kfb_title" contenteditable="true" data-field="f_kfb_title"></h2>
         <div id="pv_subfeatures"></div>
-      </div>      <div class="pv-box">
+      </div>
+      <div class="pv-box">
         <h2>Where to install your alarm</h2>
-        <p class="pv-editable" id="pv_install_text" contenteditable="true" data-field="f_install_text"><span class="pv-empty">Installation text not entered</span></p>
+        <div class="pv-editable-block" id="pv_install_text" contenteditable="true" data-field="f_install_text"></div>
       </div>
       <div class="pv-box">
         <h2>Compliant and Certified for Safety</h2>
-        <p class="pv-editable" id="pv_cert_text" contenteditable="true" data-field="f_cert_text"><span class="pv-empty">Certification text not entered</span></p>
+        <div class="pv-editable-block" id="pv_cert_text" contenteditable="true" data-field="f_cert_text"></div>
       </div>
       <div class="pv-box"><h2>What's in the box?</h2><div class="pv-box-img" id="pv_witb">What's in the box image</div></div>
     </div>
   </div>
   <div class="pv-install">
     <div class="pv-install-col">
-      <h2 class="pv-editable" id="pv_is_title" contenteditable="true" data-field="f_is_title">Installation &amp; Setup</h2>
-      <p class="pv-editable" id="pv_is_desc" contenteditable="true" data-field="f_is_desc"></p>
+      <h2 class="pv-editable" id="pv_is_title" contenteditable="true" data-field="f_is_title"></h2>
+      <p class="pv-editable-block" id="pv_is_desc" contenteditable="true" data-field="f_is_desc"></p>
       <div class="pv-doc-item"><div class="pv-doc-icon"><svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.4-1.4 2.6 2.6V4h2v8.2l2.6-2.6L17 11zm-7 4h14v2H5z"/></svg></div><div class="pv-doc-text"><strong class="pv-editable" id="pv_ig_title" contenteditable="true" data-field="f_ig_title"></strong><span class="pv-editable" id="pv_ig_desc" contenteditable="true" data-field="f_ig_desc"></span></div></div>
       <div class="pv-doc-item"><div class="pv-doc-icon"><svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.4-1.4 2.6 2.6V4h2v8.2l2.6-2.6L17 11zm-7 4h14v2H5z"/></svg></div><div class="pv-doc-text"><strong class="pv-editable" id="pv_mg_title" contenteditable="true" data-field="f_mg_title"></strong><span class="pv-editable" id="pv_mg_desc" contenteditable="true" data-field="f_mg_desc"></span></div></div>
     </div>
     <div class="pv-install-col">
-      <h2 class="pv-editable" id="pv_res_title" contenteditable="true" data-field="f_res_title">Resources</h2>
-      <p class="pv-editable" id="pv_res_desc" contenteditable="true" data-field="f_res_desc"></p>
+      <h2 class="pv-editable" id="pv_res_title" contenteditable="true" data-field="f_res_title"></h2>
+      <p class="pv-editable-block" id="pv_res_desc" contenteditable="true" data-field="f_res_desc"></p>
       <div class="pv-doc-item"><div class="pv-doc-icon"><svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.4-1.4 2.6 2.6V4h2v8.2l2.6-2.6L17 11zm-7 4h14v2H5z"/></svg></div><div class="pv-doc-text"><strong class="pv-editable" id="pv_pm_title" contenteditable="true" data-field="f_pm_title"></strong><span class="pv-editable" id="pv_pm_desc" contenteditable="true" data-field="f_pm_desc"></span></div></div>
       <div class="pv-doc-item"><div class="pv-doc-icon"><svg viewBox="0 0 24 24"><path d="M12 16l-5-5 1.4-1.4 2.6 2.6V4h2v8.2l2.6-2.6L17 11zm-7 4h14v2H5z"/></svg></div><div class="pv-doc-text"><strong class="pv-editable" id="pv_ds_title" contenteditable="true" data-field="f_ds_title"></strong><span class="pv-editable" id="pv_ds_desc" contenteditable="true" data-field="f_ds_desc"></span></div></div>
     </div>
   </div>
-  <div class="pv-reviews"><div class="pv-reviews-inner"><h2>Reviews from our customers</h2><div id="pv_reviews"><span class="pv-empty">No reviews entered</span></div></div></div>
-  <div class="pv-faqs"><h2>Related FAQs</h2><div class="pv-faq-grid" id="pv_faqs"><span class="pv-empty">No FAQs entered</span></div></div>
+  <div class="pv-reviews"><div class="pv-reviews-inner"><h2>Reviews from our customers</h2><div id="pv_reviews"></div></div></div>
+  <div class="pv-faqs"><h2>Related FAQs</h2><div id="pv_faqs"></div></div>
   <div class="pv-upsell">
     <div class="pv-upsell-img">[ Pro Connected image ]</div>
     <div class="pv-upsell-text">
-      <h2 class="pv-editable" id="pv_up_h2" contenteditable="true" data-field="f_up_h2"></h2>
-      <p class="pv-editable" id="pv_up_body" contenteditable="true" data-field="f_up_body"></p>
-      <button class="pv-upsell-btn pv-editable" id="pv_up_cta" contenteditable="true" data-field="f_up_cta">Find out more</button>
+      <h2 class="pv-editable-block" id="pv_up_h2" contenteditable="true" data-field="f_up_h2"></h2>
+      <p class="pv-editable-block" id="pv_up_body" contenteditable="true" data-field="f_up_body"></p>
+      <button class="pv-upsell-btn pv-editable" id="pv_up_cta" contenteditable="true" data-field="f_up_cta"></button>
     </div>
   </div>
   <div class="pv-footer"><div class="pv-logo">FireAngel</div><span>© FireAngel Safety Technology Ltd</span></div>
 </div>
-<div class="pv-edit-hint" id="editHint">Editing preview — changes sync to brief</div>
 
 <script>
 /* ---- AUTOSAVE ---- */
 function autosave(){
   const slug=document.getElementById('f_slug')?.value?.trim();
   if(!slug)return;
-  try{
-    const state=collectState();
-    localStorage.setItem('fa_brief_'+slug,JSON.stringify(state));
-    showToast('✓ Autosaved');
-  }catch(e){}
+  try{localStorage.setItem('fa_brief_'+slug,JSON.stringify(collectState()));showToast('✓ Autosaved');}catch(e){}
 }
 function attachAutosave(root){
-  (root||document).querySelectorAll('input, textarea, select').forEach(el=>{
-    if(!el.dataset.autosave){
-      el.dataset.autosave='1';
-      el.addEventListener('blur',autosave);
-    }
+  (root||document).querySelectorAll('input,textarea,select').forEach(el=>{
+    if(!el.dataset.autosave){el.dataset.autosave='1';el.addEventListener('blur',autosave);}
   });
 }
 
 const icons=['Heat alarm','Zigbee sensors','Temp & Humidity Sensors','Third Party Tested','Hardwired','Smoke Alarm','Cloud Enabled','Secure Wireless','3 Year Warranty','Android','iOS','Grade F2','Grade F1','Grade D2','Grade D1','Thermoptek','Battery included','1 Year Warranty','2 Year Warranty','Mains Powered','Sealed battery','Diagnostics','Thermistek','7 Year Warranty','Wireless Interlink','Predict AI','Smoke and CO sensing','Battery Silence','Push to fit','CO','Kitemark','5 Year Warranty','Fire Sensing','Light Indicator','10 Year Warranty'];
+
 const iconGrid=document.getElementById('iconGrid');
 icons.forEach(ic=>{
-  const l=document.createElement('label');
-  l.className='icon-option';
+  const l=document.createElement('label');l.className='icon-option';
   l.innerHTML=`<input type="checkbox" onchange="this.closest('label').classList.toggle('checked',this.checked)"><span>${ic}</span>`;
   iconGrid.appendChild(l);
 });
@@ -616,66 +557,63 @@ icons.forEach(ic=>{
 let imgCount=0;
 function addImage(url='',alt=''){
   imgCount++;
-  const d=document.createElement('div');
-  d.className='repeater-row';
-  d.innerHTML=`<div class="repeater-row-header">Image ${imgCount}</div>
+  const d=document.createElement('div');d.className='repeater-row';
+  d.innerHTML=`<div class="repeater-row-header"><span>Image ${imgCount}</span><button class="remove-btn" onclick="removeRow(this)">×</button></div>
     <div class="grid-2">
       <div class="field"><div class="field-label">Filename / URL</div><input type="url" value="${url}" placeholder="https://... or filename.jpg"></div>
-      <div class="field"><div class="field-label">Alt text</div><input type="text" value="${alt}" placeholder="Describe the image for accessibility"></div>
+      <div class="field"><div class="field-label">Alt text</div><input type="text" value="${alt}" placeholder="Describe the image"></div>
     </div>`;
+  document.getElementById('imageRows').appendChild(d);attachAutosave(d);
 }
 addImage();addImage();addImage();addImage();
 
 let sfCount=0;
 function addSubfeature(icon='',h3='',desc=''){
-  if(sfCount>=5)return;
-  sfCount++;
+  if(sfCount>=5)return;sfCount++;
   const opts=icons.map(i=>`<option${i===icon?' selected':''}>${i}</option>`).join('');
-  const d=document.createElement('div');
-  d.className='repeater-row';
-  d.innerHTML=`<div class="repeater-row-header">Sub-feature ${sfCount}</div>
+  const d=document.createElement('div');d.className='repeater-row';
+  d.innerHTML=`<div class="repeater-row-header"><span>Sub-feature ${sfCount}</span><button class="remove-btn" onclick="removeRow(this)">×</button></div>
     <div class="grid-3">
       <div class="field"><div class="field-label">Icon</div><select style="width:100%;border:1px solid #ddd;border-radius:6px;padding:7px 8px;font-size:12px;font-family:inherit;background:#fafafa;"><option value="">— select —</option>${opts}</select></div>
       <div class="field"><div class="field-label">H3 title</div><input type="text" value="${h3}" placeholder="e.g. Dual certification"></div>
       <div class="field"><div class="field-label">Description</div><input type="text" value="${desc}" placeholder="Short supporting text"></div>
     </div>`;
-  document.getElementById('subfeatures').appendChild(d);
+  document.getElementById('subfeatures').appendChild(d);attachAutosave(d);
 }
-addSubfeature();addSubfeature();addSubfeature();
 
 let revCount=0;
 function addReview(title='',name='',status='🔴 Draft'){
   revCount++;
-  const d=document.createElement('div');
-  d.className='repeater-row';
-  d.innerHTML=`<div class="repeater-row-header">Review ${revCount}</div>
+  const d=document.createElement('div');d.className='repeater-row';
+  d.innerHTML=`<div class="repeater-row-header"><span>Review ${revCount}</span><button class="remove-btn" onclick="removeRow(this)">×</button></div>
     <div class="grid-2">
       <div class="field"><div class="field-label">Review title (H3)</div><input type="text" value="${title}" placeholder="e.g. Great alarm, easy to install"></div>
       <div class="field"><div class="field-label">Reviewer name</div><input type="text" value="${name}" placeholder="e.g. John S."></div>
     </div>
     <div class="status-row"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>`;
   document.getElementById('reviewRows').appendChild(d);
-  const sel=d.querySelector('select.status');
-  sel.value=status;setStatus(sel);
+  const sel=d.querySelector('select.status');sel.value=status;setStatus(sel);
+  attachAutosave(d);
 }
-addReview();
 
 let faqCount=0;
 function addFaq(q='',a='',type='Existing',status='🔴 Draft'){
   faqCount++;
-  const d=document.createElement('div');
-  d.className='repeater-row';
-  d.innerHTML=`<div class="repeater-row-header">FAQ ${faqCount}</div>
-    <div class="field"><div class="field-label">Question</div><input type="text" value="${q}" placeholder="e.g. Where should I install a CO alarm?"></div>
-    <div class="field"><div class="field-label">Answer <span class="limit">New FAQs only</span></div><textarea rows="2" placeholder="Leave blank if existing">${a}</textarea></div>
+  const d=document.createElement('div');d.className='repeater-row';
+  d.innerHTML=`<div class="repeater-row-header"><span>FAQ ${faqCount}</span><button class="remove-btn" onclick="removeRow(this)">×</button></div>
+    <div class="field"><div class="field-label">Question</div><input type="text" value="${q.replace(/"/g,'&quot;')}" placeholder="e.g. Where should I install a CO alarm?"></div>
+    <div class="field"><div class="field-label">Answer <span class="limit">New FAQs only</span></div><textarea rows="3" placeholder="Leave blank if existing">${a}</textarea></div>
     <div class="grid-2" style="margin-top:8px;">
       <div class="field"><div class="field-label">New or existing?</div><select style="width:100%;border:1px solid #ddd;border-radius:6px;padding:7px 8px;font-size:12px;font-family:inherit;background:#fafafa;"><option>Existing</option><option>New — needs adding to FAQ system</option></select></div>
       <div class="status-row" style="align-self:flex-end;"><span class="status-label">Status:</span><select class="status draft" onchange="setStatus(this)"><option>🔴 Draft</option><option>🟡 In Review</option><option>🟢 Approved</option></select></div>
     </div>`;
   document.getElementById('faqRows').appendChild(d);
-  const typeEl=d.querySelectorAll('select')[0];typeEl.value=type;
+  d.querySelectorAll('select')[0].value=type;
   const statEl=d.querySelectorAll('select')[1];statEl.value=status;setStatus(statEl);
+  attachAutosave(d);
 }
+
+function removeRow(btn){btn.closest('.repeater-row').remove();autosave();buildPreview();}
 
 function count(el,outId,max,min){
   const n=el.value.length,out=document.getElementById(outId);
@@ -694,15 +632,12 @@ function showTab(i){
   document.querySelectorAll('.tab-content').forEach((t,j)=>t.classList.toggle('active',i===j));
 }
 function sanitizeSlug(el){el.value=el.value.toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-');}
-
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 
 /* ---- COLLECT STATE ---- */
 function collectState(){
+  const gv=id=>document.getElementById(id)?.value||'';
+  const gs=id=>document.getElementById(id)?.value||'🔴 Draft';
   const sfs=[...document.querySelectorAll('#subfeatures .repeater-row')].map(r=>{
     const inps=r.querySelectorAll('input[type="text"]');
     return{icon:r.querySelector('select').value,h3:inps[0]?.value||'',desc:inps[1]?.value||''};
@@ -719,34 +654,24 @@ function collectState(){
     return{q:r.querySelector('input[type="text"]')?.value||'',a:r.querySelector('textarea')?.value||'',type:sels[0]?.value||'Existing',status:sels[1]?.value||'🔴 Draft'};
   });
   const checkedIcons=[...document.querySelectorAll('#iconGrid .icon-option.checked span')].map(s=>s.textContent);
-  const gv=id=>document.getElementById(id)?.value||'';
-  const gs=id=>document.getElementById(id)?.value||'🔴 Draft';
   return{
-    slug:gv('f_slug'),
-    sku:gv('f_sku'),s_sku:gs('s_sku'),
+    slug:gv('f_slug'),sku:gv('f_sku'),s_sku:gs('s_sku'),
     seo_title:gv('f_seo_title'),s_seo_title:gs('s_seo_title'),
-    seo_desc:gv('f_seo_desc'),s_seo_desc:gs('s_seo_desc'),
-    s_slug:gs('s_slug'),
-    h1:gv('f_h1'),s_h1:gs('s_h1'),
-    tagline:gv('f_tagline'),s_tagline:gs('s_tagline'),
-    shortdesc:gv('f_shortdesc'),s_shortdesc:gs('s_shortdesc'),
-    desc:gv('f_desc'),s_desc:gs('s_desc'),
+    seo_desc:gv('f_seo_desc'),s_seo_desc:gs('s_seo_desc'),s_slug:gs('s_slug'),
+    h1:gv('f_h1'),s_h1:gs('s_h1'),tagline:gv('f_tagline'),s_tagline:gs('s_tagline'),
+    shortdesc:gv('f_shortdesc'),s_shortdesc:gs('s_shortdesc'),desc:gv('f_desc'),s_desc:gs('s_desc'),
     checkedIcons,s_icons:gs('s_icons'),
     kfb_title:gv('f_kfb_title'),s_kfb_title:gs('s_kfb_title'),
     install_text:gv('f_install_text'),s_install_text:gs('s_install_text'),
     cert_text:gv('f_cert_text'),s_cert_text:gs('s_cert_text'),
     witb_url:gv('f_witb_url'),witb_alt:gv('f_witb_alt'),s_witb:gs('s_witb'),
-    is_title:gv('f_is_title'),is_desc:gv('f_is_desc'),
-    ig_title:gv('f_ig_title'),ig_desc:gv('f_ig_desc'),
+    is_title:gv('f_is_title'),is_desc:gv('f_is_desc'),ig_title:gv('f_ig_title'),ig_desc:gv('f_ig_desc'),
     mg_title:gv('f_mg_title'),mg_desc:gv('f_mg_desc'),s_install_sec:gs('s_install_sec'),
-    res_title:gv('f_res_title'),res_desc:gv('f_res_desc'),
-    pm_title:gv('f_pm_title'),pm_desc:gv('f_pm_desc'),
+    res_title:gv('f_res_title'),res_desc:gv('f_res_desc'),pm_title:gv('f_pm_title'),pm_desc:gv('f_pm_desc'),
     ds_title:gv('f_ds_title'),ds_desc:gv('f_ds_desc'),s_resources_sec:gs('s_resources_sec'),
-    up_h2:gv('f_up_h2'),s_up_h2:gs('s_up_h2'),
-    up_body:gv('f_up_body'),s_up_body:gs('s_up_body'),
+    up_h2:gv('f_up_h2'),s_up_h2:gs('s_up_h2'),up_body:gv('f_up_body'),s_up_body:gs('s_up_body'),
     up_cta:gv('f_up_cta'),s_up_cta:gs('s_up_cta'),up_url:gv('f_up_url'),
-    subfeatures:sfs,images:imgs,reviews:revs,faqs,
-    savedAt:new Date().toISOString()
+    subfeatures:sfs,images:imgs,reviews:revs,faqs,savedAt:new Date().toISOString()
   };
 }
 
@@ -757,129 +682,58 @@ function restoreState(s){
   sv('f_slug',s.slug);sv('f_sku',s.sku);ss('s_sku',s.s_sku);
   sv('f_seo_title',s.seo_title);ss('s_seo_title',s.s_seo_title);
   sv('f_seo_desc',s.seo_desc);ss('s_seo_desc',s.s_seo_desc);ss('s_slug',s.s_slug);
-  sv('f_h1',s.h1);ss('s_h1',s.s_h1);
-  sv('f_tagline',s.tagline);ss('s_tagline',s.s_tagline);
-  sv('f_shortdesc',s.shortdesc);ss('s_shortdesc',s.s_shortdesc);
-  sv('f_desc',s.desc);ss('s_desc',s.s_desc);
+  sv('f_h1',s.h1);ss('s_h1',s.s_h1);sv('f_tagline',s.tagline);ss('s_tagline',s.s_tagline);
+  sv('f_shortdesc',s.shortdesc);ss('s_shortdesc',s.s_shortdesc);sv('f_desc',s.desc);ss('s_desc',s.s_desc);
   sv('f_kfb_title',s.kfb_title);ss('s_kfb_title',s.s_kfb_title);
   sv('f_install_text',s.install_text);ss('s_install_text',s.s_install_text);
   sv('f_cert_text',s.cert_text);ss('s_cert_text',s.s_cert_text);
   sv('f_witb_url',s.witb_url);sv('f_witb_alt',s.witb_alt);ss('s_witb',s.s_witb);
-  sv('f_is_title',s.is_title);sv('f_is_desc',s.is_desc);
-  sv('f_ig_title',s.ig_title);sv('f_ig_desc',s.ig_desc);
+  sv('f_is_title',s.is_title);sv('f_is_desc',s.is_desc);sv('f_ig_title',s.ig_title);sv('f_ig_desc',s.ig_desc);
   sv('f_mg_title',s.mg_title);sv('f_mg_desc',s.mg_desc);ss('s_install_sec',s.s_install_sec);
-  sv('f_res_title',s.res_title);sv('f_res_desc',s.res_desc);
-  sv('f_pm_title',s.pm_title);sv('f_pm_desc',s.pm_desc);
+  sv('f_res_title',s.res_title);sv('f_res_desc',s.res_desc);sv('f_pm_title',s.pm_title);sv('f_pm_desc',s.pm_desc);
   sv('f_ds_title',s.ds_title);sv('f_ds_desc',s.ds_desc);ss('s_resources_sec',s.s_resources_sec);
-  sv('f_up_h2',s.up_h2);ss('s_up_h2',s.s_up_h2);
-  sv('f_up_body',s.up_body);ss('s_up_body',s.s_up_body);
+  sv('f_up_h2',s.up_h2);ss('s_up_h2',s.s_up_h2);sv('f_up_body',s.up_body);ss('s_up_body',s.s_up_body);
   sv('f_up_cta',s.up_cta);ss('s_up_cta',s.s_up_cta);sv('f_up_url',s.up_url);
-  // icons
   document.querySelectorAll('#iconGrid .icon-option').forEach(l=>{
-    const name=l.querySelector('span').textContent;
-    const chk=l.querySelector('input');
-    chk.checked=(s.checkedIcons||[]).includes(name);
-    l.classList.toggle('checked',chk.checked);
+    const name=l.querySelector('span').textContent,chk=l.querySelector('input');
+    chk.checked=(s.checkedIcons||[]).includes(name);l.classList.toggle('checked',chk.checked);
   });
   ss('s_icons',s.s_icons);
-  // subfeatures
   document.getElementById('subfeatures').innerHTML='';sfCount=0;
   (s.subfeatures||[]).forEach(sf=>addSubfeature(sf.icon,sf.h3,sf.desc));
   document.getElementById('imageRows').innerHTML='';imgCount=0;
   (s.images||[]).forEach(img=>addImage(img.url,img.alt));
-  if(imgCount<4){for(let i=imgCount;i<4;i++)addImage();}
-  // reviews
+  if(imgCount<4)for(let i=imgCount;i<4;i++)addImage();
   document.getElementById('reviewRows').innerHTML='';revCount=0;
   (s.reviews||[]).forEach(r=>addReview(r.title,r.name,r.status));
   if(revCount<1)addReview();
-  // faqs
   document.getElementById('faqRows').innerHTML='';faqCount=0;
   (s.faqs||[]).forEach(f=>addFaq(f.q,f.a,f.type,f.status));
-  // recount chars
   ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));
   });
 }
 
-/* ---- EXPORT / IMPORT ---- */
-function exportSaves(){
-  try{
-    const all={};
-    for(let i=0;i<localStorage.length;i++){
-      const k=localStorage.key(i);
-      if(k.startsWith('fa_brief_'))all[k]=JSON.parse(localStorage.getItem(k));
-    }
-    if(!Object.keys(all).length){showToast('No saves to export');return;}
-    const blob=new Blob([JSON.stringify(all,null,2)],{type:'application/json'});
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download='fa-content-briefs-'+new Date().toISOString().slice(0,10)+'.json';
-    a.click();URL.revokeObjectURL(a.href);
-    showToast('✓ Exported '+Object.keys(all).length+' save(s)');
-  }catch(e){showToast('⚠ Export unavailable here — use on deployed site');}
-}
-function importSaves(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    try{
-      const data=JSON.parse(e.target.result);
-      let count=0;
-      Object.entries(data).forEach(([k,v])=>{
-        if(k.startsWith('fa_brief_')){localStorage.setItem(k,JSON.stringify(v));count++;}
-      });
-      showToast('✓ Imported '+count+' save(s)');
-    }catch(err){showToast('⚠ Invalid file — could not import');}
-    input.value='';
-  };
-  reader.readAsText(file);
-}
-
-/* ---- SAVE ---- */
+/* ---- SAVE / LOAD ---- */
 function doSave(){
   const slug=document.getElementById('f_slug')?.value?.trim();
   if(!slug){showToast('⚠ Set a URL slug before saving');return;}
-  try{
-    const state=collectState();
-    const key='fa_brief_'+slug;
-    localStorage.setItem(key,JSON.stringify(state));
-    showToast('✓ Saved: /product/'+slug);
-  }catch(e){
-    showToast('⚠ Save unavailable (localStorage not supported here)');
-  }
+  try{localStorage.setItem('fa_brief_'+slug,JSON.stringify(collectState()));showToast('✓ Saved: /product/'+slug);}
+  catch(e){showToast('⚠ Save unavailable here — use on deployed site');}
 }
-
-/* ---- LOAD MODAL ---- */
 function openLoadModal(){
   const body=document.getElementById('modalBody');
   let saves=[];
   try{
     for(let i=0;i<localStorage.length;i++){
       const k=localStorage.key(i);
-      if(k.startsWith('fa_brief_')){
-        const data=JSON.parse(localStorage.getItem(k));
-        saves.push({key:k,slug:data.slug,savedAt:data.savedAt,title:data.seo_title||data.h1||'Untitled'});
-      }
+      if(k.startsWith('fa_brief_')){const d=JSON.parse(localStorage.getItem(k));saves.push({key:k,slug:d.slug,savedAt:d.savedAt,title:d.seo_title||d.h1||'Untitled'});}
     }
-  }catch(e){
-    body.innerHTML='<div class="no-saves">localStorage is not available in this environment.<br>Save/load will work on the deployed GitHub Pages site.</div>';
-    document.getElementById('loadModal').classList.add('open');
-    return;
-  }
+  }catch(e){body.innerHTML='<div class="no-saves">localStorage not available here.<br>Save/load works on the deployed GitHub Pages site.</div>';document.getElementById('loadModal').classList.add('open');return;}
   if(!saves.length){body.innerHTML='<div class="no-saves">No saved briefs found.</div>';}
   else{
     saves.sort((a,b)=>new Date(b.savedAt)-new Date(a.savedAt));
-    body.innerHTML=saves.map(s=>`
-      <div class="save-item">
-        <div class="save-item-info">
-          <div class="save-item-slug">/product/${s.slug}</div>
-          <div class="save-item-meta">${s.title} &nbsp;·&nbsp; ${new Date(s.savedAt).toLocaleString('en-GB')}</div>
-        </div>
-        <div class="save-item-actions">
-          <button class="si-btn load" onclick="loadSave('${s.key}')">Load</button>
-          <button class="si-btn del" onclick="deleteSave('${s.key}',this)">Remove</button>
-        </div>
-      </div>`).join('');
+    body.innerHTML=saves.map(s=>`<div class="save-item"><div class="save-item-info"><div class="save-item-slug">/product/${s.slug}</div><div class="save-item-meta">${s.title} · ${new Date(s.savedAt).toLocaleString('en-GB')}</div></div><div class="save-item-actions"><button class="si-btn load" onclick="loadSave('${s.key}')">Load</button><button class="si-btn del" onclick="deleteSave('${s.key}',this)">Remove</button></div></div>`).join('');
   }
   document.getElementById('loadModal').classList.add('open');
 }
@@ -887,101 +741,227 @@ function closeModal(){document.getElementById('loadModal').classList.remove('ope
 function loadSave(key){
   try{
     const data=JSON.parse(localStorage.getItem(key));
-    restoreState(data);
-    buildPreview();
-    ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{
-      const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));
-    });
-    closeModal();showToast('✓ Loaded: /product/'+data.slug);
+    restoreState(data);buildPreview();closeModal();showToast('✓ Loaded: /product/'+data.slug);
   }catch(e){showToast('⚠ Could not load save');}
 }
 function deleteSave(key,btn){
-  try{
-    localStorage.removeItem(key);
-    btn.closest('.save-item').remove();
-    showToast('Removed');
+  try{localStorage.removeItem(key);btn.closest('.save-item').remove();showToast('Removed');
     const body=document.getElementById('modalBody');
     if(!body.querySelector('.save-item'))body.innerHTML='<div class="no-saves">No saved briefs found.</div>';
-  }catch(e){showToast('⚠ Could not remove save');}
+  }catch(e){showToast('⚠ Could not remove');}
+}
+function exportSaves(){
+  try{
+    const all={};
+    for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('fa_brief_'))all[k]=JSON.parse(localStorage.getItem(k));}
+    if(!Object.keys(all).length){showToast('No saves to export');return;}
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([JSON.stringify(all,null,2)],{type:'application/json'}));
+    a.download='fa-content-briefs-'+new Date().toISOString().slice(0,10)+'.json';
+    a.click();URL.revokeObjectURL(a.href);
+    showToast('✓ Exported '+Object.keys(all).length+' save(s)');
+  }catch(e){showToast('⚠ Export unavailable here');}
+}
+function importSaves(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);let count=0;
+      Object.entries(data).forEach(([k,v])=>{if(k.startsWith('fa_brief_')){localStorage.setItem(k,JSON.stringify(v));count++;}});
+      showToast('✓ Imported '+count+' save(s)');
+    }catch(err){showToast('⚠ Invalid file');}
+    input.value='';
+  };
+  reader.readAsText(file);
 }
 
-/* ---- PREVIEW ---- */
+/* ---- BUILD PREVIEW ---- */
 function g(id){const el=document.getElementById(id);return el?el.value.trim():'';}
-function setTxt(id,val,fallback){const el=document.getElementById(id);if(!el)return;el.innerHTML=val||`<span class="pv-empty">${fallback}</span>`;}
+function setEl(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html||'';}
+function setTxt(id,val,fallback){const el=document.getElementById(id);if(!el)return;el.innerHTML=val||`<span class="pv-empty">${fallback||''}</span>`;}
 
 function buildPreview(){
-  const slug=g('f_slug');
-  const sku=g('f_sku');
-  const seoTitle=g('f_seo_title');
-  const seoDesc=g('f_seo_desc');
+  const slug=g('f_slug'),sku=g('f_sku');
   const seoBar=document.getElementById('pv_seo_bar');
-  seoBar.innerHTML=`<strong>Page title:</strong> ${seoTitle||'<em>not set</em>'} &nbsp;|&nbsp; <strong>Meta description:</strong> ${seoDesc||'<em>not set</em>'} &nbsp;|&nbsp; <strong>URL:</strong> fireangel.co.uk/product/${slug||'<em>slug not set</em>'}`;
-  const slugEl=document.getElementById('pv_sku_bc');if(slugEl)slugEl.textContent=sku||slug||'—';
-  const skuHero=document.getElementById('pv_sku_hero');if(skuHero)skuHero.textContent=sku||'—';
+  seoBar.innerHTML=`<strong>Page title:</strong> ${g('f_seo_title')||'<em>not set</em>'} &nbsp;|&nbsp; <strong>Meta:</strong> ${g('f_seo_desc')||'<em>not set</em>'} &nbsp;|&nbsp; <strong>URL:</strong> fireangel.co.uk/product/${slug||'<em>not set</em>'}`;
+  setEl('pv_sku_bc',sku||slug||'—');
+  setEl('pv_sku_hero',sku||'—');
+
+  // Hero text
   setTxt('pv_h1',g('f_h1'),'H1 not entered');
+  const tag=g('f_tagline');setTxt('pv_tagline',tag.replace(/\n/g,'<br>'),'Tagline not entered');
   const sd=g('f_shortdesc');setTxt('pv_short_desc',sd.replace(/\n/g,'<br>'),'Short description not entered');
-  const tag=g('f_tagline');setTxt('pv_desc',`<strong>${tag}</strong>`,'Tagline not entered');
-  const desc=g('f_desc');setTxt('pv_desc2',desc.replace(/\n/g,'<br>'),'Product description not entered');
+  const desc=g('f_desc');setTxt('pv_desc',desc.replace(/\n/g,'<br>'),'Product description not entered');
+
+  // Icons
   const checked=[...document.querySelectorAll('#iconGrid .icon-option.checked span')].map(s=>s.textContent);
   const iconsEl=document.getElementById('pv_icons');
   iconsEl.innerHTML=checked.length?checked.map(i=>`<div class="pv-icon-badge"><div class="pv-icon-dot"></div>${i}</div>`).join(''):'<span class="pv-empty">No features selected</span>';
-  const thumbsEl=document.getElementById('pv_thumbs');
-  const imgInputs=[...document.querySelectorAll('#imageRows .repeater-row')];
-  thumbsEl.innerHTML='';
-  const mainImg=document.getElementById('pv_main_img');
-  mainImg.style.background='';
-  mainImg.innerHTML='';
-  imgInputs.forEach((row,i)=>{
-    const urlInp=row.querySelectorAll('input')[0];
-    const val=urlInp?.value?.trim()||'';
+
+  // Images
+  const thumbsEl=document.getElementById('pv_thumbs');thumbsEl.innerHTML='';
+  const mainImg=document.getElementById('pv_main_img');mainImg.innerHTML='';
+  const imgRows=[...document.querySelectorAll('#imageRows .repeater-row')];
+  imgRows.forEach((row,i)=>{
+    const val=row.querySelectorAll('input')[0]?.value?.trim()||'';
     const filename=val?val.split('/').pop():'Image '+(i+1);
     const badge=document.createElement('div');
     badge.style.cssText='background:#f0f0f0;border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:10px;color:#555;display:inline-flex;align-items:center;gap:4px;';
     badge.innerHTML=`<span style="width:8px;height:8px;background:var(--fa-orange);border-radius:50%;flex-shrink:0;display:inline-block;"></span>${filename}`;
     thumbsEl.appendChild(badge);
     if(i===0){
-      mainImg.style.cssText='background:#f5f5f5;border:1px solid #eee;border-radius:6px;display:flex;align-items:center;justify-content:center;min-height:260px;padding:20px;';
-      const big=document.createElement('div');
-      big.style.cssText='font-size:13px;color:#888;text-align:center;';
-      big.innerHTML=`<div style="width:48px;height:48px;background:#e0ddd6;border-radius:6px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" width="24" height="24" fill="#aaa"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5z"/></svg></div>${filename}`;
-      mainImg.appendChild(big);
+      mainImg.style.cssText='min-height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;';
+      mainImg.innerHTML=`<svg viewBox="0 0 24 24" width="40" height="40" fill="#ccc"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5z"/></svg><span style="font-size:12px;color:#aaa;">${filename}</span>`;
     }
   });
-  const kfbTitle=g('f_kfb_title');setTxt('pv_kfb_title',kfbTitle||'Key Features and Benefits','');
-  const sfRows=document.querySelectorAll('#subfeatures .repeater-row');
+
+  // KFB
+  setTxt('pv_kfb_title',g('f_kfb_title'),'Key Features and Benefits');
   const sfEl=document.getElementById('pv_subfeatures');sfEl.innerHTML='';
-  sfRows.forEach(row=>{
-    const inputs=row.querySelectorAll('input[type="text"]');
-    const h3=inputs[0]?.value||'';const desc=inputs[1]?.value||'';
-    if(h3||desc)sfEl.innerHTML+=`<div class="pv-subfeature"><div class="pv-sf-icon"></div><div class="pv-sf-text"><h3>${h3||'Feature title'}</h3><p>${desc||''}</p></div></div>`;
+  document.querySelectorAll('#subfeatures .repeater-row').forEach((row,ri)=>{
+    const inps=row.querySelectorAll('input[type="text"]');
+    const h3=inps[0]?.value||'',desc=inps[1]?.value||'';
+    if(h3||desc){
+      const d=document.createElement('div');d.className='pv-subfeature';
+      d.innerHTML=`<div class="pv-sf-icon"></div><div class="pv-sf-text">
+        <h3 class="pv-editable-block" contenteditable="true" data-sf-row="${ri}" data-sf-field="h3">${h3}</h3>
+        <p class="pv-editable-block" contenteditable="true" data-sf-row="${ri}" data-sf-field="desc">${desc}</p>
+      </div><button class="pv-sf-remove" onclick="removePvSf(this,${ri})">×</button>`;
+      sfEl.appendChild(d);
+    }
   });
   if(!sfEl.innerHTML)sfEl.innerHTML='<span class="pv-empty">No sub-features entered</span>';
+
+  // Boxes
   setTxt('pv_install_text',g('f_install_text').replace(/\n/g,'<br>'),'Installation text not entered');
   setTxt('pv_cert_text',g('f_cert_text').replace(/\n/g,'<br>'),'Certification text not entered');
-  ['is_title','is_desc','ig_title','ig_desc','mg_title','mg_desc','res_title','res_desc','pm_title','pm_desc','ds_title','ds_desc'].forEach(k=>setTxt('pv_'+k,g('f_'+k),''));
-  const revRows=document.querySelectorAll('#reviewRows .repeater-row');
+
+  // Install & Resources
+  ['is_title','is_desc','ig_title','ig_desc','mg_title','mg_desc','res_title','res_desc','pm_title','pm_desc','ds_title','ds_desc'].forEach(k=>{
+    setTxt('pv_'+k,g('f_'+k),'');
+  });
+
+  // Reviews
   const revEl=document.getElementById('pv_reviews');revEl.innerHTML='';
-  revRows.forEach(row=>{
-    const inputs=row.querySelectorAll('input[type="text"]');
-    const title=inputs[0]?.value||'';const name=inputs[1]?.value||'';
-    if(title||name)revEl.innerHTML+=`<div class="pv-review-card"><div class="pv-stars">★★★★★</div><div class="pv-review-title">"${title||'Review title'}"</div><div class="pv-reviewer">${name||'Reviewer'}</div></div>`;
+  document.querySelectorAll('#reviewRows .repeater-row').forEach((row,ri)=>{
+    const inps=row.querySelectorAll('input[type="text"]');
+    const title=inps[0]?.value||'',name=inps[1]?.value||'';
+    if(title||name){
+      const d=document.createElement('div');d.className='pv-review-card';
+      d.innerHTML=`<div class="pv-stars">★★★★★</div>
+        <div class="pv-editable-block" contenteditable="true" data-rev-row="${ri}" data-rev-field="title" style="font-size:14px;font-weight:500;font-style:italic;margin-bottom:4px;">"${title}"</div>
+        <div class="pv-editable" contenteditable="true" data-rev-row="${ri}" data-rev-field="name" style="font-size:12px;color:#999;">${name}</div>`;
+      revEl.appendChild(d);
+    }
   });
   if(!revEl.innerHTML)revEl.innerHTML='<span class="pv-empty">No reviews entered</span>';
-  const faqRows=document.querySelectorAll('#faqRows .repeater-row');
+
+  // FAQs
   const faqEl=document.getElementById('pv_faqs');faqEl.innerHTML='';
-  faqRows.forEach(row=>{
-    const q=row.querySelector('input[type="text"]');
-    if(q?.value)faqEl.innerHTML+=`<div class="pv-faq-item"><span class="pv-faq-q">${q.value}</span><span class="pv-faq-arrow">+</span></div>`;
+  document.querySelectorAll('#faqRows .repeater-row').forEach((row,ri)=>{
+    const qInp=row.querySelector('input[type="text"]');
+    const aTA=row.querySelector('textarea');
+    const q=qInp?.value||'',a=aTA?.value||'';
+    if(q){
+      const d=document.createElement('div');d.className='pv-faq-item';
+      d.innerHTML=`<div class="pv-faq-q pv-editable-block" contenteditable="true" data-faq-row="${ri}" data-faq-field="q">${q}</div>
+        <div class="pv-faq-answer pv-editable-block" contenteditable="true" data-faq-row="${ri}" data-faq-field="a">${a.replace(/\n/g,'<br>')}</div>`;
+      faqEl.appendChild(d);
+    }
   });
   if(!faqEl.innerHTML)faqEl.innerHTML='<span class="pv-empty">No FAQs entered</span>';
+
+  // Upsell
   setTxt('pv_up_h2',g('f_up_h2'),'Upsell headline not entered');
   setTxt('pv_up_body',g('f_up_body').replace(/\n/g,'<br>'),'');
-  const ctaBtn=document.getElementById('pv_up_cta');if(ctaBtn)ctaBtn.textContent=g('f_up_cta')||'Find out more';
+  setEl('pv_up_cta',g('f_up_cta')||'Find out more');
 }
 
+/* ---- REMOVE FROM PREVIEW ---- */
+function removePvSf(btn,ri){
+  btn.closest('.pv-subfeature').remove();
+  document.querySelectorAll('#subfeatures .repeater-row')[ri]?.remove();
+  autosave();
+}
+
+/* ---- TWO-WAY SYNC ---- */
+function initEditableSync(){
+  let hintTimer;
+  const hint=document.getElementById('editHint');
+  document.getElementById('previewMode').addEventListener('focus',e=>{
+    if(!e.target.contentEditable==='true')return;
+    hint.classList.add('show');clearTimeout(hintTimer);
+  },true);
+  document.getElementById('previewMode').addEventListener('blur',e=>{
+    const el=e.target;
+    if(el.contentEditable!=='true')return;
+    hintTimer=setTimeout(()=>hint.classList.remove('show'),1500);
+    const val=el.innerText.trim();
+    // Simple field sync
+    if(el.dataset.field){
+      const t=document.getElementById(el.dataset.field);
+      if(t){t.tagName==='TEXTAREA'?t.value=val:t.value=val;t.dispatchEvent(new Event('input'));}
+    }
+    // Sub-feature sync
+    if(el.dataset.sfRow!==undefined){
+      const row=document.querySelectorAll('#subfeatures .repeater-row')[+el.dataset.sfRow];
+      if(row){
+        const inps=row.querySelectorAll('input[type="text"]');
+        if(el.dataset.sfField==='h3'&&inps[0])inps[0].value=val;
+        if(el.dataset.sfField==='desc'&&inps[1])inps[1].value=val;
+      }
+    }
+    // Review sync
+    if(el.dataset.revRow!==undefined){
+      const row=document.querySelectorAll('#reviewRows .repeater-row')[+el.dataset.revRow];
+      if(row){
+        const inps=row.querySelectorAll('input[type="text"]');
+        if(el.dataset.revField==='title'&&inps[0])inps[0].value=val.replace(/^"|"$/g,'');
+        if(el.dataset.revField==='name'&&inps[1])inps[1].value=val;
+      }
+    }
+    // FAQ sync
+    if(el.dataset.faqRow!==undefined){
+      const row=document.querySelectorAll('#faqRows .repeater-row')[+el.dataset.faqRow];
+      if(row){
+        const qInp=row.querySelector('input[type="text"]');
+        const aTA=row.querySelector('textarea');
+        if(el.dataset.faqField==='q'&&qInp)qInp.value=val;
+        if(el.dataset.faqField==='a'&&aTA)aTA.value=el.innerText.trim();
+      }
+    }
+    autosave();
+  },true);
+}
+
+/* ---- PRINT ---- */
+function printDoc(){
+  buildPreview();
+  const slug=g('f_slug')||'product',sku=g('f_sku')||'FA';
+  const date=new Date().toISOString().slice(0,10);
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelectorAll('input[type="text"],input[type="url"],textarea').forEach(el=>{
+    const div=document.createElement('div');
+    div.textContent=el.value||'';
+    div.style.cssText='border-bottom:0.5pt solid #ccc;padding:2pt 0;font-size:10.5pt;min-height:14pt;font-family:inherit;';
+    el.replaceWith(div);
+  });
+  clone.querySelectorAll('[contenteditable]').forEach(el=>{el.removeAttribute('contenteditable');el.classList.remove('pv-editable','pv-editable-block');});
+  ['top-bar','modal-overlay','toast','pv-edit-hint'].forEach(cls=>clone.querySelectorAll('.'+cls).forEach(el=>el.remove()));
+  const b=clone.querySelector('#briefMode'),p=clone.querySelector('#previewMode');
+  if(b)b.style.display='block';if(p)p.style.display='block';
+  const win=window.open('','_print');
+  win.document.write('<!DOCTYPE html><html><head><title>'+sku+'-content-brief-'+date+'</title>');
+  [...document.querySelectorAll('style')].forEach(s=>win.document.write(s.outerHTML));
+  win.document.write('</head><body>'+clone.querySelector('body').innerHTML+'</body></html>');
+  win.document.close();win.focus();
+  setTimeout(()=>{win.print();win.close();},600);
+}
+
+/* ---- SET MODE ---- */
 function setMode(mode){
-  const brief=document.getElementById('briefMode');
-  const preview=document.getElementById('previewMode');
+  const brief=document.getElementById('briefMode'),preview=document.getElementById('previewMode');
   if(mode==='preview'){
     buildPreview();
     brief.style.display='none';preview.style.display='block';
@@ -994,128 +974,9 @@ function setMode(mode){
   }
 }
 
-function printDoc(){
-  buildPreview();
-  const slug=g('f_slug')||'product';
-  const sku=g('f_sku')||'FA';
-  const date=new Date().toISOString().slice(0,10);
-
-  // Build a print-ready clone
-  const clone=document.documentElement.cloneNode(true);
-
-  // Replace inputs/textareas with plain divs
-  clone.querySelectorAll('input[type="text"],input[type="url"],textarea').forEach(el=>{
-    const div=document.createElement('div');
-    div.className=el.className;
-    div.textContent=el.value||'';
-    div.style.cssText='border:none;border-bottom:0.5pt solid #ccc;padding:2pt 0;font-size:10.5pt;min-height:14pt;font-family:inherit;';
-    el.replaceWith(div);
-  });
-
-  // Replace contenteditable divs with plain divs
-  clone.querySelectorAll('[contenteditable]').forEach(el=>{
-    el.removeAttribute('contenteditable');
-    el.classList.remove('pv-editable');
-  });
-
-  // Remove UI chrome
-  ['top-bar','modal-overlay','toast','pv-edit-hint'].forEach(cls=>{
-    clone.querySelectorAll('.'+cls).forEach(el=>el.remove());
-  });
-
-  // Show both panels
-  const brief=clone.querySelector('#briefMode');
-  const preview=clone.querySelector('#previewMode');
-  if(brief)brief.style.display='block';
-  if(preview)preview.style.display='block';
-
-  // Open print window
-  const win=window.open('','_print');
-  win.document.write('<!DOCTYPE html><html>');
-  win.document.write('<head><title>'+sku+'-content-brief-'+date+'</title>');
-  // Copy all styles
-  [...document.querySelectorAll('style,link[rel="stylesheet"]')].forEach(s=>{
-    win.document.write(s.outerHTML);
-  });
-  win.document.write('</head><body>');
-  win.document.write(clone.querySelector('body').innerHTML);
-  win.document.write('</body></html>');
-  win.document.close();
-  win.focus();
-  setTimeout(()=>{win.print();win.close();},600);
-}
-
-
-function initEditableSync(){
-  let hintTimer;
-  function showHint(){
-    const hint=document.getElementById('editHint');
-    hint.classList.add('show');clearTimeout(hintTimer);
-  }
-  function hideHint(){
-    hintTimer=setTimeout(()=>document.getElementById('editHint').classList.remove('show'),1500);
-  }
-
-  document.getElementById('previewMode').addEventListener('focus',e=>{
-    const el=e.target;
-    if(!el.classList.contains('pv-editable'))return;
-    showHint();
-  },true);
-
-  document.getElementById('previewMode').addEventListener('blur',e=>{
-    const el=e.target;
-    if(!el.classList.contains('pv-editable'))return;
-    hideHint();
-    const val=el.innerText.trim();
-
-    // Simple field→brief sync
-    if(el.dataset.field){
-      const target=document.getElementById(el.dataset.field);
-      if(target){target.tagName==='TEXTAREA'?target.value=val:target.value=val;target.dispatchEvent(new Event('input'));}
-    }
-
-    // Sub-feature sync
-    if(el.dataset.sfRow!==undefined){
-      const ri=parseInt(el.dataset.sfRow);
-      const row=document.querySelectorAll('#subfeatures .repeater-row')[ri];
-      if(row){
-        const inputs=row.querySelectorAll('input[type="text"]');
-        if(el.dataset.sfField==='h3'&&inputs[0])inputs[0].value=val;
-        if(el.dataset.sfField==='desc'&&inputs[1])inputs[1].value=val;
-      }
-    }
-
-    // Review sync
-    if(el.dataset.revRow!==undefined){
-      const ri=parseInt(el.dataset.revRow);
-      const row=document.querySelectorAll('#reviewRows .repeater-row')[ri];
-      if(row){
-        const inputs=row.querySelectorAll('input[type="text"]');
-        if(el.dataset.revField==='title'&&inputs[0])inputs[0].value=val.replace(/^"|"$/g,'');
-        if(el.dataset.revField==='name'&&inputs[1])inputs[1].value=val;
-      }
-    }
-
-    // FAQ sync
-    if(el.dataset.faqRow!==undefined){
-      const ri=parseInt(el.dataset.faqRow);
-      const row=document.querySelectorAll('#faqRows .repeater-row')[ri];
-      if(row){
-        const qInp=row.querySelector('input[type="text"]');
-        const aTA=row.querySelector('textarea');
-        if(el.dataset.faqField==='q'&&qInp)qInp.value=val;
-        if(el.dataset.faqField==='a'&&aTA)aTA.value=el.innerText.trim();
-      }
-    }
-
-    autosave();
-  },true);
-}
-
-/* ---- PLACEHOLDER CONTENT ---- */
+/* ---- PLACEHOLDERS ---- */
 function loadPlaceholders(){
   const set=(id,val)=>{const el=document.getElementById(id);if(el)el.value=val;};
-  const sel=(id,val)=>{const el=document.getElementById(id);if(el){el.value=val;setStatus(el);}};
   set('f_sku','FA6829S-1');
   set('f_seo_title','FA6829S Ultra-Slim Carbon Monoxide Alarm | 10-Year Battery');
   set('f_seo_desc','The FireAngel FA6829S is our slimmest Carbon Monoxide alarm (25mm) with a 10-year sealed battery & IP44 rating. EN 50291 certified for homes, caravans & boats.');
@@ -1124,72 +985,53 @@ function loadPlaceholders(){
   set('f_tagline','At just 25mm deep, the FA6829S is the slimmest CO alarm in the FireAngel range. Sealed 10-year lithium battery. IP44 rated and dual EN certified for your home, caravan, motorhome, and boat.');
   set('f_shortdesc','Carbon monoxide is invisible, odourless, and can be deadly. The FireAngel FA6829S provides continuous, reliable protection for your home – in our slimmest design yet.\n\nAt just 25mm deep, it sits discreetly on any wall, while a sealed 10-year lithium battery removes the need for maintenance or replacement throughout the life of the alarm.');
   set('f_desc','Designed for use across a wide range of environments, dual EN certification makes the FA6829S legally suitable for homes, caravans, motorhomes, and boats, while IP44 splash resistance allows installation in areas such as kitchens or compact living spaces.\n\nWhen carbon monoxide is detected, the digital display shows real-time CO levels alongside a clear "ALARM" alert, while an 85dB alarm ensures every warning is heard throughout the home.\n\nAdditional features include Night-time Sensing, which dims the LED after dark, and Sleep Easy mode, which silences low battery alerts overnight.\n\nAt the end of its 10-year life, the alarm will indicate when replacement is required.');
-  set('f_witb_url','FA6829S-EU-PRODUCT-PACKAGE-WB.jpg');
-  set('f_witb_alt','Contents of the FireAngel FA6829S box including alarm unit and fixings');
   set('f_kfb_title','For home safety you can trust.');
   set('f_install_text','The FA6829S is suitable for installation in homes, caravans, motorhomes, and boats.\n\nCO alarms should be installed on a wall at head height, between 1 and 3 metres from any combustion appliance. As carbon monoxide mixes evenly with air, the alarm should not be placed on the ceiling.\n\nIn the home, install the alarm in the same room as boilers, gas fires, or wood burners. If you have appliances in multiple rooms, a separate alarm is recommended for each. As CO can travel through walls from adjoining properties, installing an alarm in living rooms or bedrooms provides additional protection.\n\nIn caravans, motorhomes, and boats, fit the alarm in the main living or sleeping area, positioned away from appliances to avoid nuisance alarms.\n\nAlways follow the installation guidance in the user manual for correct positioning.');
   set('f_cert_text','The FireAngel FA6829S is certified to both BS EN 50291-1:2018 for domestic use and BS EN 50291-2:2019 for use in caravans, motorhomes, and boats.\n\nThese standards ensure the alarm has been independently tested for accuracy, response time, and reliability across a range of environments, including mobile and marine settings.\n\nThis dual certification means the FA6829S is suitable for use throughout the home as well as in caravans and boats, providing trusted protection wherever it is installed. Unlike domestic-only alarms, it is specifically tested to perform reliably in these more demanding environments.');
+  set('f_witb_url','FA6829S-EU-PRODUCT-PACKAGE-WB.jpg');
+  set('f_witb_alt','Contents of the FireAngel FA6829S box including alarm unit and fixings');
   set('f_is_title','Installation & Setup');
   set('f_is_desc','Get the help and support you need to easily set up and install your FireAngel alarm for instant protection.');
-  set('f_ig_title','Installation guide');
-  set('f_ig_desc','Click the icon to find out more about installing your alarm');
-  set('f_mg_title','Maintenance guide');
-  set('f_mg_desc','Click the icon to find out how to properly maintain and test your alarm');
+  set('f_ig_title','Installation guide');set('f_ig_desc','Click the icon to find out more about installing your alarm');
+  set('f_mg_title','Maintenance guide');set('f_mg_desc','Click the icon to find out how to properly maintain and test your alarm');
   set('f_res_title','Resources');
   set('f_res_desc','For more technical and specification information on this alarm, view our manual and datasheet.');
-  set('f_pm_title','Product manual');
-  set('f_pm_desc','Click the icon to download the product manual');
-  set('f_ds_title','Datasheet');
-  set('f_ds_desc','Click the icon to download the product datasheet');
+  set('f_pm_title','Product manual');set('f_pm_desc','Click the icon to download the product manual');
+  set('f_ds_title','Datasheet');set('f_ds_desc','Click the icon to download the product datasheet');
   set('f_up_h2','Want whole-home protection with a smartphone alert?');
   set('f_up_body','The FireAngel Pro Connected range wirelessly interlinks all your alarms – if one sounds, every alarm in the home sounds too. Monitor them from anywhere via the FireAngel Pro Connected app, whether you are at home or away. Ideal for families, landlords, and holiday let owners managing multiple properties.');
   set('f_up_cta','Explore Pro Connected');
+  document.getElementById('subfeatures').innerHTML='';sfCount=0;
+  addSubfeature('CO','The slimmest CO alarm in the FireAngel range','Just 25mm deep for discreet wall mounting.');
+  addSubfeature('Sealed battery','10-year sealed lithium battery','No replacements required for the lifetime of the alarm.');
+  addSubfeature('Kitemark','Dual EN certification','BS EN 50291-1:2018 (homes) and BS EN 50291-2:2019 (caravans, motorhomes and boats).');
+  addSubfeature('Third Party Tested','IP44 splash-resistant','Suitable for kitchens, bathrooms, caravans, and boats.');
   document.getElementById('imageRows').innerHTML='';imgCount=0;
   addImage('FA6829S-hero.jpg','FA6829S hero shot — front face of alarm on white background');
   addImage('FA6829S-EU-PRODUCT-PACKAGE-WB.jpg','FA6829S product and packaging');
   addImage('FA6829S-side-650x650.jpg','FA6829S side profile showing ultra-slim 25mm depth');
   addImage('','');
-  // sub-features
-  document.getElementById('subfeatures').innerHTML='';sfCount=0;
-  addSubfeature('CO','Carbon Monoxide Sensing','Detects dangerous CO levels quickly and accurately using proven electrochemical sensing technology.');
-  addSubfeature('Sealed battery','Sealed 10-Year Battery','No battery replacements needed. The sealed lithium cell lasts the full lifetime of the alarm.');
-  addSubfeature('Thermistek','Ultra-Slim Design','At just 25mm deep, the FA6829S is the slimmest CO alarm in the FireAngel range – unobtrusive on any wall.');
-  addSubfeature('Kitemark','IP44 Rated','Splash and dust resistant – suitable for caravans, motorhomes, and boats as well as the home.');
-  addSubfeature('5 Year Warranty','Dual EN Certified','Certified to both domestic and marine/leisure EN standards for trusted protection wherever you are.');
-  // selected icons
   const toCheck=['CO','Sealed battery','Kitemark','5 Year Warranty','Third Party Tested'];
   document.querySelectorAll('#iconGrid .icon-option').forEach(l=>{
-    const name=l.querySelector('span').textContent;
-    const chk=l.querySelector('input');
-    chk.checked=toCheck.includes(name);
-    l.classList.toggle('checked',chk.checked);
+    const name=l.querySelector('span').textContent,chk=l.querySelector('input');
+    chk.checked=toCheck.includes(name);l.classList.toggle('checked',chk.checked);
   });
-  // reviews
   document.getElementById('reviewRows').innerHTML='';revCount=0;
   addReview('A must have in every home with gas appliances. You can\'t see it or smell it, but it will save your life if things go wrong.','Amazon Customer');
   addReview('This alarm is neat, unobtrusive and does the job.','Robert Dyas customer');
   addReview('Very easy to set up and so far so good. It nice to have a digital display so you exactly what going on.','B&Q customer');
-  // faqs
   document.getElementById('faqRows').innerHTML='';faqCount=0;
-  addFaq(
-    'What will the FA6829S alarm sound like when it detects carbon monoxide?',
-    'The alarm emits 4 loud beeps followed by a pause, repeated continuously. This pattern is distinct from smoke alarm sounds (which pulse rapidly) and from low-battery warnings (a single chirp every 40–60 seconds).\n\nAt the same time, the digital display shows a clear "ALARM" message alongside the current CO level in parts per million (ppm).\n\nIf carbon monoxide is still present, the alarm will continue until the air clears. After an event, the red memory indicator flashes to show that the alarm was triggered, even if you were not present at the time.',
-    'New — needs adding to FAQ system'
-  );
-  addFaq(
-    'Do I legally need a carbon monoxide alarm in my home?',
-    'It depends on your situation and where you live in the UK:\n\nEngland: CO alarms are required in any room with a fixed combustion appliance (such as gas boilers, gas fires, oil boilers, wood burners, or open fires, but not gas cookers). They are also required under Building Regulations when installing or replacing a combustion appliance in any home.\n\nScotland: CO alarms are required in all homes, regardless of tenure, in every room containing a carbon-fuelled appliance or flue. Regulations introduced in 2022 require sealed, tamper-proof batteries for the full lifespan of the alarm; the FA6829S meets this requirement.\n\nWales: CO alarms are required in rented properties in every room with a gas, oil or solid fuel appliance, including gas cookers.\n\nEven where not legally required, carbon monoxide detectors are strongly recommended by the UK Health Security Agency, Gas Safe Register and fire services for any home with fuel-burning appliances.',
-    'New — needs adding to FAQ system'
-  );
+  addFaq('What will the FA6829S alarm sound like when it detects carbon monoxide?','The alarm emits 4 loud beeps followed by a pause, repeated continuously. This pattern is distinct from smoke alarm sounds (which pulse rapidly) and from low-battery warnings (a single chirp every 40–60 seconds).\n\nAt the same time, the digital display shows a clear "ALARM" message alongside the current CO level in parts per million (ppm).\n\nIf carbon monoxide is still present, the alarm will continue until the air clears. After an event, the red memory indicator flashes to show that the alarm was triggered, even if you were not present at the time.','New — needs adding to FAQ system');
+  addFaq('Do I legally need a carbon monoxide alarm in my home?','It depends on your situation and where you live in the UK:\n\nEngland: CO alarms are required in any room with a fixed combustion appliance (such as gas boilers, gas fires, oil boilers, wood burners, or open fires, but not gas cookers).\n\nScotland: CO alarms are required in all homes, regardless of tenure, in every room containing a carbon-fuelled appliance or flue. Regulations introduced in 2022 require sealed, tamper-proof batteries for the full lifespan of the alarm; the FA6829S meets this requirement.\n\nWales: CO alarms are required in rented properties in every room with a gas, oil or solid fuel appliance, including gas cookers.\n\nEven where not legally required, carbon monoxide detectors are strongly recommended by the UK Health Security Agency, Gas Safe Register and fire services for any home with fuel-burning appliances.','New — needs adding to FAQ system');
   ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));
   });
 }
 
 /* ---- INIT ---- */
-setMode('preview');
 loadPlaceholders();
 buildPreview();
+setMode('preview');
 initEditableSync();
 attachAutosave();
 </script>
