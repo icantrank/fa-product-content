@@ -545,8 +545,7 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       <div class="pv-box">
         <h2 class="pv-editable" id="pv_kfb_title" contenteditable="true" data-field="f_kfb_title">Key Features and Benefits</h2>
         <div id="pv_subfeatures"></div>
-      </div>
-      <div class="pv-box">
+      </div>      <div class="pv-box">
         <h2>Where to install your alarm</h2>
         <p class="pv-editable" id="pv_install_text" contenteditable="true" data-field="f_install_text"><span class="pv-empty">Installation text not entered</span></p>
       </div>
@@ -1000,34 +999,117 @@ function printDoc(){
   const slug=g('f_slug')||'product';
   const sku=g('f_sku')||'FA';
   const date=new Date().toISOString().slice(0,10);
-  const prev=document.title;
-  document.title=`${sku}-content-brief-${date}`;
-  window.print();
-  setTimeout(()=>document.title=prev, 1000);
+
+  // Build a print-ready clone
+  const clone=document.documentElement.cloneNode(true);
+
+  // Replace inputs/textareas with plain divs
+  clone.querySelectorAll('input[type="text"],input[type="url"],textarea').forEach(el=>{
+    const div=document.createElement('div');
+    div.className=el.className;
+    div.textContent=el.value||'';
+    div.style.cssText='border:none;border-bottom:0.5pt solid #ccc;padding:2pt 0;font-size:10.5pt;min-height:14pt;font-family:inherit;';
+    el.replaceWith(div);
+  });
+
+  // Replace contenteditable divs with plain divs
+  clone.querySelectorAll('[contenteditable]').forEach(el=>{
+    el.removeAttribute('contenteditable');
+    el.classList.remove('pv-editable');
+  });
+
+  // Remove UI chrome
+  ['top-bar','modal-overlay','toast','pv-edit-hint'].forEach(cls=>{
+    clone.querySelectorAll('.'+cls).forEach(el=>el.remove());
+  });
+
+  // Show both panels
+  const brief=clone.querySelector('#briefMode');
+  const preview=clone.querySelector('#previewMode');
+  if(brief)brief.style.display='block';
+  if(preview)preview.style.display='block';
+
+  // Open print window
+  const win=window.open('','_print');
+  win.document.write('<!DOCTYPE html><html>');
+  win.document.write('<head><title>'+sku+'-content-brief-'+date+'</title>');
+  // Copy all styles
+  [...document.querySelectorAll('style,link[rel="stylesheet"]')].forEach(s=>{
+    win.document.write(s.outerHTML);
+  });
+  win.document.write('</head><body>');
+  win.document.write(clone.querySelector('body').innerHTML);
+  win.document.write('</body></html>');
+  win.document.close();
+  win.focus();
+  setTimeout(()=>{win.print();win.close();},600);
 }
 
 
 function initEditableSync(){
   let hintTimer;
-  document.querySelectorAll('.pv-editable').forEach(el=>{
-    el.addEventListener('focus',()=>{
-      const hint=document.getElementById('editHint');
-      hint.classList.add('show');
-      clearTimeout(hintTimer);
-    });
-    el.addEventListener('blur',()=>{
-      hintTimer=setTimeout(()=>document.getElementById('editHint').classList.remove('show'),1500);
-      const fieldId=el.dataset.field;
-      if(!fieldId)return;
-      const target=document.getElementById(fieldId);
-      if(!target)return;
-      const val=el.innerText.trim();
-      if(target.tagName==='TEXTAREA')target.value=val;
-      else target.value=val;
-      // trigger char count update
-      target.dispatchEvent(new Event('input'));
-    });
-  });
+  function showHint(){
+    const hint=document.getElementById('editHint');
+    hint.classList.add('show');clearTimeout(hintTimer);
+  }
+  function hideHint(){
+    hintTimer=setTimeout(()=>document.getElementById('editHint').classList.remove('show'),1500);
+  }
+
+  document.getElementById('previewMode').addEventListener('focus',e=>{
+    const el=e.target;
+    if(!el.classList.contains('pv-editable'))return;
+    showHint();
+  },true);
+
+  document.getElementById('previewMode').addEventListener('blur',e=>{
+    const el=e.target;
+    if(!el.classList.contains('pv-editable'))return;
+    hideHint();
+    const val=el.innerText.trim();
+
+    // Simple field→brief sync
+    if(el.dataset.field){
+      const target=document.getElementById(el.dataset.field);
+      if(target){target.tagName==='TEXTAREA'?target.value=val:target.value=val;target.dispatchEvent(new Event('input'));}
+    }
+
+    // Sub-feature sync
+    if(el.dataset.sfRow!==undefined){
+      const ri=parseInt(el.dataset.sfRow);
+      const row=document.querySelectorAll('#subfeatures .repeater-row')[ri];
+      if(row){
+        const inputs=row.querySelectorAll('input[type="text"]');
+        if(el.dataset.sfField==='h3'&&inputs[0])inputs[0].value=val;
+        if(el.dataset.sfField==='desc'&&inputs[1])inputs[1].value=val;
+      }
+    }
+
+    // Review sync
+    if(el.dataset.revRow!==undefined){
+      const ri=parseInt(el.dataset.revRow);
+      const row=document.querySelectorAll('#reviewRows .repeater-row')[ri];
+      if(row){
+        const inputs=row.querySelectorAll('input[type="text"]');
+        if(el.dataset.revField==='title'&&inputs[0])inputs[0].value=val.replace(/^"|"$/g,'');
+        if(el.dataset.revField==='name'&&inputs[1])inputs[1].value=val;
+      }
+    }
+
+    // FAQ sync
+    if(el.dataset.faqRow!==undefined){
+      const ri=parseInt(el.dataset.faqRow);
+      const row=document.querySelectorAll('#faqRows .repeater-row')[ri];
+      if(row){
+        const qInp=row.querySelector('input[type="text"]');
+        const aTA=row.querySelector('textarea');
+        if(el.dataset.faqField==='q'&&qInp)qInp.value=val;
+        if(el.dataset.faqField==='a'&&aTA)aTA.value=el.innerText.trim();
+      }
+    }
+
+    autosave();
+  },true);
 }
 
 /* ---- PLACEHOLDER CONTENT ---- */
