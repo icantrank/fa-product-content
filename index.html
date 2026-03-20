@@ -586,6 +586,25 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
 <div class="pv-edit-hint" id="editHint">Editing preview — changes sync to brief</div>
 
 <script>
+/* ---- AUTOSAVE ---- */
+function autosave(){
+  const slug=document.getElementById('f_slug')?.value?.trim();
+  if(!slug)return;
+  try{
+    const state=collectState();
+    localStorage.setItem('fa_brief_'+slug,JSON.stringify(state));
+    showToast('✓ Autosaved');
+  }catch(e){}
+}
+function attachAutosave(root){
+  (root||document).querySelectorAll('input, textarea, select').forEach(el=>{
+    if(!el.dataset.autosave){
+      el.dataset.autosave='1';
+      el.addEventListener('blur',autosave);
+    }
+  });
+}
+
 const icons=['Heat alarm','Zigbee sensors','Temp & Humidity Sensors','Third Party Tested','Hardwired','Smoke Alarm','Cloud Enabled','Secure Wireless','3 Year Warranty','Android','iOS','Grade F2','Grade F1','Grade D2','Grade D1','Thermoptek','Battery included','1 Year Warranty','2 Year Warranty','Mains Powered','Sealed battery','Diagnostics','Thermistek','7 Year Warranty','Wireless Interlink','Predict AI','Smoke and CO sensing','Battery Silence','Push to fit','CO','Kitemark','5 Year Warranty','Fire Sensing','Light Indicator','10 Year Warranty'];
 const iconGrid=document.getElementById('iconGrid');
 icons.forEach(ic=>{
@@ -605,7 +624,6 @@ function addImage(url='',alt=''){
       <div class="field"><div class="field-label">Filename / URL</div><input type="url" value="${url}" placeholder="https://... or filename.jpg"></div>
       <div class="field"><div class="field-label">Alt text</div><input type="text" value="${alt}" placeholder="Describe the image for accessibility"></div>
     </div>`;
-  document.getElementById('imageRows').appendChild(d);
 }
 addImage();addImage();addImage();addImage();
 
@@ -870,7 +888,12 @@ function closeModal(){document.getElementById('loadModal').classList.remove('ope
 function loadSave(key){
   try{
     const data=JSON.parse(localStorage.getItem(key));
-    restoreState(data);closeModal();showToast('✓ Loaded: /product/'+data.slug);
+    restoreState(data);
+    buildPreview();
+    ['f_seo_title','f_seo_desc','f_h1','f_tagline'].forEach(id=>{
+      const el=document.getElementById(id);if(el)el.dispatchEvent(new Event('input'));
+    });
+    closeModal();showToast('✓ Loaded: /product/'+data.slug);
   }catch(e){showToast('⚠ Could not load save');}
 }
 function deleteSave(key,btn){
@@ -1086,6 +1109,7 @@ setMode('preview');
 loadPlaceholders();
 buildPreview();
 initEditableSync();
+attachAutosave();
 </script>
 </body>
 </html>
