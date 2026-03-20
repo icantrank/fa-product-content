@@ -533,8 +533,9 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
       <div class="pv-sku" id="pv_sku_hero">—</div>
       <div class="pv-h1 pv-editable" id="pv_h1" contenteditable="true" data-field="f_h1">—</div>
       <div class="pv-icons" id="pv_icons"></div>
-      <div class="pv-desc pv-editable" id="pv_desc" contenteditable="true" data-field="f_desc" style="margin-bottom:12px;"><span class="pv-empty">Product description not entered</span></div>
+      <div class="pv-desc pv-editable" id="pv_desc" contenteditable="true" data-field="f_tagline" style="margin-bottom:12px;"><span class="pv-empty">Tagline not entered</span></div>
       <div class="pv-short-desc pv-editable" id="pv_short_desc" contenteditable="true" data-field="f_shortdesc"><span class="pv-empty">Short description not entered</span></div>
+      <div class="pv-desc pv-editable" id="pv_desc2" contenteditable="true" data-field="f_desc" style="margin-bottom:12px;"><span class="pv-empty">Product description not entered</span></div>
       <div class="pv-price">£XX.XX</div>
       <div class="pv-btns"><button class="pv-btn-primary">Add to basket</button><button class="pv-btn-secondary">Add to compare</button></div>
     </div>
@@ -897,11 +898,8 @@ function buildPreview(){
   const skuHero=document.getElementById('pv_sku_hero');if(skuHero)skuHero.textContent=sku||'—';
   setTxt('pv_h1',g('f_h1'),'H1 not entered');
   const sd=g('f_shortdesc');setTxt('pv_short_desc',sd.replace(/\n/g,'<br>'),'Short description not entered');
-  const desc=g('f_desc'),tag=g('f_tagline');
-  let descHtml='';
-  if(tag)descHtml+=`<strong>${tag}</strong>`;
-  if(desc)descHtml+=desc.replace(/\n/g,'<br>');
-  setTxt('pv_desc',descHtml,'Product description not entered');
+  const tag=g('f_tagline');setTxt('pv_desc',`<strong>${tag}</strong>`,'Tagline not entered');
+  const desc=g('f_desc');setTxt('pv_desc2',desc.replace(/\n/g,'<br>'),'Product description not entered');
   const checked=[...document.querySelectorAll('#iconGrid .icon-option.checked span')].map(s=>s.textContent);
   const iconsEl=document.getElementById('pv_icons');
   iconsEl.innerHTML=checked.length?checked.map(i=>`<div class="pv-icon-badge"><div class="pv-icon-dot"></div>${i}</div>`).join(''):'<span class="pv-empty">No features selected</span>';
@@ -1041,7 +1039,6 @@ function loadPlaceholders(){
   addSubfeature('Sealed battery','Sealed 10-Year Battery','No battery replacements needed. The sealed lithium cell lasts the full lifetime of the alarm.');
   addSubfeature('Thermistek','Ultra-Slim Design','At just 25mm deep, the FA6829S is the slimmest CO alarm in the FireAngel range – unobtrusive on any wall.');
   addSubfeature('Kitemark','IP44 Rated','Splash and dust resistant – suitable for caravans, motorhomes, and boats as well as the home.');
-  addSubfeature('5 Year Warranty','Dual EN Certified','Certified to both domestic and marine/leisure EN standards for trusted protection wherever you are.');
   // selected icons
   const toCheck=['CO','Sealed battery','Kitemark','5 Year Warranty','Third Party Tested'];
   document.querySelectorAll('#iconGrid .icon-option').forEach(l=>{
