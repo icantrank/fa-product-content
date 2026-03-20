@@ -284,7 +284,7 @@ select.status.draft{color:#dc2626;}select.status.review{color:#d97706;}select.st
     <button class="tb-btn" onclick="openLoadModal()">Load</button>
     <button class="tb-btn" onclick="exportSaves()">Export</button>
     <label class="tb-btn" style="cursor:pointer;">Import<input type="file" accept=".json" style="display:none" onchange="importSaves(this)"></label>
-    <button class="tb-btn" onclick="buildPreview();window.print()">Print / PDF</button>
+    <button class="tb-btn" onclick="printDoc()">Print / PDF</button>
     <div class="mode-toggle">
       <button class="mode-btn active" id="btnBrief" onclick="setMode('brief')">Edit</button>
       <button class="mode-btn" id="btnPreview" onclick="setMode('preview')">Preview</button>
@@ -972,7 +972,18 @@ function setMode(mode){
   }
 }
 
-/* ---- TWO-WAY SYNC ---- */
+function printDoc(){
+  buildPreview();
+  const slug=g('f_slug')||'product';
+  const sku=g('f_sku')||'FA';
+  const date=new Date().toISOString().slice(0,10);
+  const prev=document.title;
+  document.title=`${sku}-content-brief-${date}`;
+  window.print();
+  setTimeout(()=>document.title=prev, 1000);
+}
+
+
 function initEditableSync(){
   let hintTimer;
   document.querySelectorAll('.pv-editable').forEach(el=>{
@@ -1039,6 +1050,7 @@ function loadPlaceholders(){
   addSubfeature('Sealed battery','Sealed 10-Year Battery','No battery replacements needed. The sealed lithium cell lasts the full lifetime of the alarm.');
   addSubfeature('Thermistek','Ultra-Slim Design','At just 25mm deep, the FA6829S is the slimmest CO alarm in the FireAngel range – unobtrusive on any wall.');
   addSubfeature('Kitemark','IP44 Rated','Splash and dust resistant – suitable for caravans, motorhomes, and boats as well as the home.');
+  addSubfeature('5 Year Warranty','Dual EN Certified','Certified to both domestic and marine/leisure EN standards for trusted protection wherever you are.');
   // selected icons
   const toCheck=['CO','Sealed battery','Kitemark','5 Year Warranty','Third Party Tested'];
   document.querySelectorAll('#iconGrid .icon-option').forEach(l=>{
